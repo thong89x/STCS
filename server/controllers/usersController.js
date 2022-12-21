@@ -1,4 +1,4 @@
-let User = require('../models/user.model');
+let User = require('../models/User');
 const bcrypt = require('bcrypt')
 const asyncHandler = require('express-async-handler')
 
