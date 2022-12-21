@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
         default: Date.now
     },
     autoForm: {type:String, maxlength: 3000, default:''}
-}, {timestamp: true});
+}, {timestamps: true});
 
 const Users = mongoose.model('user', userSchema, 'user');
 module.exports = Users;

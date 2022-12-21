@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
-    imageURL:{type:String, required:true},
+    userID: {type: mongooseID},
+    imageURL:[String],
     amountRegistry:{type:Number, default:0},
     typeProduct:{type:String, required:true},
     nameProduct:{type:String, required:true},
@@ -16,7 +17,8 @@ const postSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    listQuestion:[String]
+    listQuestion:[String],
+    pricePruduct: {type:Number, default: 0}
 });
 
 const Post = mongooAse.model('post', postSchema, 'post');

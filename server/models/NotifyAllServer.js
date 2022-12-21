@@ -5,8 +5,7 @@ const notifySchema = new mongoose.Schema({
     footerNotifyAll:{type:String, default:''},
     contentNotifyAll:{type:String, minlength: 100, maxlength:3000,required:true},
     timeNotify: {
-        type: Date,
-        default: Date.now
+        timestamps:true
     },
 });
 
