@@ -24,16 +24,18 @@ const connectDB = async () => {
   }
 }
 connectDB()
-const connection = mongoose.connection;
+const connection = mongoose.connection; 
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 })
 
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/authRoutes');
+const postRouter = require('./routes/postRoutes');
 
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
+app.use('/posts', postRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const postSchema = new mongoose.Schema({
-    userID: {type: mongooseID},
+    userID: Schema.Types.ObjectID,
     imageURL:[String],
     amountRegistry:{type:Number, default:0},
     typeProduct:{type:String, required:true},
@@ -13,13 +14,9 @@ const postSchema = new mongoose.Schema({
         type:Date,
         required:true
     },
-    timeCreatePost: {
-        type: Date,
-        default: Date.now
-    },
     listQuestion:[String],
     pricePruduct: {type:Number, default: 0}
-});
+}, {timestamps: true}) ;
 
-const Post = mongooAse.model('post', postSchema, 'post');
+const Post = mongoose.model('post', postSchema, 'post');
 module.exports = Post;  

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Schema = mongoose.Schema;
 const registryformSchema = new mongoose.Schema({
     userID:{type:Sting, default:''},
     postID:{type:Sting, default:''},
