@@ -6,7 +6,6 @@ const userSchema = new mongoose.Schema({
     //trim: remove while space
     username: {type:String, unique: true, required:[true,'Username must be requited'], trim: true},
     password: {type:String, required:[true,'Password must be requited'], trim: true, minlength:[6, 'Password must be at least 6 characters']},
-    userroles: {type:String, required:true},
     isActive: {type:Boolean, default: true},
     role: { type:String, default: 'user'},
     profile: {
@@ -21,7 +20,7 @@ const userSchema = new mongoose.Schema({
         default: Date.now
     },
     autoForm: {type:String, maxlength: 3000, default:''}
-}, {timestamp: true});
+}, {timestamps: true});
 
 const Users = mongoose.model('user', userSchema, 'user');
 module.exports = Users;

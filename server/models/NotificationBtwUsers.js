@@ -1,12 +1,21 @@
 const mongoose = require('mongoose');
 
 const notificationSchema = new mongoose.Schema({
-    topic:{type:String, required:true, minlength: 100, maxlength:3000},
+    topic:
+    {
+        newComment:{type:String, default:'', minlength: 100, maxlength:3000},
+        replyComment:{type:String, default:'', minlength: 100, maxlength:3000},
+        newOrder:{type:String, default:'', minlength: 100, maxlength:3000},
+        cancelOrder:{type:String, default:'', minlength: 100, maxlength:3000},
+        approvedOrder:{type:String, default:'', minlength: 100, maxlength:3000},
+        declinedOrder:{type:String, default:'', minlength: 100, maxlength:3000},
+        confirmOrder:{type:String, default:'', minlength: 100, maxlength:3000},
+        otherNotification:{type:String, default:'', minlength: 100, maxlength:3000}
+    },
     link:{type:String, required:true},
     status:{type:Boolean, default:flase},
     timeNotification: {
-        type: Date,
-        default: Date.now
+       timestamps:true
     },
 });
 
