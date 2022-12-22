@@ -2,6 +2,7 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
+const { getUserById } = require('./usersController')
 
 // @desc Login
 // @route POST /auth
@@ -15,19 +16,19 @@ const login = asyncHandler(async (req, res) => {
 
     const foundUser = await User.findOne({ username }).exec()
 
-    if (!foundUser || !foundUser.active) {
+    if (!foundUser || !foundUser.isActive) {
         return res.status(401).json({ message: 'Unauthorized' })
     }
 
     const match = await bcrypt.compare(password, foundUser.password)
-
+console.log("Hi");
     if (!match) return res.status(401).json({ message: 'Unauthorized' })
 
     const accessToken = jwt.sign(
         {
             "UserInfo": {
                 "username": foundUser.username,
-                "roles": foundUser.roles
+                "role": foundUser.role
             }
         },
         process.env.ACCESS_TOKEN_SECRET,
@@ -77,6 +78,23 @@ const SignUp = asyncHandler(async (req, res) => {
     //     userObject = { username, "password": hashedPwd,roles}
     // }
     // Create and store new user 
+
+    // const userFromToken = req.user;
+    // res.find() => registry
+    // Post =  Post.findbyID(registry.PostID)
+    // user_id = Post.user._id
+    // user_id->userName: Seller
+    // if(userFromToken==registry.user._id->username: Buyer || userFromToken == userName: Seller)
+    // {
+        
+    // }
+
+    // req.params.id -> Post -> userID: master ->username
+
+
+    // req.user : userFromToke -> userID
+
+
     const user = await User.create(userObject)
 
     if (user) { //created 
@@ -90,7 +108,9 @@ const SignUp = asyncHandler(async (req, res) => {
 // @access Public - because access token has expired
 const refresh = (req, res) => {
     const cookies = req.cookies
+    console.log("Hi")
     if (!cookies?.jwt) return res.status(401).json({ message: 'Unauthorized' })
+    
     console.log("Check")
     const refreshToken = cookies.jwt
 
@@ -101,14 +121,14 @@ const refresh = (req, res) => {
             if (err) return res.status(403).json({ message: 'Forbidden' })
 
             const foundUser = await User.findOne({ username: decoded.username }).exec()
-
+            console.log("Hi")
             if (!foundUser) return res.status(401).json({ message: 'Unauthorized' })
 
             const accessToken = jwt.sign(
                 {
                     "UserInfo": {
                         "username": foundUser.username,
-                        "roles": foundUser.roles
+                        "roles": foundUser.role
                     }
                 },
                 process.env.ACCESS_TOKEN_SECRET,

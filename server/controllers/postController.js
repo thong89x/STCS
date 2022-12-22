@@ -51,7 +51,8 @@ const getPostByUserName = asyncHandler(async (req, res) => {
 
 const createPost = asyncHandler(async (req, res) => {
     console.log("has req")
-    const { username, typeProduct, nameProduct } = req.body
+    const {  typeProduct, nameProduct } = req.body
+    const username = req.user
     const User = await Users.find({ username:username}).exec()
     if(User.length == 0){
         return res.status(400).json({ message: 'Not found username' })
@@ -78,32 +79,45 @@ const createPost = asyncHandler(async (req, res) => {
 // @route PATCH /Posts
 // @access Private
 const updatePost = asyncHandler(async (req, res) => {
-    const { Postname, password,roles, active  } = req.body
-
+    const { typeProduct, nameProduct,address, describePost,addionInfo,pricePruduct,imageURL,amountRegistry  } = req.body
+    const id = req.params.id
+    const username = req.user
+    const UserOwner = await Users.findOne({ username:username}).exec()
     // Confirm data 
-    if (!id || !Postname || !roles.length || typeof active !== 'boolean') {
-        return res.status(400).json({ message: 'All fields except password are required' })
-    }
+    // if () {
+    //     return res.status(400).json({ message: 'All fields except password are required' })
+    // }
 
     // Does the Post exist to update?
-    const Post = await Post.findOne({ Postname }).exec()
-
-    if (!Post) {
+    const posts = await Post.findById(id).exec()
+    if (!posts) {
         return res.status(400).json({ message: 'Post not found' })
     }
 
+    console.log(UserOwner._id.equals(posts.userID))
 
-    Post.roles = roles
-    Post.active = active
 
-    if (password) {
-        // Hash password 
-        Post.password = await bcrypt.hash(password, 10) // salt rounds 
+    if (UserOwner._id.equals(posts.userID)) {
+        posts.typeProduct = typeProduct
+        posts.nameProduct = nameProduct
+        posts.address = address
+        posts.describePost = describePost
+        posts.addionInfo = addionInfo
+        posts.pricePruduct = pricePruduct
+        posts.amountRegistry = amountRegistry
+        posts.timeRegistry = posts.timeRegistry
+        posts.imageURL = imageURL
+
+    
+        const updatedPost = await posts.save()
+    
+        res.json({ message: `${updatedPost.nameProduct} updated` })
     }
+    console.log("hi")
+    return res.status(400).json({ message: 'Unauthorized' })
 
-    const updatedPost = await Post.save()
 
-    res.json({ message: `${updatedPost.Postname} updated` })
+   
 })
 
 // @desc Delete a Post
@@ -120,30 +134,32 @@ const deletePost = asyncHandler(async (req, res) => {
 //     }
 // );
 //     return;
-    const id  = req.params.id  || req.body.id
-    console.log(id);
-    // Confirm data
-    if (!id) {
-        return res.status(400).json({ message: 'Post ID Required' })
-    }
-
-    // Does the Post still have assigned notes?
-    // const note = await Note.findOne({ Post: id }).lean().exec()
-    // if (note) {
-    //     return res.status(400).json({ message: 'Post has assigned notes' })
-    // }
-
-    // Does the Post exist to delete?
-    const Post = await Post.findById(id).exec()
-    
-
-    if (!Post) {
+    const id  = req.params.id 
+    const RolesFromToken = req.role
+    const userFromToken = req.user
+    const posts = await Post.findById(id).exec()
+    if (!posts) {
         return res.status(400).json({ message: 'Post not found' })
     }
+    const users = await Users.findById(posts.userID).exec()
+    var valid = false;
+    if(RolesFromToken == "admin")
+    {
+        valid= true;
+    }
+    else{
+        if(userFromToken == users.username)
+        {
+            valid = true;
+        }
+    }
 
-    const result = await Post.deleteOne()
+    if(!valid) {
+        return res.status(400).json({ message: 'Unauthorized' })
+    }
+    const result = await posts.deleteOne()
 
-    const reply = `Postname ${result.Postname} with ID ${result._id} deleted`
+    const reply = `Postname ${result.nameProduct} with ID ${result._id} deleted`
 
     res.json(reply)
 })

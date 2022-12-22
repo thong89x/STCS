@@ -5,14 +5,21 @@ const verifyJWT = require('../middleware/verifyJWT')
 
 // router.use(verifyJWT)
 
-router.route('/')
+router.route('/v2')
 .get(usersController.getAllUsers)
 .post(usersController.createUser)
-router.route('/:id')
-.get(usersController.getUserById)
+router.route('/v2/:id')
+.get(usersController.getUser)
 .patch(verifyJWT,usersController.updateUser)
 .delete(verifyJWT,usersController.deleteUser)
-router.route('/:username/posts')
+
+router.route('/v1/:username')
+.get(usersController.getUser)
+.patch(verifyJWT,usersController.updateUser)
+
+router.route('/v1/:username/posts')
 .get(postController.getPostByUserName)
+// router.route('/v1/:username/registry')
+// .get(registryController.getregistry)
 
 module.exports = router

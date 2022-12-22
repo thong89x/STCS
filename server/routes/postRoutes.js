@@ -6,10 +6,11 @@ const verifyJWT = require('../middleware/verifyJWT')
 
 router.route('/')
 .get(postController.getAllPosts)
-.post(postController.createPost)
+.post(verifyJWT,postController.createPost)
 router.route('/:id')
 .get(postController.getPostById)
-.patch(postController.updatePost)
-.delete(postController.deletePost)
-
+.patch(verifyJWT,postController.updatePost)
+.delete(verifyJWT,postController.deletePost)
+// router.route('/:id/comment')
+// .get(commentController.getCommentbyPost)
 module.exports = router
