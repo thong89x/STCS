@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const registryformSchema = new mongoose.Schema({
-    userID:{type:Sting, default:''},
+    userID: {type:Schema.Types.ObjectID,required: true},
     postID:{type:Sting, default:''},
     starRatings:{type:Number, default:0},
     //cmtLike:{type:Number, default:0},
@@ -11,10 +11,7 @@ const registryformSchema = new mongoose.Schema({
         type: Date,
         required:true
     },
-    timeCreateRegistryForm: {
-        timestamps:true
-    },
-});
+},{timestamps:true});
 
 const RegistryForm = mongooAse.model('registryform', registryformSchema, 'registryform');
 module.exports = RegistryForm;  

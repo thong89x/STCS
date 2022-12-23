@@ -32,10 +32,13 @@ connection.once('open', () => {
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/authRoutes');
 const postRouter = require('./routes/postRoutes');
+const commentRouter = require('./routes/commentRoutes');
+
 
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/posts', postRouter);
+app.use('/comments', commentRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
