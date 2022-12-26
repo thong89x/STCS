@@ -1,4 +1,4 @@
-let Comment = require('../models/Comment');
+const Comment = require('../models/Comment');
 const bcrypt = require('bcrypt')
 const asyncHandler = require('express-async-handler');
 const Users = require('../models/User');
