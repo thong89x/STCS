@@ -8,6 +8,9 @@ const asyncHandler = require('express-async-handler')
 // @access Private
 const getAllUsers = asyncHandler(async (req, res) => {
     // Get all users from MongoDB
+    if (req.role != "admin" && req.role != "subAdmin"){
+        return res.status(400).json({ message: 'Cant access' })
+    }
     const users = await User.find().select('-password').lean()
 
     // If no users 
@@ -103,7 +106,7 @@ const updateUser = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'User not found' })
     }
     var valid = false;
-    if(RolesFromToken == "admin")
+    if(RolesFromToken == "admin" && RolesFromToken == "subAdmin")
     {
         valid= true;
     }
@@ -144,6 +147,9 @@ const deleteUser = asyncHandler(async (req, res) => {
 //     }
 // );
 //     return;
+    if (req.role != "admin" && req.role != "subAdmin"){
+        return res.status(400).json({ message: 'Cant access' })
+    }
     const id  = req.params.id 
     console.log(id);
     // Confirm data

@@ -143,7 +143,7 @@ const deletePost = asyncHandler(async (req, res) => {
     }
     const users = await Users.findById(posts.userID).exec()
     var valid = false;
-    if(RolesFromToken == "admin")
+    if(RolesFromToken == "admin" && RolesFromToken == "subAdmin")
     {
         valid= true;
     }

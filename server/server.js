@@ -33,12 +33,14 @@ const usersRouter = require('./routes/users');
 const authRouter = require('./routes/authRoutes');
 const postRouter = require('./routes/postRoutes');
 const commentRouter = require('./routes/commentRoutes');
+const registryFormRouter = require('./routes/registryRoutes');
 
 
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/posts', postRouter);
 app.use('/comments', commentRouter);
+app.use('/registrys', registryFormRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

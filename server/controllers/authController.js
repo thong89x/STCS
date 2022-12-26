@@ -32,7 +32,7 @@ console.log("Hi");
             }
         },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '2m' }
+        { expiresIn: '15m' }
     )
 
     const refreshToken = jwt.sign(
