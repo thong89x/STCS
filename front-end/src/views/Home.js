@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import TodoList from '../components/TodoList';
-
+import { NavLink } from 'react-router-dom';
 import { addPost, removePost} from 'features/todos/todoSlice'
 
 
@@ -26,6 +26,9 @@ export default function Home() {
     }
   return (  
     <div className='home-page'>
+        <button>
+            <NavLink to = "/posts/add" className = 'nav-link'>Create a New Post</NavLink>
+        </button>
         <button onClick={handleAddTodoClick}>Random Todo</button>
         <ul>
         {todoList.map((todo, idx) => (
