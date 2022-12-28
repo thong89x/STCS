@@ -1,4 +1,4 @@
-let Post = require('../models/Post');
+const Post = require('../models/Post');
 const bcrypt = require('bcrypt')
 const asyncHandler = require('express-async-handler');
 const Users = require('../models/User');
@@ -18,7 +18,7 @@ const getAllPosts = asyncHandler(async (req, res) => {
 
     res.json(Posts)
 })
-const getPostById = asyncHandler(async (req, res) => {
+const getPostByID = asyncHandler(async (req, res) => {
     console.log(req.params.id)
     // Get all Posts from MongoDB
     const Posts = await Post.findById(req.params.id).select('-password').lean()
@@ -143,7 +143,7 @@ const deletePost = asyncHandler(async (req, res) => {
     }
     const users = await Users.findById(posts.userID).exec()
     var valid = false;
-    if(RolesFromToken == "admin")
+    if(RolesFromToken == "admin" && RolesFromToken == "subAdmin")
     {
         valid= true;
     }
@@ -166,7 +166,7 @@ const deletePost = asyncHandler(async (req, res) => {
 
 module.exports = {
     getAllPosts,
-    getPostById,
+    getPostByID,
     createPost,
     updatePost,
     deletePost,

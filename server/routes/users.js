@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const usersController = require('../controllers/usersController')
 const postController = require('../controllers/postController')
+const registryController = require('../controllers/registryControllers')
 const verifyJWT = require('../middleware/verifyJWT')
 
-// router.use(verifyJWT)
+//router.use(verifyJWT)
 
 router.route('/v2')
-.get(usersController.getAllUsers)
+.get(verifyJWT, usersController.getAllUsers)
 .post(usersController.createUser)
 router.route('/v2/:id')
 .get(usersController.getUser)
@@ -19,7 +20,9 @@ router.route('/v1/:username')
 
 router.route('/v1/:username/posts')
 .get(postController.getPostByUserName)
-// router.route('/v1/:username/registry')
-// .get(registryController.getregistry)
 
+router.route('/v1/:username/registrys')
+.get(verifyJWT, registryController.getRegistryFormByUserName)
+
+    
 module.exports = router

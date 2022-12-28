@@ -7,5 +7,5 @@ const notifySchema = new mongoose.Schema({
     contentNotifyAll:{type:String, minlength: 100, maxlength:3000,required:true},
 },{ timestamps:true });
 
-const Notify = mongooAse.model('notify', notifySchema, 'notify');
+const Notify = mongoose.model('notify', notifySchema, 'notify');
 module.exports = Notify;
