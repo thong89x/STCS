@@ -11,14 +11,14 @@ const Posts = React.lazy(()=> import('./features/posts/Posts') )
 
 function App() {
   return (
-    <div className="container">
+    <div className="containerWeb">
       <Suspense fallback={<div>Loading.....</div>}>
         <Header/>
         <Routes>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/home' element={<Home/>} />
-
+          
           <Route path="/users/*" element={<UserRouter/>}/>
 
           <Route path='/posts/*' element={<Posts/>} />
