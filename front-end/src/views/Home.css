@@ -1,0 +1,19 @@
+.homeContainer{
+    padding: 20px 100px;
+}
+
+.carousel-item > img{
+    width: 100%;
+    height: 40vh;
+}
+
+.product{
+    width: 254px;
+    height: 351px;
+    justify-content: center;
+    align-items: center;
+}
+.product>img{
+    width: 254px;
+    height: 246px;
+}

@@ -73,7 +73,7 @@ export default navbar;
 const Navigation = styled.div`
 width: 100%;
 height: 80px;
-position: fixed;
+position: relative;
 top: 0;
 // transition-timing-function: ease-in;
 // transition: all 1s;
