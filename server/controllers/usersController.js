@@ -91,6 +91,12 @@ const updateUser = asyncHandler(async (req, res) => {
 
     const { password, isActive  } = req.body
 
+    const user ={
+        
+        profile: {
+
+        }
+    }
     // Confirm data 
     if ( typeof isActive !== 'boolean') {
         return res.status(400).json({ message: 'All fields except password are required' })
