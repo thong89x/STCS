@@ -1,0 +1,10 @@
+ul.todo-list {
+
+}
+ul.todo-list >li {
+    cursor: pointer;
+ transition: all .35s ease-in-out 0s;
+}
+ul.todo-list > li.active {
+    color: aqua
+}
