@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import { addPost, removePost} from 'features/posts/postSlice'
 import { useDispatch } from 'react-redux'
-import 'semantic-ui-css/semantic.min.css'
-import "../styles/NewPost.css"
-import { Button,Select,Image,Segment } from 'semantic-ui-react';
+import "../styles/Post.css"
+import { Button,Image,Segment,Form, TextArea } from 'semantic-ui-react';
 export default function NewPost() {
     const [name,setName] = useState("")
     const [desc,setDesc] = useState("")
-    const [type,setType] = useState("")
     const [question, setQuestion] = useState("")
+    const [address, setAdress] = useState("")
+    const [price, setPrice] = useState("")
+    const [quantity, setQuantity] = useState("")
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const handleSubmit = event =>{
@@ -19,16 +20,11 @@ export default function NewPost() {
             id: newID,
             name: name,
             desc: desc,
+            address: address,
+            price: setPrice,
+            quantity: setQuantity,
             question: question
         }
-        const ButtonExampleConditionals = () => (
-            <Button.Group>
-              <Button>Hủy</Button>
-              <Button.Or />
-              <Button positive>Thêm sản phẩm</Button>
-            </Button.Group>
-          )
-
         const action = addPost(newPost)
         dispatch(action)
         navigate('/posts')
@@ -50,14 +46,41 @@ export default function NewPost() {
                         <input type="text" className="form-control" id="tensp" value={name} onChange={(e)=>setName(e.target.value)}  placeholder="Nhập tên sản phẩm"/>
                     </div>
                 </div>
-                <hr/>
-                <div className="form-group row">
+                <br/>
+                {/* <div className="form-group row">
                     <label htmlFor="productDescribe" className="col-sm-2 col-form-label">Mô tả sản phẩm</label>
                     <div className="col-sm-10">
                         <input type="text" className="form-control" id="motasp" value={desc} onChange={(e)=>setDesc(e.target.value)} placeholder="Nhập mô tả sản phẩm"/>
                     </div>
+                </div> */}
+                <div class="ui form">
+                    <div class="field">
+                        <label>Mô tả sản phẩm</label>
+                        <textarea placeholder='Vui lòng nhập mô tả sản phẩm' className="form-control" id="motasp" value={desc} onChange={(e)=>setDesc(e.target.value)}>
+                        </textarea>
+                    </div>
                 </div>
-                
+                <br/>
+                <div className="form-group row">
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Địa chỉ người thêm sản phẩm</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="diachinguoiban" value={address} onChange={(e)=>setAdress(e.target.value)}  placeholder="Thêm địa chỉ người bán"/>
+                    </div>
+                </div>
+                <br/>
+                <div className="form-group row">
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Giá mặt hàng (Tối đa: 150.000VNĐ)</label>
+                    <div className="col-sm-10">
+                        <input type="number" className="form-control" id="giatien" min="0" max="150000" value={price} onChange={(e)=>setPrice(e.target.value)}  placeholder="Nhập số tiền (VNĐ)"/>
+                    </div>
+                </div>
+                <br/>
+                <div className="form-group row">
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Số lượng</label>
+                    <div className="col-sm-10">
+                        <input type="number" className="form-control" id="soluong" value={quantity} onChange={(e)=>setQuantity(e.target.value)}  placeholder="Nhập số tiền (VNĐ)"/>
+                    </div>
+                </div>
             </Segment>
             <Segment>
                 <div as = 'h3' className = "text_thongtincoban">
@@ -82,6 +105,8 @@ export default function NewPost() {
                         <input type="text" className="form-control" id="question" value={question} onChange={(e)=>setQuestion(e.target.value)}  placeholder="Vui lòng điền câu hỏi"/>
                     </div>
                 </div>
+                <hr/>
+                <a class="ui red tag label">Thêm câu hỏi</a>
             </Segment>
             <div class="ui buttons">
                 <button class="ui button">Hủy</button>

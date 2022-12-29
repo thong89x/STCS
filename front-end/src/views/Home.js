@@ -29,6 +29,9 @@ export default function Home() {
         <button>
             <NavLink to = "/posts/add" className = 'nav-link'>Create a New Post</NavLink>
         </button>
+        <button>
+            <NavLink to = "/users/edit/:id" className = 'nav-link'>Edit Personal Information</NavLink>
+        </button>
         <button onClick={handleAddTodoClick}>Random Todo</button>
         <ul>
         {todoList.map((todo, idx) => (

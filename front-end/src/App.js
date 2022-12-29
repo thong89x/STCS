@@ -3,7 +3,6 @@ import { Login } from './views/Login'
 import { SignUp } from './views/SignUp' 
 import { NotFound } from './views/NotFound';
 import Header from './components/Header';
-import NewPost from 'features/posts/components/NewPost';
 import {Routes,Route, Navigate, Link } from 'react-router-dom'
 import './App.css';
 import UserRouter from 'features/users/userRouter';

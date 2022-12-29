@@ -1,16 +1,21 @@
-.outlineFrame {
-    box-sizing: border-box;
-    position: absolute;
-    height: 1425px;
-    left: 0;
-    right: 10.21%;
 
-    background: -webkit-linear-gradient(to bottom,#A0B4F3, #9EFCF6);
-    background: linear-gradient(to bottom,#A0B4F3, #9EFCF6);
-    border-radius: 25px;
+.backGroundPage{
+    background-color: "#DDE4F5";
+    height: 110%;
+}
+.infoBox {
+    position: fixed;
+    width: 550px;
+    height: 533px;
+    left: 345px;
+    top: 0px;
 }
 
-.text_themsanpham {
+.cameraIcon{
+    left: 145px;
+}
+
+.text_header {
     position: top;
     height: 39px;
     left: 13.47%;
@@ -20,12 +25,11 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
-    font-size: 48px;
+    font-size: 32px;
     line-height: 39px;
 
     /* identical to box height */
     text-align: center;
-
     color: #000000; 
 }
 
@@ -43,5 +47,8 @@
     
     text-align: left; 
     color: #000000;    
-    
+}
+
+.shade {
+    color: '#C4C4C4'
 }
