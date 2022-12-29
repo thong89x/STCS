@@ -77,7 +77,7 @@ export default function Home() {
       <div className='row mt-3 '>
         <h2 className='col-4'>Most Searched </h2>
         <button className='col-1 rounded-pill'>
-            <NavLink  to ="/showall">
+            <NavLink  to ="/mostsearched">
               Show all
             </NavLink>
           </button>
