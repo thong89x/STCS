@@ -59,6 +59,9 @@ export default function Home() {
         <span class="visually-hidden">Next</span>
     </button>
     </div>
+      <button >
+        New post
+      </button>
       <div className='row mt-3 '>
         <h2 className='col-4'>Recommend for you </h2>
         <button className='col-1 rounded-pill'>Show all</button>

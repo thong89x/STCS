@@ -40,10 +40,6 @@ export default function UsersList() {
           {
             usersList.map(currentuser => {
             return
-            <div className='product'>
-            <img src="https://images-na.ssl-images-amazon.com/images/I/61IbbtxnCIL._AC_UX466_.jpg" class="d-block" alt="Not found"/>
-          <h3 className='text-center'>{post.nameproduct}</h3>
-          </div>
             // <User user={currentuser} key={currentuser._id}/>;
             })
           }

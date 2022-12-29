@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import './styles/navbar.css';
 import LogoGroup from '../assets/Logo.png'
@@ -8,34 +8,13 @@ import {IoIosInformationCircleOutline} from 'react-icons/io'
 import styled from 'styled-components';
 import {IoNotifications} from 'react-icons/io5'
 import {BsList} from 'react-icons/bs'
-// code mau nho sua
-// export default class Navbar extends Component {
-
-//   render() {
-//     return (
-//       <nav className="navbar navbar-dark bg-dark navbar-expand-lg ">
-//         <NavLink to="/home" className="navbar-brand">Logo</NavLink>
-//         <div className="collpase navbar-collapse">
-//         <ul className="navbar-nav mr-auto">
-//           <li className="navbar-item">
-//           <NavLink to="/home" className="nav-link">Home</NavLink>
-//           </li>
-//           <li className="navbar-item">
-//           <NavLink to="/posts" className="nav-link">Posts</NavLink>
-//           </li>
-//           <li className="navbar-item">
-//           <NavLink to="/post" className="nav-link">Post</NavLink>
-//           </li>
-//         </ul>
-//         </div>
-//       </nav>
-      
-//     );
-//   }
-// }
-
-function navbar(props){
-
+import { useNavigate } from 'react-router-dom';
+function Navbar(props){
+  const searchRef = useRef()
+  const Navigate = useNavigate()
+  const handleSearch = () => {
+    Navigate(`/search?typeorder=${searchRef.current.value}`)
+  }
 
   return(
     <Navigation>
@@ -44,23 +23,23 @@ function navbar(props){
         <img src={LogoGroup} alt =""></img>
       </NavLink>
       <div className='navSearch'>
-        <div>
+        <div onClick={handleSearch}>
           <BsSearch className='iconSearch'/>
         </div>
-        <input type="text" placeholder='Search...'/>
+        <input ref={searchRef} type="text" placeholder='Search...'/>
       </div>
-      <div className='myOrder'>
+      <NavLink to ="/Order" className='myOrder'>
         <RiBillLine className='iconBill'/> 
         My Orders
-      </div>
-      <div className='information'>
+      </NavLink>
+      <NavLink to ="/Info" className='information'>
         <IoIosInformationCircleOutline className='iconInf'/>
         About
-      </div>
-      <div className='notification'>
+      </NavLink>
+      <NavLink to ="/Notification" className='notification'>
         <IoNotifications className='iconNotify'/>
         Notifications
-      </div>
+      </NavLink>
       <div className='list'>
         <BsList className='iconList'/>
       </div>
@@ -69,7 +48,7 @@ function navbar(props){
   )
 }
 
-export default navbar;
+export default Navbar;
 const Navigation = styled.div`
 width: 100%;
 height: 80px;
