@@ -39,7 +39,8 @@ export default function UsersList() {
           <tbody>
           {
             usersList.map(currentuser => {
-            return <User user={currentuser} key={currentuser._id}/>;
+            return
+            // <User user={currentuser} key={currentuser._id}/>;
             })
           }
           </tbody>

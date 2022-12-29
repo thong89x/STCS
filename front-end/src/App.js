@@ -7,11 +7,13 @@ import {Routes,Route, Navigate, Link } from 'react-router-dom'
 import './App.css';
 import UserRouter from 'features/users/userRouter';
 import React, { Suspense } from 'react';
+import Search from './features/posts/Search';
+import Order from 'views/Order';
 const Posts = React.lazy(()=> import('./features/posts/Posts') )
 
 function App() {
   return (
-    <div className="containerWeb ">
+    <div className="containerWeb">
       <Suspense fallback={<div>Loading.....</div>}>
         <Header/>
         <Routes>
@@ -20,8 +22,9 @@ function App() {
           <Route path='/home' element={<Home/>} />
           <Route path='/admin' element={<Home/>} />
 
+          <Route path='/search' element={<Search/>} />
           <Route path="/users/*" element={<UserRouter/>}/>
-
+          <Route path="/order" element={<Order/>}/>
           <Route path='/posts/*' element={<Posts/>} />
           <Route path='*' element={<NotFound/>}/>
         </Routes>
