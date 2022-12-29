@@ -10,7 +10,9 @@ const useAuth = () => {
 
         return { username, role }
     }
-
-    return { role: 'viewer'}
+    const userInfo = localStorage.getItem("userInfo");
+    if(userInfo)
+        return JSON.parse(userInfo)
+    return {role: 'viewer'}
 }
 export default useAuth

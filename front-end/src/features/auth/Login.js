@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from './authSlice'
+import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 
 const Login =() => {
@@ -30,6 +31,9 @@ const Login =() => {
         },config).then((res)=>{
             accessToken = res.data
             dispatch(setCredentials( accessToken ))
+            
+            // const { username, role } = decoded.UserInfo
+            
             navigate('/home')
         }).catch((err)=>{
             alert("vui long nhap lai tk mat khau");

@@ -21,7 +21,7 @@ export default function PostList() {
     <div>
         Post List
         <ul>
-        {postList.map((post) => (
+        {postList.map((post,idx) => (
             <PostTiny post={post} handleRemoveClick={handleRemoveClick} handleEditClick={handleEditClick}/>
         ))}
         </ul>

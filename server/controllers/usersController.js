@@ -7,6 +7,7 @@ const asyncHandler = require('express-async-handler')
 // @route GET /users
 // @access Private
 const getAllUsers = asyncHandler(async (req, res) => {
+    console.log(getAllUsers);
     // Get all users from MongoDB
     if (req.role != "admin" && req.role != "subAdmin"){
         return res.status(400).json({ message: 'Cant access' })

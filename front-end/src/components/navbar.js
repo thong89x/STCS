@@ -12,7 +12,6 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from 'hooks/useAuth';
 function Navbar(props){
   const { username, role } = useAuth()
-  console.log(username)
   const searchRef = useRef()
   const Navigate = useNavigate()
   const handleSearch = () => {
@@ -38,6 +37,9 @@ function Navbar(props){
       <NavLink to ="/Info" className='information'>
         <IoIosInformationCircleOutline className='iconInf'/>
         About
+      </NavLink>
+      <NavLink to ="/users" className='information'>
+        Users
       </NavLink>
       <NavLink to ="/Notification" className='notification'>
         <IoNotifications className='iconNotify'/>
