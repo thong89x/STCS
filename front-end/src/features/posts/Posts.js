@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useReducer, useState } from 'react'
 import {Routes,Route,useMatches, useMatch, useLocation } from "react-router-dom"
 import EditPost from './components/EditPost'
 import NewPost from './components/NewPost'

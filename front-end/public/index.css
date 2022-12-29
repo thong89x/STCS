@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    /* COLORS */
+    --BGCOLOR: #0F172A;
+    --BORDER-COLOR: #FFF;
+    --COLOR: #FFF;
+    --ERROR: firebrick;
+    --INACTIVE: lightgray;
+    --LINK-COLOR: whitesmoke;
+    --LINK-HOVER: rgba(245, 245, 245, 0.9);
+    --NOTE-BGCOLOR: hsla(240, 64%, 27%, 0.65);
+    --STATUS-COMPLETE: limegreen;
+    --STATUS-OPEN: firebrick;
+    --TABLE-BGCOLOR: #FFF;
+    --TABLE-COLOR: #000;
+    --INPUT-INVALID: #F00;
+  }

@@ -1,5 +1,5 @@
 import Home  from './views/Home' 
-import { Login } from './views/Login' 
+import Login  from './features/auth/Login' 
 import { SignUp } from './views/SignUp' 
 import { NotFound } from './views/NotFound';
 import Header from './components/Header';
@@ -11,13 +11,14 @@ const Posts = React.lazy(()=> import('./features/posts/Posts') )
 
 function App() {
   return (
-    <div className="container">
+    <div className="containerWeb ">
       <Suspense fallback={<div>Loading.....</div>}>
         <Header/>
         <Routes>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/home' element={<Home/>} />
+          <Route path='/admin' element={<Home/>} />
 
           <Route path="/users/*" element={<UserRouter/>}/>
 

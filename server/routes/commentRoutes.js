@@ -10,8 +10,7 @@ router.route('/')
 .post(commentController.createComment)
 router.route('/:id')
 .get(commentController.getCommentById)
-router.route('/:id/comment')
-.get(commentController.getCommentByPostID)
+
 
 
 module.exports = router
