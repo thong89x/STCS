@@ -4,10 +4,9 @@ import TodoList from '../components/TodoList';
 import { NavLink } from 'react-router-dom';
 import { addPost, removePost} from 'features/todos/todoSlice'
 import jwtDecode from 'jwt-decode'
-import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import "./Home.css"
+import "./styles/Home.css"
 
 export default function Home() {
     const todoList = useSelector(state=> state.todoList);

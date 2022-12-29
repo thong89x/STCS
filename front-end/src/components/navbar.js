@@ -9,7 +9,10 @@ import styled from 'styled-components';
 import {IoNotifications} from 'react-icons/io5'
 import {BsList} from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom';
+import useAuth from 'hooks/useAuth';
 function Navbar(props){
+  const { username, role } = useAuth()
+  console.log(username)
   const searchRef = useRef()
   const Navigate = useNavigate()
   const handleSearch = () => {
@@ -43,6 +46,14 @@ function Navbar(props){
       <div className='list'>
         <BsList className='iconList'/>
       </div>
+      {username ? 
+      <NavLink to ={`/users/${username}`} className="login">
+        {username}
+      </NavLink>
+      :<NavLink to ="/login" className="login">
+        Login
+      </NavLink> }
+      
     </div>
     </Navigation>
   )
@@ -60,15 +71,18 @@ top: 0;
 @media only screen and (max-width: 600px) {
   height: 100px;
 }
+
 .navContainer{
   background-color: #716DF2;
   display: flex;
   align-items: center;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   height: 100%;
-  padding: 30px 100px;
-
+  padding: 30px 11%;
+  .login {
+   color: white;
+  }
   @media only screen and (max-width: 600px) {
     flex-direction: column;
     height: 100px;
