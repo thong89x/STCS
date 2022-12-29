@@ -9,6 +9,8 @@ import UserRouter from 'features/users/userRouter';
 import React, { Suspense } from 'react';
 import Search from './features/posts/Search';
 import Order from 'views/Order';
+import MostSearched from 'views/MostSearched';
+import ShowAll from 'views/ShowAll';
 const Posts = React.lazy(()=> import('./features/posts/Posts') )
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
           <Route path='/search' element={<Search/>} />
           <Route path="/users/*" element={<UserRouter/>}/>
           <Route path="/order" element={<Order/>}/>
+          <Route path="/showall" element={<ShowAll/>}/>
+          <Route path="/mostsearched" element={<MostSearched/>}/>
           <Route path='/posts/*' element={<Posts/>} />
           <Route path='*' element={<NotFound/>}/>
         </Routes>
