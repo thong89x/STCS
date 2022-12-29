@@ -4,24 +4,24 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = [{
     id:47512,
-    name:"Niga Slave",
-    desc:"Mua 1 lần dùng trọn đời",
-    imgUrl:"https://picsum.photos/id/110/300/300"
+    nameProduct:"Áo thun",
+    typeProduct:"Áo thun", 
+    imageUrl:["https://th.bing.com/th/id/R.0fcbb14681efe4b5bc25813c16bde304?rik=r9vRoNDKrsRDTA&pid=ImgRaw&r=0",""]
 },{
     id:50000,
-    name:"White Power",
-    desc:"Dùng để thanh trừng Niga Slave",
-    imgUrl:"https://picsum.photos/id/649/300/300"
+    nameProduct:"Áo khoác",
+    typeProduct:"Áo khoác",
+    imageUrl:["https://th.bing.com/th/id/OIP.THOLrXSux_tuWg88YA2PigHaJ4?pid=ImgDet&w=3600&h=4800&rs=1",""]
 },{
     id:60000,
-    name:"Niga Slave",
-    desc:"Mua 1 lần dùng trọn đời",
-    imgUrl:"https://picsum.photos/id/859/300/300"
+    nameProduct:"Áo phao",
+    typeProduct:"Áo phao",
+    imageUrl:["https://images-na.ssl-images-amazon.com/images/I/61IbbtxnCIL._AC_UX466_.jpg",""]
 },{
     id:71000,
-    name:"Niga Slave",
-    desc:"Mua 1 lần dùng trọn đời",
-    imgUrl:"https://picsum.photos/id/110/300/300"
+    nameProduct:"Quần jean",
+    typeProduct:"Quần jean",
+    imageUrl:["https://th.bing.com/th/id/OIP.SW3BoS5QYVOi5aMrPNycpQHaHa?pid=ImgDet&w=2020&h=2020&rs=1",""]
 }]
 const postSlice = createSlice({
     name: 'posts',
