@@ -1,30 +1,54 @@
-import React, { useState } from 'react'
-import {useNavigate} from 'react-router-dom'
-import { Button,Image,Segment,Form, TextArea } from 'semantic-ui-react';
+import React, { useState,Dispatch,setCredentials } from 'react'
+import { Image,Segment} from 'semantic-ui-react';
+import { useDispatch,useSelector} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import "../stylesUser/User.css"
 export default function EditUser() {
-  const [name,setName] = useState("")
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [fullname,setFullname] = useState("")
+  const [age, setAge] = useState("")
   const [address,setAdress] = useState("")
-  const [phone, setPhone] = useState("")
-  const [gender,setGender] = useState("")
-  const [city,setCity] = useState("")
+  const [sex,setSex] = useState("")
+  const [email,setEmail] = useState("")
+  const {token} = useSelector(state=> state.auth)
+  
   const handleSubmit = event =>{
     event.preventDefault()  
     const newID = 1000 + Math.floor(Math.random()*1000+ 9000);
-    const newEdit = {
-        name: name,
+    const newInfo = {
+        fullname: fullname,
+        age: age,
         address: address,
-        phone: phone,
-        gender: gender,
-        city: city
+        sex: sex,
+        email: email
     }
   }
+  const config = {
+    headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token? token: 'a'}`,
+    },
+  };
+  axios.post('http://localhost:5000/users/v1/${username}',config)
+  .then((response)=>{
+      
+  }).catch((err)=>{
+    if (err?.response?.status == 403){
+      console.log('sending request token')
+      axios.get('http://localhost:5000/auth/refresh',config).then((res)=>{
+        dispatch(setCredentials(...res.data))
+      }).catch((err)=>{
+        navigate('/login')
+      })
+    }
+  })
   return (
     <>
     <div style = {{backgroundColor: "#DDE4F5"}} class = 'backGroundPage'>
     <br/>
-    <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular />
-    <i class="camera icon" className = 'cameraIcon'></i>
+    <Image middle src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular/>
     
     <span className = "text_header">Duy Mai   
     </span>
@@ -37,21 +61,14 @@ export default function EditUser() {
                 <div className="form-group row">
                     <label htmlFor="productName" className="col-sm-2 col-form-label">Họ tên</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="hotenUser" value={name} onChange={(e)=>setName(e.target.value)}/>
+                        <input type="text" className="form-control" id="hotenUser" value={fullname} onChange={(e)=>setFullname(e.target.value)}/>
                     </div>
                 </div>
                 <br/>
                 <div className="form-group row">
-                    <label htmlFor="productName" className="col-sm-2 col-form-label">Địa chỉ</label>
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Số tuổi</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="hotenUser" value={address} onChange={(e)=>setAdress(e.target.value)}/>
-                    </div>
-                </div>
-                <br/>
-                <div className="form-group row">
-                    <label htmlFor="productName" className="col-sm-2 col-form-label">Số điện thoại liên lạc</label>
-                    <div className="col-sm-10">
-                        <input type="number" max = '10' className="form-control" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required value={phone} onChange={(e)=>setPhone(e.target.value)}/>
+                        <input type="number" min = '10' max = '100' className="form-control" id="age" name="age" required value={age} onChange={(e)=>setAge(e.target.value)}/>
                     </div>
                 </div>
                 <br/>
@@ -59,16 +76,23 @@ export default function EditUser() {
                     <label htmlFor="productName" className="col-sm-2 col-form-label">Giới tính</label>
                     <div className="col-sm-10">
                     <select class="ui dropdown">
-                      <option value={gender} onChange={(e)=>setGender(e.target.value)}>Male</option>
-                      <option value={gender} onChange={(e)=>setGender(e.target.value)}>Female</option>
+                      <option value={sex} onChange={(e)=>setSex(e.target.value)}>Male</option>
+                      <option value={sex} onChange={(e)=>setSex(e.target.value)}>Female</option>
                     </select>
                     </div>
                 </div>
                 <br/>
                 <div className="form-group row">
-                    <label htmlFor="productName" className="col-sm-2 col-form-label">Tỉnh/thành phố sinh sống</label>
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Địa chỉ</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="noiSinhSong" value={city} onChange={(e)=>setCity(e.target.value)}/>
+                        <input type="email" className="form-control" id="hotenUser" value={address} onChange={(e)=>setAdress(e.target.value)}/>
+                    </div>
+                </div>
+                <br/>
+                <div className="form-group row">
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Email</label>
+                    <div className="col-sm-10">
+                        <input type="email" className="form-control" pattern=".+@globex\.com" id="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="group8@example.com"/>
                     </div>
                 </div>
                 <br/>
