@@ -31,10 +31,11 @@ export default function UsersList() {
               setUsersList(()=> response.data)
               console.log(usersList)
           }).catch((err)=>{
-            if (err?.response?.status == 403){
+            if (err?.response?.status == 403 ||err?.response?.status == 400  ){
               console.log('sending request token')
               axios.get('http://localhost:5000/auth/refresh',config).then((res)=>{
                 const accessToken = res.data
+                console.log(accessToken)
                 dispatch(setCredentials(accessToken))
                 return accessToken
               }).then((res)=>{
