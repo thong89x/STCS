@@ -2,13 +2,9 @@ import React, { Component, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import './styles/navbar.css';
 import LogoGroup from '../assets/Logo.png'
-import {BsSearch} from 'react-icons/bs'
-import {RiBillLine} from 'react-icons/ri'
-import {IoIosInformationCircleOutline} from 'react-icons/io'
 import styled from 'styled-components';
-import {IoNotifications} from 'react-icons/io5'
-import {BsList} from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom';
+import UseAuth from 'hooks/useAuth';
 function navbarAdmin(props){
 //   const searchRef = useRef()
 //   const Navigate = useNavigate()
@@ -16,33 +12,27 @@ function navbarAdmin(props){
 //     Navigate(`/search?typeorder=${searchRef.current.value}`)
 //   }
 
+const { username, role } = UseAuth()
   return(
     <Navigation>
     <div className='navContainer'>
-      <NavLink to ="/home" className='logo'>
-        <img src={LogoGroup} alt =""></img>
+      <NavLink to ="/annoucements">
+        <button className='announcements'> Announcements</button>
       </NavLink>
-      <div className='navSearch'>
-        <div>
-          <BsSearch className='iconSearch'/>
-        </div>
-        <input type="text" placeholder='Search...'/>
-      </div>
-      <NavLink to ="/Order" className='myOrder'>
-        <RiBillLine className='iconBill'/> 
-        My Orders
+      <NavLink to ="/useracc">
+        <button className='useracc'> User's Account</button>
       </NavLink>
-      <NavLink to ="/Info" className='information'>
-        <IoIosInformationCircleOutline className='iconInf'/>
-        About
+      <NavLink to ="/report">
+        <button className='report'> Reports</button>
       </NavLink>
-      <NavLink to ="/Notification" className='notification'>
-        <IoNotifications className='iconNotify'/>
-        Notifications
+
+      {username ? 
+      <NavLink to ={`/users/${username}`} className="login">
+        {username}
       </NavLink>
-      <div className='list'>
-        <BsList className='iconList'/>
-      </div>
+      :<NavLink to ="/login" className="login">
+        Login
+      </NavLink> }
     </div>
     </Navigation>
   )
@@ -73,57 +63,83 @@ top: 0;
     flex-direction: column;
     height: 100px;
   }
-  .logo{
-    width: 88px;
-    cursor: pointer;
-    margin-right: 50px;
-    img {
-      width: 100%;
-    }
-  }
 
-  .navSearch{
-    color: white;
-    padding-right: 20px;
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 15px;
-    
-    input:focus ~ .iconSearch {
-      display: none;
+  .announcements{
+
+    :active{
+      color: #2e88c9;
+      background-color: white;
+      border: 2px solid white;
     }
 
-    .iconSearch{
-      color: black;
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      transform: translateX(285px) translateY(3px);
+    :hover{
+      color: #2e88c9;
+      background-color: white;
+      border: 2px solid white;
     }
-    
-    input {
-      border-radius: 10px;
-      border: 5px solid white;
-      outline: none;
-      width: 300px;
-    }
-  }
-  .myOrder{
+
+    padding: 5px 10px 20px 10px;
+    font-size: 24px;
+    font-family: Lucida Sans;
+    font-weight: bold;
     color: white;
-    padding-right: 20px;
-    justify-content: flex-end;
-    text-decoration: none;
-    font-size: 16px;
-    display: flex;
-    margin-right: 50px;
-    
-    .iconBill {
-      width: 25px;
-      height: 25px;
-      margin-right: 5px;
-      align-text: center;
-      display: flex;
+    border-radius: 15px 15px 0px 0px;
+    background-color: #2e88c9;
+    border: 2px solid #2e88c9;
+    margin-right: 30px;
+    filter: drop-shadow(0 0 0.75rem black)
+  }
+
+  .useracc{
+
+    :active{
+      color: #2e88c9;
+      background-color: white;
+      border: 2px solid white;
     }
+
+    :hover{
+      color: #2e88c9;
+      background-color: white;
+      border: 2px solid white;
+    }
+
+    padding: 5px 10px 20px 10px;
+    font-size: 24px;
+    font-family: Lucida Sans;
+    font-weight: bold;
+    color: white;
+    border-radius: 15px 15px 0px 0px;
+    background-color: #2e88c9;
+    border: 2px solid #2e88c9;
+    margin-right: 30px;
+    filter: drop-shadow(0 0 0.75rem black)
+  }
+
+  .report{
+
+    :active{
+      color: #2e88c9;
+      background-color: white;
+      border: 2px solid white;
+    }
+
+    :hover{
+      color: #2e88c9;
+      background-color: white;
+      border: 2px solid white;
+    }
+
+    padding: 5px 10px 20px 10px;
+    font-size: 24px;
+    font-family: Lucida Sans;
+    font-weight: bold;
+    color: white;
+    border-radius: 15px 15px 0px 0px;
+    background-color: #2e88c9;
+    border: 2px solid #2e88c9;
+    margin-right: 30px;
+    filter: drop-shadow(0 0 0.75rem black)
   }
 
   .information{
@@ -136,38 +152,6 @@ top: 0;
     margin-right: 50px;
 
     .iconInf{
-      width: 25px;
-      height: 25px;
-      margin-right: 5px;
-      display: flex;
-    }
-  }
-
-  .notification{
-    color: white;
-    padding-right: 20px;
-    justify-content: flex-end;
-    text-decoration: none;
-    border-radius: 20px;
-    display: flex;
-    margin-right: 50px;
-
-    .iconNotify{
-      width: 25px;
-      height: 25px;
-      margin-right: 5px;
-      display: flex;
-    }
-  }
-  .list{
-    color: white;
-    padding-right: 20px;
-    justify-content: flex-end;
-    text-decoration: none;
-    border-radius: 20px;
-    display: flex;
-
-    .iconList{
       width: 25px;
       height: 25px;
       margin-right: 5px;

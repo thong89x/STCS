@@ -9,9 +9,10 @@ import styled from 'styled-components';
 import {IoNotifications} from 'react-icons/io5'
 import {BsList} from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom';
-import useAuth from 'hooks/useAuth';
+import UseAuth from 'hooks/useAuth';
+import NavbarAdmin from './navbarAdmin';
 function Navbar(props){
-  const { username, role } = useAuth()
+  const { username, role } = UseAuth()
   const searchRef = useRef()
   const Navigate = useNavigate()
   const handleSearch = () => {
@@ -19,7 +20,9 @@ function Navbar(props){
   }
 
   return(
-    <Navigation>
+    
+    <Navigation>  
+      {role==='admin'?<NavbarAdmin/>:
     <div className='navContainer'>
       <NavLink to ="/home" className='logo'>
         <img src={LogoGroup} alt =""></img>
@@ -56,7 +59,7 @@ function Navbar(props){
         Login
       </NavLink> }
       
-    </div>
+    </div>}
     </Navigation>
   )
 }
