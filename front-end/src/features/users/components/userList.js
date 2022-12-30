@@ -22,8 +22,9 @@ export default function UsersList() {
               Authorization: `Bearer ${token? token : 'a'}`,
             },
           };
-          
-          await axios.get('http://localhost:5000/users/v2',config).then((response)=>{
+          axios.defaults.withCredentials = true
+          await axios.get('http://localhost:5000/users/v2',config)
+          .then((response)=>{
             console.log(response.data)
             setUsersList(()=> response.data)
             console.log(usersList)

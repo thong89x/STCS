@@ -7,8 +7,6 @@ import jwtDecode from 'jwt-decode'
 import axios from 'axios';
 import styled from 'styled-components';
 import "./styles/Home.css"
-import "./Home.css"
-import { NavLink } from 'react-router-dom';
 
 export default function Home() {
     const todoList = useSelector(state=> state.todoList);

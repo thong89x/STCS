@@ -25,10 +25,12 @@ const Login =() => {
               "Content-Type": "application/json"
             },
           };
+        axios.defaults.withCredentials = true
         const res =  await axios.post('http://localhost:5000/auth',{
             username :  userRef.current.value,
             password : pwRef.current.value
         },config).then((res)=>{
+
             accessToken = res.data
             dispatch(setCredentials( accessToken ))
             

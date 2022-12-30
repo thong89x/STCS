@@ -45,8 +45,7 @@ console.log("Hi");
     // Create secure cookie with refresh token 
     res.cookie('jwt', refreshToken, {
         httpOnly: true, //accessible only by web server 
-        secure: true, //https
-        sameSite: 'None', //cross-site cookie 
+        secure: false, //https
         maxAge: 7 * 24 * 60 * 60 * 1000 //cookie expiry: set to match rT
     })
 
@@ -109,6 +108,7 @@ const SignUp = asyncHandler(async (req, res) => {
 // @access Public - because access token has expired
 const refresh = (req, res) => {
     const cookies = req.cookies
+    console.log(req.cookies)
     console.log("Hi")
     if (!cookies?.jwt) return res.status(401).json({ message: 'Unauthorized' })
     
