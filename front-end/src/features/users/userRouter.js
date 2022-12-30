@@ -11,6 +11,5 @@ export default function UserRouter() {
         <Route path="/edit/:id" element={<EditUser/>} />
       </Route>
     </Routes>
-
   )
 }

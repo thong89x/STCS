@@ -1,5 +1,5 @@
 import Home  from './views/Home' 
-import { Login } from './views/Login' 
+import Login  from './features/auth/Login' 
 import { SignUp } from './views/SignUp' 
 import { NotFound } from './views/NotFound';
 import Header from './components/Header';
@@ -22,6 +22,8 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/home' element={<Home/>} />
+          <Route path='/admin' element={<Home/>} />
+
           <Route path='/search' element={<Search/>} />
           <Route path="/users/*" element={<UserRouter/>}/>
           <Route path="/order" element={<Order/>}/>

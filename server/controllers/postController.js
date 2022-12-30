@@ -15,7 +15,7 @@ const getAllPosts = asyncHandler(async (req, res) => {
     if (!Posts?.length) {
         return res.status(400).json({ message: 'No Posts found' })
     }
-
+    console.log("All Posts")
     res.json(Posts)
 })
 const getPostByID = asyncHandler(async (req, res) => {

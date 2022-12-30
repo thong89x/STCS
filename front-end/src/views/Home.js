@@ -1,14 +1,36 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import TodoList from '../components/TodoList';
-
+import { NavLink } from 'react-router-dom';
 import { addPost, removePost} from 'features/todos/todoSlice'
+import jwtDecode from 'jwt-decode'
+import axios from 'axios';
 import styled from 'styled-components';
+import "./styles/Home.css"
 import "./Home.css"
 import { NavLink } from 'react-router-dom';
 
 export default function Home() {
     const todoList = useSelector(state=> state.todoList);
+    const {token} = useSelector(state=> state.auth);
+    useEffect(()=>{
+        const config = {
+            headers: {
+              "Content-Type": "application/json"
+            },
+          };
+        axios.get('http://localhost:5000/posts',config).then((res)=>{
+            console.log(res.data)
+        }).catch((err)=>{
+            console.log(err)
+        })
+    },[])
+    if (token) {
+        const decoded = jwtDecode(token)
+        const { username, role } = decoded.UserInfo
+        console.log(username,role)
+    }
+    console.log()
     // const activeID = useSelector(state=> state.todoList.activeID);
     const postList = useSelector(state=> state.postList.slice(0,4));
     const dispatch = useDispatch()

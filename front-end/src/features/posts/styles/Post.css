@@ -1,0 +1,58 @@
+.outlineFrame {
+    box-sizing: border-box;
+    position: absolute;
+    height: 1200px;
+    left: 0;
+    right: 10.21%;
+
+    background: -webkit-linear-gradient(to bottom,#A0B4F3, #9EFCF6);
+    background: linear-gradient(to bottom,#A0B4F3, #9EFCF6);
+    border-radius: 25px;
+}
+
+.infoBox {
+    position: absolute;
+    width: 550px;
+    height: 533px;
+    left: 445px;
+    top: 370px;
+}
+
+.text_themsanpham {
+    position: top;
+    height: 39px;
+    left: 13.47%;
+    right: 68.61%;
+    bottom: 1960px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 39px;
+
+    /* identical to box height */
+    text-align: center;
+
+    color: #000000; 
+}
+
+.text_thongtincoban {
+    position: center;
+    width: 550px;
+    height: 58px;
+    top: 101px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 58px;
+    
+    text-align: left; 
+    color: #000000;    
+}
+
+.shade {
+    color: '#C4C4C4'
+}

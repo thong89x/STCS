@@ -8,9 +8,10 @@ export default function User(props) {
       <td>{props.user.role}</td>
       <td>{props.user.isActive? 'Active':'Ban'}</td>
       <td>{props.user.lastLogin.substring(0,10)}</td>
-      <td>{props.user.createdAt.substring(0,10)}</td>
+      <td>{props.user.createdAt? props.user.createdAt.substring(0,10):''}</td>
+      
       <td>
-        <Link to={"/edit/"+props.user._id}>edit</Link> | <a href="/#">delete</a>
+        <Link to={"/users/edit/"+props.user._id}>edit</Link> | <a href="/#">delete</a>
       </td>
     </tr>
   )

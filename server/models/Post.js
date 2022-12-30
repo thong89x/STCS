@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const postSchema = new mongoose.Schema({
-    userID: {type:Schema.Types.ObjectID,required: true},
+    userID:{type:Schema.Types.ObjectID,required: true},
     imageURL:[String],
     amountRegistry:{type:Number, default:0},
     typeProduct:{type:String, required:true},

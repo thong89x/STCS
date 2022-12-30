@@ -32,6 +32,7 @@ const postSlice = createSlice({
         },
         removePost(state, action) {
             const removePostID = action.payload;
+            //axios xoa o server
             return state.filter(post=> post.id !== removePostID);
         },
         updatePost(state, action){
