@@ -19,7 +19,7 @@ const { username, role } = UseAuth()
       <NavLink to ="/annoucements">
         <button className='announcements'> Announcements</button>
       </NavLink>
-      <NavLink to ="/useracc">
+      <NavLink to ="/users">
         <button className='useracc'> User's Account</button>
       </NavLink>
       <NavLink to ="/report">
