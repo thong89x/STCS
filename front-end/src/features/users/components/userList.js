@@ -6,6 +6,7 @@ import userApi from '../../../api/userApi'
 import axios from 'axios';
 import useAuth from 'hooks/useAuth';
 import { setCredentials } from 'features/auth/authSlice';
+import jwtDecode from 'jwt-decode'
 export default function UsersList() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -13,35 +14,49 @@ export default function UsersList() {
     const {token} = useSelector(state=> state.auth)
     const {role} = useAuth()
     console.log(token)
+
     console.log(role)
     useEffect(()=>{
         const FetchuserList = async()=>{
           const config = {
             headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token? token : 'a'}`,
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token? token: 'a'}`,
             },
           };
           axios.defaults.withCredentials = true
-          await axios.get('http://localhost:5000/users/v2',config)
+          axios.get('http://localhost:5000/users/v2',config)
           .then((response)=>{
-            console.log(response.data)
-            setUsersList(()=> response.data)
-            console.log(usersList)
+              console.log(response.data)
+              setUsersList(()=> response.data)
+              console.log(usersList)
           }).catch((err)=>{
-            if (err?.response?.status === 403) {
-              console.log('sending refresh token')
-
-            // send refresh token to get new access token 
-                axios.get('http://localhost:5000/auth/refresh',config).then((res)=>{
-                  dispatch(setCredentials( ...res.data ))
-                }).catch((err)=>{
-                  navigate('/login')
+            if (err?.response?.status == 403){
+              console.log('sending request token')
+              axios.get('http://localhost:5000/auth/refresh',config).then((res)=>{
+                const accessToken = res.data
+                dispatch(setCredentials(accessToken))
+                return accessToken
+              }).then((res)=>{
+                console.log(res.accessToken)
+                config.headers.Authorization = `Bearer ${res.accessToken}`
+                axios.get('http://localhost:5000/users/v2',config)
+                .then((response)=>{
+                    console.log(response.data)
+                    setUsersList(()=> response.data)
+                    console.log(usersList)
                 })
-          }})
+              })
+              .catch((err)=>{
+                navigate('/login')
+              })
+            }
+          })
         }
         FetchuserList()
     },[])
+
+    
   return (
     <div>
         <table className="table">
