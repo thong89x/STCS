@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import User from './user'
 import userApi from '../../../api/userApi'
 import axios from 'axios';
+import { setCredentials } from 'features/auth/authSlice';
 export default function UsersList() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [usersList,setUsersList] = useState([])
+    const {token} = useSelector(state=> state.auth)
     useEffect(()=>{
         const FetchuserList = async()=>{
             try{
@@ -22,6 +24,28 @@ export default function UsersList() {
         }
         FetchuserList()
     },[])
+
+    const config = {
+      headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token? token: 'a'}`,
+      },
+    };
+    axios.get('http://localhost:5000/users/v2',config)
+    .then((response)=>{
+        console.log(response.data)
+        setUsersList(()=> response.data)
+        console.log(usersList)
+    }).catch((err)=>{
+      if (err?.response?.status == 403){
+        console.log('sending request token')
+        axios.get('http://localhost:5000/auth/refresh',config).then((res)=>{
+          dispatch(setCredentials(...res.data))
+        }).catch((err)=>{
+          navigate('/login')
+        })
+      }
+    })
   return (
     <div>
         <table className="table">

@@ -29,6 +29,9 @@ export default function NewPost() {
         dispatch(action)
         navigate('/posts')
     }
+    const navigateHome = () => {
+      navigate('/home');
+    };
   return (
     <>
     <form onSubmit={handleSubmit}>
@@ -71,7 +74,7 @@ export default function NewPost() {
                 <div className="form-group row">
                     <label htmlFor="productName" className="col-sm-2 col-form-label">Giá mặt hàng (Tối đa: 150.000VNĐ)</label>
                     <div className="col-sm-10">
-                        <input type="number" className="form-control" id="giatien" min="0" max="150000" value={price} onChange={(e)=>setPrice(e.target.value)}  placeholder="Nhập số tiền (VNĐ)"/>
+                        <input type="number" className="form-control" id="giatien" maxlength="6" value={price} onChange={(e)=>setPrice(e.target.value)}  placeholder="Nhập số tiền (VNĐ)"/>
                     </div>
                 </div>
                 <br/>
@@ -109,7 +112,7 @@ export default function NewPost() {
                 <a class="ui red tag label">Thêm câu hỏi</a>
             </Segment>
             <div class="ui buttons">
-                <button class="ui button">Hủy</button>
+                <button class="ui button" onClick = {navigateHome}>Hủy</button>
                 <div class="or"></div>
                 <button class="ui positive button">Thêm sản phẩm </button>
             </div>
