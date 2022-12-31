@@ -1,7 +1,5 @@
 import React, { Component, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import './styles/navbar.css';
-import LogoGroup from '../assets/Logo.png'
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import UseAuth from 'hooks/useAuth';

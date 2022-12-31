@@ -10,7 +10,7 @@ import {IoNotifications} from 'react-icons/io5'
 import {BsList} from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom';
 import UseAuth from 'hooks/useAuth';
-import NavbarAdmin from './navbarAdmin';
+import NavbarAdmin from 'features/admin/navbarAdmin';
 function Navbar(props){
   const { username, role } = UseAuth()
   const searchRef = useRef()

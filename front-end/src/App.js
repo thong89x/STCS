@@ -11,7 +11,7 @@ import Search from './features/posts/Search';
 import Order from 'views/Order';
 import MostSearched from 'views/MostSearched';
 import ShowAll from 'views/ShowAll';
-import navbarAdmin from 'components/navbarAdmin';
+import navbarAdmin from 'features/admin/navbarAdmin';
 const Posts = React.lazy(()=> import('./features/posts/Posts') )
 
 function App() {
