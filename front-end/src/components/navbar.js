@@ -11,10 +11,25 @@ import {BsList} from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom';
 import UseAuth from 'hooks/useAuth';
 import NavbarAdmin from 'features/admin/navbarAdmin';
+import { useDispatch } from 'react-redux';
+import {logOut} from '../features/auth/authSlice';
+
 function Navbar(props){
   const { username, role } = UseAuth()
   const searchRef = useRef()
   const Navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const componentDidMount = (props) => {  
+    if(role === "viewer"){
+      return "/login"
+    }
+    return props
+  }
+  const handleLogout = () => {
+    dispatch(logOut())
+    // gui request localhost/auth/logout
+  }
   const handleSearch = () => {
     Navigate(`/search?typeorder=${searchRef.current.value}`)
   }
@@ -33,24 +48,28 @@ function Navbar(props){
         </div>
         <input ref={searchRef} type="text" placeholder='Search...'/>
       </div>
-      <NavLink to ="/Order" className='myOrder'>
+      <NavLink to ={componentDidMount("/order")} className='myOrder'>
         <RiBillLine className='iconBill'/> 
         My Orders
       </NavLink>
-      <NavLink to ="/Info" className='information'>
+      <NavLink to ={componentDidMount("/info")} className='information'>
         <IoIosInformationCircleOutline className='iconInf'/>
         About
       </NavLink>
-      <NavLink to ="/users" className='information'>
-        Users
-      </NavLink>
-      <NavLink to ="/Notification" className='notification'>
+      <NavLink to ={componentDidMount("/notificatioin")} className='notification'>
         <IoNotifications className='iconNotify'/>
         Notifications
       </NavLink>
-      <div className='list'>
-        <BsList className='iconList'/>
-      </div>
+          <a className='list' href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <BsList className='iconList'/>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="#">Setting</a>
+            <NavLink to ="/login" class="dropdown-item" onClick={handleLogout}>Log out</NavLink>
+          </div>
       {username ? 
       <NavLink to ={`/users/${username}`} className="login">
         {username}
@@ -79,14 +98,18 @@ top: 0;
 
 .navContainer{
   background-color: #716DF2;
+  background-image: linear-gradient(to bottom right, #716df2, rgb(227, 93, 248) );
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: center;
   height: 100%;
   padding: 30px 11%;
+  font-weight: bolder;
+
   .login {
    color: white;
+   font-size: 16px;
   }
   @media only screen and (max-width: 600px) {
     flex-direction: column;
@@ -135,14 +158,17 @@ top: 0;
     font-size: 16px;
     display: flex;
     margin-right: 50px;
-    
+    padding-top: 5px;
+
     .iconBill {
+      font-weight: bolder;
       width: 25px;
       height: 25px;
       margin-right: 5px;
       align-text: center;
-      display: flex;
+      padding-bottom: 5px;
     }
+    
   }
 
   .information{
@@ -153,12 +179,16 @@ top: 0;
     border-radius: 20px;
     display: flex;
     margin-right: 50px;
+    font-size: 16px;
+    padding-top: 5px;
+    
 
     .iconInf{
+      padding-bottom: 5px;
+      font-weight: bolder;
       width: 25px;
       height: 25px;
       margin-right: 5px;
-      display: flex;
     }
   }
 
@@ -170,12 +200,15 @@ top: 0;
     border-radius: 20px;
     display: flex;
     margin-right: 50px;
+    font-size: 16px;
+    padding-top: 5px;
 
     .iconNotify{
+      padding-bottom: 5px;
+      font-weight: bolder;
       width: 25px;
       height: 25px;
       margin-right: 5px;
-      display: flex;
     }
   }
   .list{
@@ -187,11 +220,12 @@ top: 0;
     display: flex;
 
     .iconList{
+      font-weight: bolder;
       width: 25px;
       height: 25px;
       margin-right: 5px;
-      display: flex;
     }
   }
+
 }
 `;

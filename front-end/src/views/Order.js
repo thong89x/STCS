@@ -4,23 +4,21 @@ export default function Order() {
   return (
     <div className='order'>
         <div className='box'>Form Registry Order</div>
-        <div className='input'>
-        <div >Full name:</div>
+        <div className='background-input'>
+        <div className='input'>Full name:</div>
         <input className='input_text' placeholder='Enter your full name.'/>
-        <div>Email Id:</div>
+        <div className='input_double'>
+        <div className='input'>Email Id:</div>
         <input className='input_text' placeholder='abc@gmail.com'/>
-        <div>Mobile No:</div>
+        <div className='input'>Mobile No:</div>
         <input className='input_text' placeholder='+84 - 827431231'/>
-        <div>Address:</div>
+        </div>
+        <div className='input'>Address:</div>
         <input className='input_text' placeholder='xxxxxxxxx.'/>
-        <div>Quantity:</div>
+        <div className='input'>Quantity:</div>
         <input className='input_text' placeholder='1,2,3...'/>
-        <br/>
-        <div className='button'>
-        <div className='row d-flex justify-content-center'>
-        <button className='col-2'>Confirm</button>
-        </div>
-        </div>
+        <div className='space '/>
+        <button className='button'>Confirm</button>
         </div>
     </div>
   )
