@@ -1,16 +1,17 @@
 import { useRef, useState, useEffect } from 'react'
-import { useNavigate, Link, useLocation } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from './authSlice'
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 import './styles/Login.css'
 import { Segment } from 'semantic-ui-react'
-const Login =() => {
+const SignUp =() => {
  
     const userRef = useRef()
     const pwRef = useRef()
     const [errMsg, setErrMsg] = useState('')
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -25,19 +26,15 @@ const Login =() => {
               "Content-Type": "application/json"
             },
           };
-        axios.defaults.withCredentials = true
-        const User = {
+        const newUser = {
             username :  userRef.current.value,
             password : pwRef.current.value
         }
-        const res =  await axios.post('http://localhost:5000/auth',User,config).then((res)=>{
-
-            accessToken = res.data
-            dispatch(setCredentials( accessToken ))
-            
-            // const { username, role } = decoded.UserInfo
-            
-            navigate('/home')
+        axios.defaults.withCredentials = true
+        const res =  await axios.post('http://localhost:5000/auth/signup',newUser,config).then((res)=>{
+            navigate('/login', {
+                state:"Create account successfully",
+                newUser})
         }).catch((err)=>{
             alert("vui long nhap lai tk mat khau");
             console.log(err)
@@ -54,7 +51,7 @@ const Login =() => {
                     <Segment>
                         <form className='form-container' onSubmit={handleSubmit}>
                             <div className='row'>
-                                <h2>Đăng Nhập</h2>
+                                <h2>Đăng Ký</h2>
                             </div>
                             <div className="form-group " >
                                 <label htmlFor="InputUsername">Username:</label>
@@ -65,7 +62,7 @@ const Login =() => {
                                 <label htmlFor="InputPassword1">Password</label>
                                 <input ref={pwRef} type="password" className="form-control" id="InputPassword1" placeholder="Password"/>
                             </div>
-                            <button type="submit" className="btn btn-primary loginbtn w-100">Đăng Nhập</button>
+                            <button type="submit" className="btn btn-primary loginbtn w-100">Đăng Ký</button>
                             <div className='row form-group'>
                                 <div className='line col w-20'></div>
                                 Hoặc
@@ -73,9 +70,10 @@ const Login =() => {
                                 
                             </div>
                             <footer className='row '>
-                                <div className='col-8'> Bạn chưa có tài khoản</div>
-                                <Link to="/signup" className='col ToggleLink'>Đăng Ký</Link>
+                                <div className='col-8'> Bạn đã có tài khoản</div>
+                                <Link to="/login" className='col ToggleLink'>Đăng Nhập</Link>
                             </footer>
+
                         </form>  
                     </Segment>
                 </main>
@@ -88,4 +86,4 @@ const Login =() => {
 
     return content
 }
-export default Login
+export default SignUp

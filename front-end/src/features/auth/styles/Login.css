@@ -1,0 +1,34 @@
+.decore{
+    background-image: url('assets/images/LoginImage.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+
+.LoginContainer{
+    height: 100vh;
+    background-color: aqua;
+}
+.public {
+    height: 100vh;
+}
+.loginbtn {
+    margin-top: 10px;
+    height: 45px;
+    left: 913px;
+    right: 165px;
+
+    background: linear-gradient(90deg, #12646A 2.07%, rgba(219, 47, 133, 0.94) 100%);
+    border: 1px solid #000000;
+    border-radius: 100px;
+}
+.line{
+    margin: 10px;
+    height: 1px;
+    background: #000000;
+}
+.ToggleLink {
+    color: rgba(219, 47, 133, 0.94);
+}
+.form-container {
+    font-size: 16px;
+}

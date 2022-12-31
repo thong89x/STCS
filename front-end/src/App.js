@@ -1,6 +1,6 @@
 import Home  from './views/Home' 
 import Login  from './features/auth/Login' 
-import { SignUp } from './views/SignUp' 
+import SignUp from './features/auth/SignUp' 
 import { NotFound } from './views/NotFound';
 import Header from './components/Header';
 import {Routes,Route, Navigate, Link } from 'react-router-dom'
