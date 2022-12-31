@@ -1,0 +1,28 @@
+.framebox {
+    padding-left: 30rem;
+    padding-right: 30rem;
+    padding-top: 5rem;
+    
+}
+
+.mb-3{
+    position: flex;
+}
+
+.text_header_admin {
+    position: top;
+    height: 39px;
+    left: 13.47%;
+    right: 68.61%;
+    padding-bottom: 7%;
+
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 39px;
+
+    /* identical to box height */
+    text-align: center;
+    color: #000000; 
+}
