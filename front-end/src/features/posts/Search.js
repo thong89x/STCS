@@ -9,7 +9,7 @@ export default function Search() {
   }
   const [searchParams, setSearchParams] = useSearchParams();
   searchParams.get("typeorder")
-  const postList = useSelector(state=> state.postList);
+  const postList = useSelector(state=> state.postList.list);
   console.log(postList)
   return (
     <div className='searchContainer'>

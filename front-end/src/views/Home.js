@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import TodoList from '../components/TodoList';
 import { NavLink } from 'react-router-dom';
-import { addPost, removePost} from '../features/posts/postSlice'
+import { addPost, getall, getAllPost, removePost} from '../features/posts/postSlice'
 import jwtDecode from 'jwt-decode'
 import axios from 'axios';
 import styled from 'styled-components';
@@ -30,11 +30,9 @@ export default function Home() {
       axios.get('http://localhost:5000/posts',config).then(async(res)=>{
           const list = res.data
           list.forEach(async(element) => {
-            console.log(element)
-            const action = addPost(element)
-            await dispatch(action)
           });
           setpostList(res.data)
+          dispatch(getAllPost())
       }).catch((err)=>{
           console.log(err)
       })

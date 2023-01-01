@@ -22,7 +22,6 @@ import ViewOrder from 'views/ViewOrder';
 import { useDispatch } from 'react-redux';
 import { getall } from 'features/posts/postSlice';
 import AdEditUser from 'features/admin/components/AdEditUser';
-import UsersList from 'features/users/components/userList';
 const Posts = React.lazy(()=> import('./features/posts/Posts') )
 
 function App() {

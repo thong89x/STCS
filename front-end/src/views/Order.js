@@ -5,15 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCredentials } from 'features/auth/authSlice';
 import { useState } from 'react';
 import './styles/Order.css'
-import { useDispatch,useSelector } from 'react-redux';
-import { Outlet, useNavigate , useParams} from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import User from 'features/users/components/user';
 import userApi from 'api/userApi';
 import useAuth from 'hooks/useAuth';
-import { setCredentials } from 'features/auth/authSlice';
 import jwtDecode from 'jwt-decode'
-import { useState, useRef } from 'react';
-import axios from 'axios'
 
 export default function Order() {
   const navigate = useNavigate()
