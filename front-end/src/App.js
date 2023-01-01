@@ -6,7 +6,7 @@ import Header from './components/Header';
 import {Routes,Route, Navigate, Link } from 'react-router-dom'
 import './App.css';
 import UserRouter from 'features/users/userRouter';
-import React, { Suspense } from 'react';
+import React, { Component, Suspense, useEffect } from 'react';
 import Search from './features/posts/Search';
 import Order from 'views/Order';
 import MostSearched from 'views/MostSearched';
@@ -16,7 +16,11 @@ import Announcements from 'features/admin/announcements';
 import ManageUser from 'features/admin/manageUser';
 import Report from 'features/admin/report';
 import useAuth from 'hooks/useAuth';
-import Approach from 'views/Approach';
+import AdEditUser from 'features/admin/components/AdEditUser';
+import UsersList from 'features/users/components/userList';
+import ViewOrder from 'views/ViewOrder';
+import { useDispatch } from 'react-redux';
+import { getall } from 'features/posts/postSlice';
 const Posts = React.lazy(()=> import('./features/posts/Posts') )
 
 function App() {
@@ -38,9 +42,10 @@ function App() {
           <Route path='/search' element={<Search/>} /> 
           
           {/* Users */}
-          <Route path='/approach' element={<Approach/>} /> 
+          <Route path='/vieworder/:id' element={<ViewOrder/>} />
+          <Route path='/announcements' element={<navbarAdmin/>} />
+          <Route path='/report' element={<AdEditUser/>} />
           <Route path="/users/*" element={<UserRouter/>}/>
-          <Route path="/order" element={<Order/>}/>
           <Route path="/showall" element={<ShowAll/>}/>
           <Route path="/mostsearched" element={<MostSearched/>}/>
           <Route path='/posts/*' element={<Posts/>} />
