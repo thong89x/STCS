@@ -16,6 +16,7 @@ import Announcements from 'features/admin/announcements';
 import ManageUser from 'features/admin/manageUser';
 import Report from 'features/admin/report';
 import useAuth from 'hooks/useAuth';
+import AdEditUser from 'features/admin/components/AdEditUser';
 const Posts = React.lazy(()=> import('./features/posts/Posts') )
 
 function App() {
@@ -37,6 +38,8 @@ function App() {
           <Route path='/search' element={<Search/>} /> 
           {/* Users */}
           
+          <Route path='/announcements' element={<navbarAdmin/>} />
+          <Route path='/report' element={<AdEditUser/>} />
           <Route path="/users/*" element={<UserRouter/>}/>
           <Route path="/order" element={<Order/>}/>
           <Route path="/showall" element={<ShowAll/>}/>
