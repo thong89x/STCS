@@ -16,7 +16,7 @@ import Announcements from 'features/admin/announcements';
 import ManageUser from 'features/admin/manageUser';
 import Report from 'features/admin/report';
 import useAuth from 'hooks/useAuth';
-import AdEditUser from 'features/admin/components/AdEditUser';
+// import AdEditUser from 'features/admin/components/AdEditUser';
 import UsersList from 'features/users/components/userList';
 import ViewOrder from 'views/ViewOrder';
 import { useDispatch } from 'react-redux';
@@ -38,13 +38,14 @@ function App() {
           <Route path='/' element={<Home/>} />
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
-          <Route path='/home' element={<Home/>} />
           <Route path='/search' element={<Search/>} /> 
+          <Route path='/home' element={<Home/>} />
+          
           
           {/* Users */}
           <Route path='/vieworder/:id' element={<ViewOrder/>} />
           <Route path='/announcements' element={<navbarAdmin/>} />
-          <Route path='/report' element={<AdEditUser/>} />
+          {/* <Route path='/report' element={<AdEditUser/>} /> */}
           <Route path="/users/*" element={<UserRouter/>}/>
           <Route path="/showall" element={<ShowAll/>}/>
           <Route path="/mostsearched" element={<MostSearched/>}/>
