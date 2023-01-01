@@ -77,7 +77,9 @@ function Navbar(props){
       :<NavLink to ="/login" className="login">
         Login
       </NavLink> }
-      
+      <NavLink to ="/approach">
+        approach
+      </NavLink>
     </div>}
     </Navigation>
   )
