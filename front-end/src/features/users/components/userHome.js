@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect ,useState} from 'react'
 import { useParams } from 'react-router-dom'
-import {Segment} from 'semantic-ui-react';
+import {Image,Segment} from 'semantic-ui-react';
 import "../stylesUser/User.css"
 export default function UserHome() {
     const [user,setUser]=useState()
@@ -22,10 +22,11 @@ export default function UserHome() {
     },[])
     return (
         <>
+        <Image middle src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular centered/>
+        <h2 id = "centerText">Duy Mai   </h2>
         <Segment className ="infoBox">
-            <hr/>
             <ol>
-                <li>Fullname: {user?.profile?.fullname?user.profile.fullname:"Niga" }</li>
+                <li>Fullname: {user?.profile?.fullname }</li>
                 <li>Email: {user?.profile?.email}</li>
                 <li>Age: {user?.profile?.age}</li>
                 <li>Gender: {user?.profile?.sex}</li>

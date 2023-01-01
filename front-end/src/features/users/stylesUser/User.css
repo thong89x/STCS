@@ -6,11 +6,13 @@
 .infoBox {
     position: flex;
     width: 550px;
-    height: 450px;
+    height: 125px;
     left: 500px;
     top: -10px;
 }
-
+#centerText{
+    text-align: center;
+}
 .cameraIcon{
     left: 145px;
 }
