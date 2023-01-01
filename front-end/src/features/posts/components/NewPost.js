@@ -1,35 +1,71 @@
 import React, { useState } from 'react'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate,useParams} from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { setCredentials } from 'features/auth/authSlice'
 import { addPost, removePost} from 'features/posts/postSlice'
 import { useDispatch } from 'react-redux'
+import axios from 'axios'
 import "../styles/Post.css"
 import { Button,Image,Segment,Form, TextArea } from 'semantic-ui-react';
 export default function NewPost() {
     const [name,setName] = useState("")
     const [desc,setDesc] = useState("")
+    const [type,setType] = useState("")
     const [question, setQuestion] = useState("")
     const [address, setAdress] = useState("")
     const [price, setPrice] = useState("")
     const [quantity, setQuantity] = useState("")
     const navigate = useNavigate();
     const dispatch = useDispatch()
+    const {token} = useSelector(state=> state.auth)
+    const {id} = useParams()
+    const {username} = useParams()
     const handleSubmit = event =>{
-        event.preventDefault()  
-        const newID = 1000 + Math.floor(Math.random()*1000+ 9000);
-        const newPost = {
-            id: newID,
-            name: name,
-            desc: desc,
-            address: address,
-            price: setPrice,
-            quantity: setQuantity,
-            question: question
-        }
-        const action = addPost(newPost)
-        dispatch(action)
-        navigate('/posts')
+    event.preventDefault()  
+    const newPost = {
+        nameProduct: name,
+        describePost: desc,
+        address: address,
+        pricePruduct: price,
+        amountRegistry: quantity,
+        typeProduct: type
     }
-    const navigateHome = () => {
+    console.log(newPost)
+    const config = {
+        headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token? token: 'a'}`,
+        },
+        };
+        axios.defaults.withCredentials = true
+        axios.post('http://localhost:5000/posts/', newPost,config)
+        .then((response)=>{
+            console.log(response.data)
+            
+        }).catch((err)=>{
+        if (err?.response?.status == 403 ||err?.response?.status == 400  ){
+            console.log('sending request token')
+            axios.get('http://localhost:5000/auth/refresh',config).then((res)=>{
+            const accessToken = res.data
+            console.log(accessToken)
+            dispatch(setCredentials(accessToken))
+            return accessToken
+            }).then((res)=>{
+            console.log(res.accessToken)
+            config.headers.Authorization = `Bearer ${res.accessToken}`
+            axios.post('http://localhost:5000/posts/', newPost,config)
+            .then((response)=>{
+                console.log(response.data)
+            })
+            })
+            .catch((err)=>{
+            navigate('/login')
+            })
+        }
+    })
+    }
+    const navigateHome = () => 
+    {
       navigate('/home');
     };
   return (
@@ -82,6 +118,13 @@ export default function NewPost() {
                     <label htmlFor="productName" className="col-sm-2 col-form-label">Số lượng</label>
                     <div className="col-sm-10">
                         <input type="number" className="form-control" id="soluong" value={quantity} onChange={(e)=>setQuantity(e.target.value)}  placeholder="Nhập số tiền (VNĐ)"/>
+                    </div>
+                </div>
+                <br/>
+                <div className="form-group row">
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Loại hàng hóa</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="loaihanghoa" value={type} onChange={(e)=>setType(e.target.value)}  placeholder="Nhập loại hàng hóa"/>
                     </div>
                 </div>
             </Segment>

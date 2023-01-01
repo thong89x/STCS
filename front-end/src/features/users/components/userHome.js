@@ -3,6 +3,7 @@ import React, { useEffect ,useState} from 'react'
 import { useParams } from 'react-router-dom'
 import {Image,Segment} from 'semantic-ui-react';
 import "../stylesUser/User.css"
+import { NavLink } from 'react-router-dom';
 export default function UserHome() {
     const [user,setUser]=useState()
     const {username} = useParams()
@@ -23,7 +24,7 @@ export default function UserHome() {
     return (
         <>
         <Image middle src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular centered/>
-        <h2 id = "centerText">Duy Mai   </h2>
+        <h2 id = "centerText"> {user?.username }   </h2>
         <Segment className ="infoBox">
             <ol>
                 <li>Fullname: {user?.profile?.fullname }</li>
@@ -33,7 +34,9 @@ export default function UserHome() {
                 <li>Adress: {user?.profile?.address}</li>
             </ol>
         </Segment>
-        
+        <button id ="centerButton"> 
+            <NavLink to={`/users/edit/${username}`} > Edit thông tin cá nhân </NavLink>
+        </button>
         </>
     )
 }
