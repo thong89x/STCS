@@ -8,7 +8,7 @@ router.route('/')
 .get(registryController.getAllRegistryForms)
 .post(verifyJWT,registryController.createRegistryForm)
 router.route('/:id')
-.get(registryController.updateRegistryForms)
+.get(verifyJWT,registryController.getRegistryFormByID)
 .patch(verifyJWT,registryController.updateRegistryForms)
 
 module.exports = router

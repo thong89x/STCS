@@ -58,7 +58,10 @@ const getRegistryFormByUserName = asyncHandler(async (req, res) => {
 })
 const getRegistryFormByID = asyncHandler(async (req, res) => {
     const userFromToken = req.user
-    const User = Users.find({username:userFromToken})
+    console.log({username:userFromToken})
+    
+    const User =  await Users.findOne({username:userFromToken}).lean()
+    console.log(User)
     if (!User){
         return res.status(400).json({ message: 'User not found' })
     }
@@ -71,7 +74,9 @@ const getRegistryFormByID = asyncHandler(async (req, res) => {
     if (!RegistryForms) {
         return res.status(400).json({ message: 'No RegistryForms found' })
     }
-    if (!RegistryForms.userID.equals(User[0]._id)){
+    console.log(RegistryForms.userID)
+    console.log(User._id)
+    if (!RegistryForms.userID.equals(User._id)){
         return res.status(400).json({ message: 'Unauthorized' })
     }
     return res.status(200).json(RegistryForms)

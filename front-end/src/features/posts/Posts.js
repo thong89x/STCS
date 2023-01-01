@@ -6,7 +6,7 @@ import ViewPost from './components/ViewPost'
 import Post from './components/Post'
 import PostLayout from './components/PostLayout'
 import PostList from './components/PostList'
-import Order from 'views/Order'
+import Order from 'features/registryOrder/Order'
 
 export default function Posts() {
   return (
