@@ -3,28 +3,24 @@ import { useDispatch,useSelector } from 'react-redux';
 import { removePost,updatePost,addPost} from 'features/posts/postSlice'
 import { PostTiny } from './Post';
 import { useNavigate } from 'react-router-dom';
-export default function PostList() {
-    const postList = useSelector(state=> state.postList);
-    const dispatch = useDispatch()
-    
+export default function PostList(props) {
     const navigate = useNavigate()
-    const handleRemoveClick = (post) => {
-        const action = removePost(post.id);
-        dispatch(action);
-    }
-    const handleEditClick = (post) => {
-        navigate(`/posts/edit/${post.id}`)
-        // const action = updatePost(post);
-        // dispatch(action);
-    }
+   const postList = props.postList
   return (
-    <div>
-        Post List
-        <ul>
-        {postList.map((post,idx) => (
-            <PostTiny post={post} handleRemoveClick={handleRemoveClick} handleEditClick={handleEditClick}/>
-        ))}
-        </ul>
+    <div className='row d-flex flex-wrap justify-content-between'>
+        {postList?postList.map((post) => (
+            <div key={post._id} className='product' onClick={()=>{
+              navigate('/posts/'+post._id)
+            }}>
+              {post.imageUrl?
+              <img src={post.imageUrl[0]?post.imageUrl[0]:"https://th.bing.com/th/id/OIP.hjEu2V3As5q1pr7ZJ3CtnQHaJT?pid=ImgDet&rs=1"} className="d-block" alt="Not found"/>
+              :<>
+                <img src={"https://th.bing.com/th/id/OIP.hjEu2V3As5q1pr7ZJ3CtnQHaJT?pid=ImgDet&rs=1"} className="d-block" alt="Not found"/>
+              </>
+              }          
+              <h3 className='text-center'>{post.nameProduct}</h3>
+          </div>
+          )):<div></div>}
     </div>
   )
 }

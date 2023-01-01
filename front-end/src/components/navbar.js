@@ -63,12 +63,12 @@ function Navbar(props){
           <a className='list' href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <BsList className='iconList'/>
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <a class="dropdown-item" href="#">Setting</a>
-            <NavLink to ="/login" class="dropdown-item" onClick={handleLogout}>Log out</NavLink>
+          <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a className="dropdown-item" href="#">Action</a>
+            <a className="dropdown-item" href="#">Another action</a>
+            <a className="dropdown-item" href="#">Something else here</a>
+            <a className="dropdown-item" href="#">Setting</a>
+            <NavLink to ="/login" className="dropdown-item" onClick={handleLogout}>Log out</NavLink>
           </div>
       {username ? 
       <NavLink to ={`/users/${username}`} className="login">

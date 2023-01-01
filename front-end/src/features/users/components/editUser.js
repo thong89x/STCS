@@ -19,16 +19,21 @@ export default function EditUser() {
   const  inputSex = useRef()
   const  inputEmail = useRef()
   const {username} = useParams()
-    useEffect(()=>{
-
+  useEffect(()=>{
+    
   },[])
   const handleSubmit = event =>{
     event.preventDefault()  
-    const listInfo = [inputName.current.value, inputAge.current.value,inputAdress.current.value,inputSex.current.value,inputEmail.current.value,]
-    const newInfo = {
-      listInfo:listInfo
+    const listInfo = {
+      fullname:fullname,
+      age:age,
+      address:address,
+      sex:sex,
+      email:email
     }
-    console.log(newInfo)
+    const newInfo = {
+      profile:listInfo
+    }
     const config = {
       headers: {
       "Content-Type": "application/json",
@@ -44,11 +49,9 @@ export default function EditUser() {
         console.log('sending request token')
         axios.get('http://localhost:5000/auth/refresh',config).then((res)=>{
           const accessToken = res.data
-          console.log(accessToken)
           dispatch(setCredentials(accessToken))
           return accessToken
         }).then((res)=>{
-          console.log(res.accessToken)
           config.headers.Authorization = `Bearer ${res.accessToken}`
           axios.patch('http://localhost:5000/users/v1/'+username,newInfo,config)
           .then((response)=>{
@@ -63,9 +66,9 @@ export default function EditUser() {
   }
   return (
     <>
-    <div style = {{backgroundColor: "#DDE4F5"}} class = 'backGroundPage'>
+    <div style = {{backgroundColor: "#DDE4F5"}} className = 'backGroundPage'>
     <br/>
-    <Image middle src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular/>
+    <Image middle={'true'} src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular/>
     
     <span className = "text_header"> {username}   </span>
       <Segment style = {{backgroundColor: "#A0B4F3"}} className = "infoBoxEditUser">
@@ -108,8 +111,8 @@ export default function EditUser() {
                     </div>
                 </div>
                 <br/>
-                <div class="text_header">
-                    <button class="ui positive button" onClick={handleSubmit}> Lưu chỉnh sửa </button>
+                <div className="text_header">
+                    <button className="ui positive button" onClick={handleSubmit}> Lưu chỉnh sửa </button>
                 </div>
             </Segment>
         </Segment>

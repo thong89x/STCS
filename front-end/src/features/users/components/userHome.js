@@ -6,6 +6,7 @@ import "../stylesUser/User.css"
 import { NavLink } from 'react-router-dom';
 export default function UserHome() {
     const [user,setUser]=useState()
+    const [profile,setProfile]=useState()
     const {username} = useParams()
     useEffect(()=>{
         const config = {
@@ -14,29 +15,36 @@ export default function UserHome() {
             },
           };
         axios.get(`http://localhost:5000/users/v1/${username}`,config).then((res)=>{
-            console.log(res.data)
+            
             setUser(res.data)
+            setProfile(res.data.profile)
+            console.log(user)
+            console.log(profile)
             return res.data;
         }).catch((err)=>{
             console.log(err)
         })
     },[])
+    const middle = true
     return (
         <>
-        <Image middle src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular centered/>
-        <h2 id = "centerText"> {user?.username }   </h2>
-        <Segment className ="infoBox">
-            <ol>
-                <li>Fullname: {user?.profile?.fullname }</li>
-                <li>Email: {user?.profile?.email}</li>
-                <li>Age: {user?.profile?.age}</li>
-                <li>Gender: {user?.profile?.sex}</li>
-                <li>Adress: {user?.profile?.address}</li>
-            </ol>
-        </Segment>
-        <button id ="centerButton"> 
-            <NavLink to={`/users/edit/${username}`} > Edit thông tin cá nhân </NavLink>
-        </button>
+        {user ?
+            <>
+            <Image middle={middle.toString()} src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular centered/>
+            <h2 id = "centerText"> {user?.username } </h2>
+            <Segment className ="infoBox">
+                <ol>
+                    <li>Fullname: {profile.fullname}</li>
+                    <li>Email: {profile.email}</li>
+                    <li>Age: {profile.age}</li>
+                    <li>Gender: {profile.sex}</li>
+                    <li>Adress: {profile.address}</li>
+                </ol>
+            </Segment>
+            <button id ="centerButton"> 
+                <NavLink to={`/users/edit/${username}`} > Edit thông tin cá nhân </NavLink>
+            </button>
+            </>: ""}
         </>
     )
 }

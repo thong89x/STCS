@@ -15,11 +15,11 @@ const getAllPosts = asyncHandler(async (req, res) => {
     if (!Posts?.length) {
         return res.status(400).json({ message: 'No Posts found' })
     }
-    console.log("All Posts")
+
     res.json(Posts)
 })
 const getPostByID = asyncHandler(async (req, res) => {
-    console.log(req.params.id)
+
     // Get all Posts from MongoDB
     const Posts = await Post.findById(req.params.id).select('-password').lean()
 
@@ -32,13 +32,13 @@ const getPostByID = asyncHandler(async (req, res) => {
 })
 
 const getPostByUserName = asyncHandler(async (req, res) => {
-    console.log(req.params.username)
+
     // Get all Posts from MongoDB
     const User = await Users.find({ username:req.params.username}).exec()
     if(User.length == 0){
         return res.status(400).json({ message: 'Not found username' })
     }
-    console.log(User)
+
     const Posts = await Post.find({ userID:User[0]._id}).exec()
 
     // If no Posts 
@@ -50,7 +50,6 @@ const getPostByUserName = asyncHandler(async (req, res) => {
 })
 
 const createPost = asyncHandler(async (req, res) => {
-    console.log("has req")
     const {  typeProduct, nameProduct } = req.body
     const username = req.user
     const User = await Users.find({ username:username}).exec()
@@ -94,7 +93,7 @@ const updatePost = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'Post not found' })
     }
 
-    console.log(UserOwner._id.equals(posts.userID))
+
 
 
     if (UserOwner._id.equals(posts.userID)) {
@@ -113,7 +112,7 @@ const updatePost = asyncHandler(async (req, res) => {
     
         res.json({ message: `${updatedPost.nameProduct} updated` })
     }
-    console.log("hi")
+
     return res.status(400).json({ message: 'Unauthorized' })
 
 

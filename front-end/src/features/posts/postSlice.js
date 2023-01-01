@@ -5,9 +5,14 @@ export const getAllPost = createAsyncThunk(
     "postList", 
     async () => {
       try {
+        const config = {
+          headers: {
+            "Content-Type": "application/json"
+          },
+        };
         const response = await axios.get(
           "http://localhost:5000/posts"
-        );
+        ,config);
         return response.data;
       } catch (error) {
         console.error(error);

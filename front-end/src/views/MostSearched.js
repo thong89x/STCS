@@ -10,7 +10,7 @@ export default function MostSearched() {
       <div className='row d-flex flex-wrap justify-content-between'>
           {postList.map((post) => (
             <div className='product'>
-            <img src={post.imageUrl[0]} class="d-block" alt="Not found"/>
+            <img src={post.imageUrl[0]} className="d-block" alt="Not found"/>
             <h3 className='text-center'>{post.nameProduct}</h3>
           </div>
           ))}

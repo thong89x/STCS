@@ -17,8 +17,6 @@ const Login =() => {
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(userRef.current.value)
-        console.log(pwRef.current.value)
         var accessToken;
         const config = {
             headers: {

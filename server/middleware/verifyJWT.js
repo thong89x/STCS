@@ -9,7 +9,7 @@ const verifyJWT = (req, res, next) => {
     }
 
     const token = authHeader.split(' ')[1]
-    console.log("Verify")
+
     jwt.verify(
         token,
         process.env.ACCESS_TOKEN_SECRET,
@@ -20,7 +20,7 @@ const verifyJWT = (req, res, next) => {
             next()
         }
     )
-    console.log("Verify")
+
 }
 
 module.exports = verifyJWT 

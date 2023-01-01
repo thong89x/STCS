@@ -42,25 +42,20 @@ export default function Order() {
     axios.defaults.withCredentials = true
     axios.post('http://localhost:5000/registrys',newRegistry,config)
     .then((response)=>{
-        console.log(response.data)
         setUsersList(()=> response.data)
-        console.log(usersList)
     }).catch((err)=>{
       if (err?.response?.status == 403 ||err?.response?.status == 400  ){
         console.log('sending request token')
         axios.get('http://localhost:5000/auth/refresh',config).then((res)=>{
           const accessToken = res.data
-          console.log(accessToken)
           dispatch(setCredentials(accessToken))
           return accessToken
         }).then((res)=>{
-          console.log(res.accessToken)
+           
           config.headers.Authorization = `Bearer ${res.accessToken}`
           axios.get('http://localhost:5000/users/v2',config)
           .then((response)=>{
-              console.log(response.data)
               setUsersList(()=> response.data)
-              console.log(usersList)
           })
         })
         .catch((err)=>{

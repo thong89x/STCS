@@ -7,7 +7,7 @@ const asyncHandler = require('express-async-handler')
 // @route GET /users
 // @access Private
 const getAllUsers = asyncHandler(async (req, res) => {
-    console.log(getAllUsers);
+  
     // Get all users from MongoDB
     if (req.role != "admin" && req.role != "subAdmin"){
         return res.status(400).json({ message: 'Cant access' })
@@ -28,7 +28,7 @@ const getUser = asyncHandler(async (req, res) => {
     var users = null
     if (!username )
     {
-        console.log("ID")
+
         users = await User.findById(id).select('-password').lean()
 
         // If no users 
@@ -39,7 +39,7 @@ const getUser = asyncHandler(async (req, res) => {
         
     }
     if(!id){
-        console.log("Name")
+
         users = await User.findOne({username:username}).select('-password').lean()
 
         // If no users 
@@ -53,7 +53,6 @@ const getUser = asyncHandler(async (req, res) => {
     
 })
 const createUser = asyncHandler(async (req, res) => {
-    console.log("has req")
 
     const { username, password } = req.body
 
@@ -89,16 +88,14 @@ const updateUser = asyncHandler(async (req, res) => {
     const {username,id}= req.params
     var users = null
 
-    const { password, isActive  } = req.body
+    const { password, isActive ,role,profile } = req.body
 
     // Confirm data 
-    if ( typeof isActive !== 'boolean') {
-        return res.status(400).json({ message: 'All fields except password are required' })
-    }
+   
     const RolesFromToken = req.role
     const userFromToken = req.user
     if(id){
-        users = await User.findById(id).select('-password').lean()
+        users = await User.findById(id).lean()
     }
     if(username){
         users = await User.findOne({ username }).exec()
@@ -122,8 +119,15 @@ const updateUser = asyncHandler(async (req, res) => {
         return res.status(401).json({ message: 'Unauthorized' })
     }
     users.role= role
-    users.isActive = isActive
-
+    if ( typeof isActive == 'boolean') {
+        users.isActive = isActive
+    }
+    users.profile.fullname = profile.fullname
+    users.profile.age = profile.age
+    users.profile.address = profile.age
+    users.profile.sex = profile.sex 
+    users.profile.email = profile.email
+    
     if (password) {
         // Hash password 
         users.password = await bcrypt.hash(password, 10) // salt rounds 

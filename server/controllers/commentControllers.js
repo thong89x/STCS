@@ -20,7 +20,7 @@ const getAllComments = asyncHandler(async (req, res) => {
     res.json(Comments)
 })
 const getCommentById = asyncHandler(async (req, res) => {
-    console.log(req.params.id)
+
     // Get all Comments from MongoDB
     const Comments = await Comment.findById(req.params.id)
 
@@ -33,13 +33,12 @@ const getCommentById = asyncHandler(async (req, res) => {
 })
 
 const getCommentByPostID = asyncHandler(async (req, res) => {
-    console.log(req.params.id)
+
     // Get all Comments from MongoDB
     const Post = await Posts.findById(req.params.id).exec()
     if(!Post){
         return res.status(400).json({ message: 'Not found postID' })
     }
-    console.log(Post)
     const Comments = await Comment.find({ postID:Post[0]._id}).exec()
 
     // If no Comments 

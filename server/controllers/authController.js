@@ -10,7 +10,6 @@ const { getUserById } = require('./usersController')
 const login = asyncHandler(async (req, res) => {
 
     const { username, password } = req.body
-    console.log(username,password)
     if (!username || !password) {
         return res.status(400).json({ message: 'All fields are required' })
     }
@@ -22,7 +21,6 @@ const login = asyncHandler(async (req, res) => {
     }
 
     const match = await bcrypt.compare(password, foundUser.password)
-console.log("Hi");
     if (!match) return res.status(401).json({ message: 'Unauthorized' })
 
     const accessToken = jwt.sign(
@@ -53,7 +51,6 @@ console.log("Hi");
     res.json({ accessToken })
 })
 const SignUp = asyncHandler(async (req, res) => {
-    console.log("has req")
 
     const { username, password, roles } = req.body
 
@@ -108,11 +105,8 @@ const SignUp = asyncHandler(async (req, res) => {
 // @access Public - because access token has expired
 const refresh = (req, res) => {
     const cookies = req.cookies
-    console.log(req.cookies)
-    console.log("Hi")
     if (!cookies?.jwt) return res.status(401).json({ message: 'Unauthorized' })
     
-    console.log("Check")
     const refreshToken = cookies.jwt
 
     jwt.verify(
@@ -122,7 +116,7 @@ const refresh = (req, res) => {
             if (err) return res.status(403).json({ message: 'Forbidden' })
 
             const foundUser = await User.findOne({ username: decoded.username }).exec()
-            console.log("Hi")
+    
             if (!foundUser) return res.status(401).json({ message: 'Unauthorized' })
 
             const accessToken = jwt.sign(

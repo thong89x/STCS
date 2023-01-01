@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     role: { type:String, default: 'user'},
     profile: {
         fullname: {type:String, default: ''},
-        age: {type:Number,default: ''},
+        age: {type:Number,default: 10},
         address: {type:String, default: ''},
         sex: {type:String, default:''},
         email:{type:String, default:''}

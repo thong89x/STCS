@@ -30,7 +30,6 @@ export default function NewPost() {
         amountRegistry: quantity,
         typeProduct: type
     }
-    console.log(newPost)
     const config = {
         headers: {
         "Content-Type": "application/json",
@@ -47,11 +46,11 @@ export default function NewPost() {
             console.log('sending request token')
             axios.get('http://localhost:5000/auth/refresh',config).then((res)=>{
             const accessToken = res.data
-            console.log(accessToken)
+     
             dispatch(setCredentials(accessToken))
             return accessToken
             }).then((res)=>{
-            console.log(res.accessToken)
+             
             config.headers.Authorization = `Bearer ${res.accessToken}`
             axios.post('http://localhost:5000/posts/', newPost,config)
             .then((response)=>{
@@ -92,8 +91,8 @@ export default function NewPost() {
                         <input type="text" className="form-control" id="motasp" value={desc} onChange={(e)=>setDesc(e.target.value)} placeholder="Nhập mô tả sản phẩm"/>
                     </div>
                 </div> */}
-                <div class="ui form">
-                    <div class="field">
+                <div className="ui form">
+                    <div className="field">
                         <label>Mô tả sản phẩm</label>
                         <textarea placeholder='Vui lòng nhập mô tả sản phẩm' className="form-control" id="motasp" value={desc} onChange={(e)=>setDesc(e.target.value)}>
                         </textarea>
@@ -152,12 +151,12 @@ export default function NewPost() {
                     </div>
                 </div>
                 <hr/>
-                <a class="ui red tag label">Thêm câu hỏi</a>
+                <a className="ui red tag label">Thêm câu hỏi</a>
             </Segment>
-            <div class="ui buttons">
-                <button class="ui button" onClick = {navigateHome}>Hủy</button>
-                <div class="or"></div>
-                <button class="ui positive button">Thêm sản phẩm </button>
+            <div className="ui buttons">
+                <button className="ui button" onClick = {navigateHome}>Hủy</button>
+                <div className="or"></div>
+                <button className="ui positive button">Thêm sản phẩm </button>
             </div>
         </Segment>
 

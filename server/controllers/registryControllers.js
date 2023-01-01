@@ -22,7 +22,7 @@ const getAllRegistryForms = asyncHandler(async (req, res) => {
     res.status(200).json(RegistryForms)
 })
 const getRegistryFormsByPostID = asyncHandler(async (req, res) => {
-    console.log(req.params.id)
+
     // Get all RegistryForms from MongoDB
     const RegistryForms = await RegistryForm.find({postID:req.params.id})
 
@@ -35,15 +35,15 @@ const getRegistryFormsByPostID = asyncHandler(async (req, res) => {
 })
 
 const getRegistryFormByUserName = asyncHandler(async (req, res) => {
-    console.log(req.params.username)
+
     // Get all RegistryForms from MongoDB
     const User = await Users.findOne({ username:req.params.username}).exec()
     if(!User){
         return res.status(400).json({ message: 'Not found username' })
     }
-    console.log(User.username)
+
     const usernamefromToken = req.user
-    console.log(usernamefromToken)
+
     if (usernamefromToken != User.username){
         return res.status(400).json({ message: 'This Registry Form is not belong to you' })
     }
@@ -63,7 +63,7 @@ const getRegistryFormByID = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'User not found' })
     }
 
-    console.log(req.params.id)
+  
     // Get all RegistryForms from MongoDB
     const RegistryForms = await RegistryForm.findById(req.params.id)
 
@@ -77,7 +77,7 @@ const getRegistryFormByID = asyncHandler(async (req, res) => {
     return res.status(200).json(RegistryForms)
 })
 const createRegistryForm = asyncHandler(async (req, res) => {
-    console.log("has req")
+
     const {  statusRegForm, listAnswer, postID} = req.body
     const username = req.user
     const User = await Users.find({ username:username}).exec()
@@ -131,7 +131,6 @@ const updateRegistryForms = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'RegistryForm not found' })
     }
 
-    console.log(UserInteract._id.equals(RegistryForms.userID))
     
     //UserInteract.userID ==> Buyer
     // Post (userID)
@@ -162,7 +161,7 @@ const updateRegistryForms = asyncHandler(async (req, res) => {
             var dateAccecpt = new Date(RegistryForms.updatedAt)
             var dateNow = new Date(Date.now())
             var timeDistance = (dateNow - dateAccecpt)/1000
-            console.log(timeDistance)
+
             if(timeDistance > 86400){
                 return res.status(400).json({ message: 'Overtime to decline' })
             }
