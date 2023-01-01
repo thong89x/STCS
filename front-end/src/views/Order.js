@@ -2,14 +2,31 @@ import axios from 'axios';
 import React, { useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import './styles/Order.css'
+import { useDispatch,useSelector } from 'react-redux';
+import { Outlet, useNavigate , useParams} from 'react-router-dom';
+import User from 'features/users/components/user';
+import userApi from 'api/userApi';
+import useAuth from 'hooks/useAuth';
+import { setCredentials } from 'features/auth/authSlice';
+import jwtDecode from 'jwt-decode'
+import { useState, useRef } from 'react';
+import axios from 'axios'
+
 export default function Order() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [usersList,setUsersList] = useState([])
   const {id} = useParams();
   const ques1Ref = useRef();// dungf cho oo input chi lay du lieu
+  const ques2Ref = useRef();
+  const ques3Ref = useRef();
+  const ques4Ref = useRef();
+  const ques5Ref = useRef();
   // useState -> gia tri cua 1 bien thay doi thi no load lai 1 phan man hinh
   const postID = id;
   const {token} = useSelector(state=> state.auth)
   const HandleSubmit = ()=>{
-    const listAnswer = [ques1Ref.current.value,'b','c'];
+    const listAnswer = [ques1Ref.current.value,ques2Ref.current.value,ques3Ref.current.value,ques4Ref.current.value,ques5Ref.current.value];
     const newRegistry = {
       listAnswer:listAnswer,
       postID: postID
@@ -57,20 +74,20 @@ export default function Order() {
     <div className='order'>
         <div className='box'>Form Registry Order</div>
         <div className='background-input'>
-        <div className='input'>Full name:</div>
-        <input ref={ques1Ref}className='input_text' placeholder='Enter your full name.'/>
+        <div className='input'>Why do you need the item?:</div>
+        <input ref={ques1Ref}className='input_text' placeholder='Enter your answer.'/>
         <div className='input_double'>
-        <div className='input'>Email Id:</div>
-        <input className='input_text' placeholder='abc@gmail.com'/>
-        <div className='input'>Mobile No:</div>
-        <input className='input_text' placeholder='+84 - 827431231'/>
+        <div className='input'>Do you need it right now?:</div>
+        <input ref={ques2Ref}className='input_text' placeholder='Enter your answer.'/>
+        <div className='input'>What is your degree?</div>
+        <input ref={ques3Ref}className='input_text' placeholder='Enter your answer.'/>
         </div>
-        <div className='input'>Address:</div>
-        <input className='input_text' placeholder='xxxxxxxxx.'/>
-        <div className='input'>Quantity:</div>
-        <input className='input_text' placeholder='1,2,3...'/>
+        <div className='input'>New publisher of LOL video game?</div>
+        <input ref={ques4Ref}className='input_text' placeholder='Enter your answer.'/>
+        <div className='input'>Can you please rate 5 stars for my shop?</div>
+        <input ref={ques5Ref}className='input_text' placeholder='Enter your answer.'/>
         <div className='space '/>
-        <button className='button'>Confirm</button>
+        <button onClick={HandleSubmit} className='button'>Confirm</button>
         </div>
     </div>
   )

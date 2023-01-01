@@ -8,7 +8,6 @@ const authSlice = createSlice({
             const { accessToken } = action.payload
             state.token = accessToken
             const decoded = jwtDecode(accessToken)
-            console.log(decoded)
             const { username, role } = decoded.UserInfo
             localStorage.setItem("userInfo", JSON.stringify({username,role}));
         },

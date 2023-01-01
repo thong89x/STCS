@@ -1,0 +1,11 @@
+.nameuser{
+    font-size: 20px;
+    font-weight: bolder;
+}
+.cmt{
+    margin-top: 10px;
+    width: 200px;
+    block-size: 30px;
+    background-color: white;
+    border-radius: 10px;
+}

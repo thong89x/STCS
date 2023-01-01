@@ -1,0 +1,7 @@
+.searchContainer{
+    padding: 20px 100px;
+    background-color: #2DCDDF;
+    background-image: linear-gradient(#2DCDDF, rgb(227, 93, 248) );
+    width: 100%;
+    min-height: 100vh;
+}

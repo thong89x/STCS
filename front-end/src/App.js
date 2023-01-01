@@ -6,7 +6,7 @@ import Header from './components/Header';
 import {Routes,Route, Navigate, Link } from 'react-router-dom'
 import './App.css';
 import UserRouter from 'features/users/userRouter';
-import React, { Suspense } from 'react';
+import React, { Component, Suspense, useEffect } from 'react';
 import Search from './features/posts/Search';
 import Order from 'views/Order';
 import MostSearched from 'views/MostSearched';
@@ -16,6 +16,11 @@ import Announcements from 'features/admin/announcements';
 import ManageUser from 'features/admin/manageUser';
 import Report from 'features/admin/report';
 import useAuth from 'hooks/useAuth';
+// import AdEditUser from 'features/admin/components/AdEditUser';
+import UsersList from 'features/users/components/userList';
+import ViewOrder from 'views/ViewOrder';
+import { useDispatch } from 'react-redux';
+import { getall } from 'features/posts/postSlice';
 import AdEditUser from 'features/admin/components/AdEditUser';
 import UsersList from 'features/users/components/userList';
 const Posts = React.lazy(()=> import('./features/posts/Posts') )
@@ -38,11 +43,15 @@ function App() {
           <Route path='/' element={<Home/>} />
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
-          <Route path='/home' element={<Home/>} />
           <Route path='/search' element={<Search/>} /> 
-          {/* Users */}
+          <Route path='/home' element={<Home/>} />
           
+          
+          {/* Users */}
+          <Route path='/vieworder/:id' element={<ViewOrder/>} />
           <Route path='/announcements' element={<navbarAdmin/>} />
+          {/* <Route path='/report' element={<AdEditUser/>} /> */}
+          
           <Route path='/report' element={<AdEditUser/>} />
           <Route path="/users/*" element={<UserRouter/>}/>
           

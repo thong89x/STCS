@@ -7,7 +7,6 @@ const useAuth = () => {
     if (token) {
         const decoded = jwtDecode(token)
         const { username, role } = decoded.UserInfo
-        console.log(role)
         return { username, role }
     }
     const userInfo = localStorage.getItem("userInfo");

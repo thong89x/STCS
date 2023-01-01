@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import TodoList from '../components/TodoList';
 import { NavLink } from 'react-router-dom';
-import { addPost, removePost} from 'features/todos/todoSlice'
+import { addPost, removePost} from '../features/posts/postSlice'
 import jwtDecode from 'jwt-decode'
 import axios from 'axios';
 import styled from 'styled-components';
@@ -10,10 +10,10 @@ import "./styles/Home.css"
 import useAuth from 'hooks/useAuth';
 
 export default function Home() {
-    const todoList = useSelector(state=> state.todoList);
     const {token} = useSelector(state=> state.auth);
     const {username, role} = useAuth()
-
+    const [postList, setpostList] = useState();
+    const dispatch = useDispatch()
     const componentDidMount = (props) => {  
       if(role === "viewer"){
         return "/login"
@@ -22,17 +22,27 @@ export default function Home() {
     }
 
     useEffect(()=>{
-        const config = {
-            headers: {
-              "Content-Type": "application/json"
-            },
-          };
-        axios.get('http://localhost:5000/posts',config).then((res)=>{
-            console.log(res.data)
-        }).catch((err)=>{
-            console.log(err)
-        })
+      const config = {
+          headers: {
+            "Content-Type": "application/json"
+          },
+        };
+      axios.get('http://localhost:5000/posts',config).then(async(res)=>{
+          const list = res.data
+          list.forEach(async(element) => {
+            console.log(element)
+            const action = addPost(element)
+            await dispatch(action)
+          });
+          setpostList(res.data)
+      }).catch((err)=>{
+          console.log(err)
+      })
+      
+      
     },[])
+
+
     if (token) {
         const decoded = jwtDecode(token)
         const { username, role } = decoded.UserInfo
@@ -40,9 +50,8 @@ export default function Home() {
     }
     console.log()
     // const activeID = useSelector(state=> state.todoList.activeID);
-    const postList = useSelector(state=> state.postList.slice(0,4));
-    const dispatch = useDispatch()
-    console.log(todoList)
+    
+    console.log(postList)
     const handleAddTodoClick = () =>{
         const newID = 1000 + Math.floor(Math.random()*1000+ 9000);
         const newTodo ={
@@ -97,12 +106,17 @@ export default function Home() {
           </button>
       </div>
       <div className='row d-flex flex-wrap justify-content-between'>
-          {postList.map((post) => (
+          {postList?postList.map((post) => (
             <div className='product'>
-            <img src={post.imageUrl[0]} class="d-block" alt="Not found"/>
-            <h3 className='text-center'>{post.nameProduct}</h3>
+              {post.imageUrl?
+              <img src={post.imageUrl[0]?post.imageUrl[0]:"https://th.bing.com/th/id/OIP.hjEu2V3As5q1pr7ZJ3CtnQHaJT?pid=ImgDet&rs=1"} class="d-block" alt="Not found"/>
+              :<>
+                <img src={"https://th.bing.com/th/id/OIP.hjEu2V3As5q1pr7ZJ3CtnQHaJT?pid=ImgDet&rs=1"} class="d-block" alt="Not found"/>
+              </>
+              }          
+              <h3 className='text-center'>{post.nameProduct}</h3>
           </div>
-          ))}
+          )):<div></div>}
       </div>
       <div className='row mt-3'>
         <h2 className='col-4'>Most Searched </h2>
@@ -113,12 +127,17 @@ export default function Home() {
           </button>
       </div>
       <div className='row d-flex flex-wrap justify-content-between'>
-          {postList.map((post) => (
+          {postList?postList.map((post) => (
             <div className='product'>
-            <img src={post.imageUrl[0]} class="d-block" alt="Not found"/>
+              {post.imageUrl?
+              <img src={post.imageUrl[0]?post.imageUrl[0]:"https://th.bing.com/th/id/OIP.hjEu2V3As5q1pr7ZJ3CtnQHaJT?pid=ImgDet&rs=1"} class="d-block" alt="Not found"/>
+              :<>
+                <img src={"https://th.bing.com/th/id/OIP.hjEu2V3As5q1pr7ZJ3CtnQHaJT?pid=ImgDet&rs=1"} class="d-block" alt="Not found"/>
+              </>
+              }
             <h3 className='text-center'>{post.nameProduct}</h3>
           </div>
-          ))}
+          )):<div></div>}
       </div>
     </div>
   )

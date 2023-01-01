@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import {NavLink, useNavigate, useParams} from 'react-router-dom'
 import { addPost, removePost} from 'features/posts/postSlice'
 import { useDispatch } from 'react-redux'
 import "../styles/ViewPost.css"
 import {Image,Segment, Grid } from 'semantic-ui-react';
 import axios from 'axios'
+import Component1 from 'features/comment/component'
 export default function ViewPost() {
     const {id} = useParams()
     const [valid,setValid] = useState(false)
@@ -193,6 +194,9 @@ export default function ViewPost() {
               </Grid>
         </Segment>
       </Segment>
+      <div>
+        <Component1/>
+      </div>
       
     </Segment>
     : <></>}
