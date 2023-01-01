@@ -11,7 +11,7 @@ export default function UserRouter() {
     <Routes>
       <Route element={<UserLayout/>}>
         <Route path="/:username" element={<UserHome/>} />
-        <Route path="/edit/:id" element={<EditUser/>} />
+        <Route path="/edit/:username" element={<EditUser/>} />
       </Route>
     </Routes>
   )

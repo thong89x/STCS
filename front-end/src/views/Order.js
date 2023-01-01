@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React, { useRef } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux';
+import { setCredentials } from 'features/auth/authSlice';
+import { useState } from 'react';
 import './styles/Order.css'
 import { useDispatch,useSelector } from 'react-redux';
 import { Outlet, useNavigate , useParams} from 'react-router-dom';
@@ -23,6 +26,7 @@ export default function Order() {
   const ques4Ref = useRef();
   const ques5Ref = useRef();
   // useState -> gia tri cua 1 bien thay doi thi no load lai 1 phan man hinh
+
   const postID = id;
   const {token} = useSelector(state=> state.auth)
   const HandleSubmit = ()=>{

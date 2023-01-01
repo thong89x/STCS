@@ -4,14 +4,29 @@
     height: 110%;
 }
 .infoBox {
-    position: flex;
     width: 550px;
     height: 125px;
+    position: flex;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.infoBoxEditUser {
+    position: flex;
+    width: 550px;
+    height: 435px;
     left: 500px;
     top: -10px;
 }
 #centerText{
     text-align: center;
+}
+#centerButton{
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -250%);
 }
 .cameraIcon{
     left: 145px;
