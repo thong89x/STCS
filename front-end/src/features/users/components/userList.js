@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import User from './user'
 import userApi from '../../../api/userApi'
 import axios from 'axios';
@@ -81,6 +81,9 @@ export default function UsersList() {
           }
           </tbody>
         </table>
+
+        <Outlet/>
     </div>
+    
   )
 }

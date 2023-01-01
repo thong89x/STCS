@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link,NavLink } from 'react-router-dom';
 export default function User(props) {
   return (
     <tr>
@@ -11,7 +11,7 @@ export default function User(props) {
       <td>{props.user.createdAt? props.user.createdAt.substring(0,10):''}</td>
       
       <td>
-        <Link to={"/users/edit/"+props.user._id}>edit</Link> | <a href="/#">delete</a>
+        <NavLink to={`/admin/account/edit/`+props.user._id}>edit</NavLink> | <a href="/#">delete</a>
       </td>
     </tr>
   )
