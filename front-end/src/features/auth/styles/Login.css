@@ -1,12 +1,13 @@
 .decore{
     background-image: url('assets/images/LoginImage.png');
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: 80% 100%;
 }
 
 .LoginContainer{
     height: 100vh;
     background-color: aqua;
+    background-image: linear-gradient(aqua, white );
 }
 .public {
     height: 100vh;

@@ -1,10 +1,16 @@
+
+
 .homeContainer{
     padding: 20px 100px;
+    background-color: #2DCDDF;
+    background-image: linear-gradient(#2DCDDF, rgb(227, 93, 248) );
+    width: 100%;
+    height: auto;
 }
 
 .carousel-item > img{
     width: 100%;
-    height: 40vh;
+    height: 45vh;
 }
 
 .product{
@@ -12,10 +18,32 @@
     height: 351px;
     justify-content: center;
     align-items: center;
-    background-color: #d9d9d9;
+    background-color: #F2DEBA;
     border-radius: 0px 0px 15px 15px;
 }
 .product>img{
     width: 230px;
     height: 246px;
 }
+
+.newpost{
+    border-radius: 15px;
+    width: 100px;
+    block-size: 50px;
+    background-color: #F2DEBA;
+    border: 5px solid #F2DEBA;
+    font-size: 18px;
+    margin-top: 15px;
+    font-weight: bolder;
+    color: #124963;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.showAll{
+    padding: 20px 100px;
+    background-color: #2DCDDF;
+    background-image: linear-gradient(#2DCDDF, rgb(227, 93, 248) );
+    width: 100%;
+    min-height: 100vh;
+}
+

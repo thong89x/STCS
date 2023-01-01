@@ -1,10 +1,11 @@
 import React from 'react'
 import PostList from 'features/posts/components/PostList'
 import { useDispatch, useSelector } from 'react-redux'
+import "./styles/Home.css"
 export default function MostSearched() {
   const postList = useSelector(state=> state.postList);
   return (
-    <div className='searchContainer'>
+    <div className='showAll'>
         <h2 className=''>Most Searched</h2>
       <div className='row d-flex flex-wrap justify-content-between'>
           {postList.map((post) => (

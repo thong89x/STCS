@@ -7,10 +7,20 @@ import jwtDecode from 'jwt-decode'
 import axios from 'axios';
 import styled from 'styled-components';
 import "./styles/Home.css"
+import useAuth from 'hooks/useAuth';
 
 export default function Home() {
     const todoList = useSelector(state=> state.todoList);
     const {token} = useSelector(state=> state.auth);
+    const {username, role} = useAuth()
+
+    const componentDidMount = (props) => {  
+      if(role === "viewer"){
+        return "/login"
+      }
+      return props
+    }
+
     useEffect(()=>{
         const config = {
             headers: {
@@ -73,8 +83,8 @@ export default function Home() {
         <span class="visually-hidden">Next</span>
     </button>
     </div>
-      <NavLink to ="/posts/add">
-        <button>
+      <NavLink to ={componentDidMount("/posts/add")}>
+        <button className='newpost'>
           New post
         </button>
       </NavLink>
@@ -94,7 +104,7 @@ export default function Home() {
           </div>
           ))}
       </div>
-      <div className='row mt-3 '>
+      <div className='row mt-3'>
         <h2 className='col-4'>Most Searched </h2>
         <button className='col-1 rounded-pill'>
             <NavLink  to ="/mostsearched">

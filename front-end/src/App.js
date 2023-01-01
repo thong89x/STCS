@@ -11,23 +11,32 @@ import Search from './features/posts/Search';
 import Order from 'views/Order';
 import MostSearched from 'views/MostSearched';
 import ShowAll from 'views/ShowAll';
-import navbarAdmin from 'components/navbarAdmin';
+import navbarAdmin from 'features/admin/navbarAdmin';
+import Announcements from 'features/admin/announcements';
+import ManageUser from 'features/admin/manageUser';
+import Report from 'features/admin/report';
+import useAuth from 'hooks/useAuth';
 const Posts = React.lazy(()=> import('./features/posts/Posts') )
 
 function App() {
+  const { username, role } = useAuth()
   return (
     <div className="containerWeb">
       <Suspense fallback={<div>Loading.....</div>}>
         <Header/>
         <Routes>
+          {/* Admin */}
+          <Route path='/admin' element={<Announcements/>} />
+          <Route path='/useracc' element={<ManageUser/>} />
+          <Route path='/report' element={<Report/>} />
+          {/* Guest */}
+          <Route path='/' element={<Home/>} />
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/home' element={<Home/>} />
-          <Route path='/admin' element={<Home/>} />
-          <Route path='/announcements' element={<navbarAdmin/>} />
-          <Route path='/useracc' element={<navbarAdmin/>} />
-          <Route path='/report' element={<navbarAdmin/>} />
-          <Route path='/search' element={<Search/>} />
+          <Route path='/search' element={<Search/>} /> 
+          {/* Users */}
+          
           <Route path="/users/*" element={<UserRouter/>}/>
           <Route path="/order" element={<Order/>}/>
           <Route path="/showall" element={<ShowAll/>}/>
