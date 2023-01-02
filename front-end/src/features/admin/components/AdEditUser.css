@@ -10,7 +10,6 @@
 }
 
 .text_header_admin {
-    position: top;
     height: 39px;
     left: 13.47%;
     right: 68.61%;
@@ -25,4 +24,8 @@
     /* identical to box height */
     text-align: center;
     color: #000000; 
+}
+
+.btnn{
+    padding-inline: 10px;
 }
