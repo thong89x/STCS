@@ -50,7 +50,7 @@ const getPostByUserName = asyncHandler(async (req, res) => {
 })
 
 const createPost = asyncHandler(async (req, res) => {
-    const {  typeProduct, nameProduct } = req.body
+    const {  typeProduct, nameProduct,address,imageURL,amountRegistry,describePost,pricePruduct } = req.body
     const username = req.user
     const User = await Users.find({ username:username}).exec()
     if(User.length == 0){
