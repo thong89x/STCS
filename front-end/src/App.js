@@ -23,6 +23,7 @@ import { useDispatch } from 'react-redux';
 import { getall } from 'features/posts/postSlice';
 import AdEditUser from 'features/admin/components/AdEditUser';
 import AdminRouter from "./features/admin/adminRouter" 
+import RequireAuth from 'features/auth/RequireAuth';
 const Posts = React.lazy(()=> import('./features/posts/Posts') )
 
 function App() {
@@ -33,10 +34,9 @@ function App() {
         <Header/>
         <Routes>
           {/* Admin */}
-          <Route path='/admin/*' element={<AdminRouter/>} />
-
-          
-          <Route path='/useracc' element={<ManageUser/>} />
+          <Route element={<RequireAuth allowedRoles={["admin", "sub-admin"]} />}>
+            <Route path='/admin/*' element={<AdminRouter/>} />
+          </Route>
           <Route path='/report' element={<Report/>} />
           {/* Guest */}
           <Route path='/' element={<Home/>} />
@@ -48,15 +48,16 @@ function App() {
           
           {/* Users */}
           <Route path='/vieworder/:id' element={<ViewOrder/>} />
-          <Route path='/announcements' element={<navbarAdmin/>} />
+          {/* <Route path='/announcements' element={<navbarAdmin/>} /> */}
           {/* <Route path='/report' element={<AdEditUser/>} /> */}
           
           <Route path='/report' element={<AdEditUser/>} />
           <Route path="/users/*" element={<UserRouter/>}/>
-          
+          <Route path='/posts/*' element={<Posts/>} />
+
           <Route path="/showall" element={<ShowAll/>}/>
           <Route path="/mostsearched" element={<MostSearched/>}/>
-          <Route path='/posts/*' element={<Posts/>} />
+          
           <Route path='*' element={<NotFound/>}/>
         </Routes>
       </Suspense>

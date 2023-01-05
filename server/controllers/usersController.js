@@ -131,7 +131,7 @@ const updateUser = asyncHandler(async (req, res) => {
     {
         users.profile.fullname = profile.fullname
         users.profile.age = profile.age
-        users.profile.address = profile.age
+        users.profile.address = profile.address
         users.profile.sex = profile.sex 
         users.profile.email = profile.email
     }
