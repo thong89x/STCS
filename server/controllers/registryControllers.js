@@ -96,6 +96,9 @@ const createRegistryForm = asyncHandler(async (req, res) => {
     if (!Post){
         return res.status(400).json({ message: 'Not found postID' })
     }
+    if (Post.amountRegistry <= 0){
+        return res.status(400).json({ message: 'Sold out' })
+    }
     // Confirm data
     if (!listAnswer?.length) {
         return res.status(400).json({ message: 'Status of Registry Form and Answer are required' })

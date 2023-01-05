@@ -5,7 +5,8 @@ const registryController = require('../controllers/registryControllers')
 const verifyJWT = require('../middleware/verifyJWT')
 
 // router.use(verifyJWT)
-
+router.route('/search')
+.get(postController.searchProduct)
 router.route('/')
 .get(postController.getAllPosts)
 .post(verifyJWT,postController.createPost)
@@ -17,4 +18,6 @@ router.route('/:id/comment')
 .get(commentController.getCommentByPostID)
 router.route('/:id/registrys')
 .get(verifyJWT, registryController.getRegistryFormsByPostID)
+
+
 module.exports = router 
