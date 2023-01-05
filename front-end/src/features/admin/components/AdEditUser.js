@@ -13,6 +13,7 @@ export default function AdEditUser() {
   const [user, setUser] = useState();
   const [isActive, setIsActive] = useState();
   const [role, setRole] = useState();
+  const [name, setName] = useState();
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {token} = useSelector(state=> state.auth)
@@ -68,6 +69,7 @@ export default function AdEditUser() {
       const user = res.data;
       setIsActive(user.isActive==true ? "Yes":"No")
       setRole(user.role)
+      setName(user.username)
       setUser(user)
       return res.data;
   }).catch((err)=>{
@@ -75,7 +77,7 @@ export default function AdEditUser() {
   })
   },[])
 
-  const handleClickCancle = () => navigate('/admin')
+  const handleClickCancel = () => navigate('/admin')
   
   return (
     <>
@@ -93,7 +95,7 @@ export default function AdEditUser() {
 
       <div className="input-group mb-3">
         <span className="input-group-text" id="basic-addon2">Username</span>
-        <span className="form-control">Vo Minh Thong</span>
+        <span className="form-control">{name}</span>
       </div>
 
       <div className="input-group mb-3">
@@ -124,7 +126,7 @@ export default function AdEditUser() {
 
       <div className='btnn row'>
           <button type="submit" className="btn btn-success" onClick={handleClickApply}>Apply</button>
-          <button type="submit" className="btn btn-danger" onClick={handleClickCancle}>Cancle</button>
+          <button type="submit" className="btn btn-danger" onClick={handleClickCancel}>Cancel</button>
       </div>
 
     </Segment>

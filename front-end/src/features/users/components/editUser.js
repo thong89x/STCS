@@ -13,14 +13,27 @@ export default function EditUser() {
   const [sex,setSex] = useState("")
   const [email,setEmail] = useState("")
   const {token} = useSelector(state=> state.auth)
-  const  inputName = useRef()
-  const  inputAge = useRef()
-  const  inputAdress = useRef()
-  const  inputSex = useRef()
-  const  inputEmail = useRef()
+
   const {username} = useParams()
   useEffect(()=>{
-    
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      },
+    };
+  axios.get(`http://localhost:5000/users/v1/${username}`,config).then((res)=>{
+      console.log(res.data)
+      const user = res.data;
+      setFullname(user.profile.fullname)
+      setAge(user.profile.age)
+      setAdress(user.profile.address)
+      setSex(user.profile.sex)
+      setEmail(user.profile.email)
+      
+      return res.data;
+  }).catch((err)=>{
+      console.log(err)
+  })
   },[])
   const handleSubmit = event =>{
     event.preventDefault()  
@@ -64,9 +77,13 @@ export default function EditUser() {
       }
     })
   }
+
+  const handleClickCancel = () => navigate(-1)
+
   return (
     <>
-    <div  className = 'backGroundPage ' style = {{backgroundColor: "#DDE4F5"}}>
+    
+    <div  className = 'backGroundPage' style = {{backgroundColor: "#DDE4F5"}}>
       <div className='row d-flex flex-row justify-content-center'>
       <br/>
       <Image middle={'true'} src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular/>
@@ -81,32 +98,32 @@ export default function EditUser() {
             <Segment>
                 <div className="input-group mb-3">
                   <span className="input-group-text">Họ và tên</span>
-                  <input type="text" className="form-control" id="hotenUser" value={fullname} onChange={(e)=>setFullname(e.target.value)}></input>
+                  <input type="text" className="form-control" id="hotenUser" value={fullname} onChange={(e)=>setFullname(e.target.value)}/>
                 </div>
 
                 <div className="input-group mb-3">
                   <span className="input-group-text">Tuổi</span>
-                  <input  ref = {inputAge} type="number" min = '6' max = '100' className="form-control" id="age" name="age" required value={age} onChange={(e)=>setAge(e.target.value)}/>
+                  <input type="number" min = '6' max = '100' className="form-control" id="age" name="age" required value={age} onChange={(e)=>setAge(e.target.value)}/>
                 </div>
 
                 <div className="input-group mb-3">
                   <span className="input-group-text">Giới tính</span>
-                  <input  ref = {inputSex} type="text" className="form-control" id="gioiTinhUser" value={sex} onChange={(e)=>setSex(e.target.value)}/>
+                  <input type="text" className="form-control" id="gioiTinhUser" value={sex} onChange={(e)=>setSex(e.target.value)}/>
                 </div>
 
                 <div className="input-group mb-3">
                   <span className="input-group-text">Địa chỉ</span>
-                  <input  ref = {inputAdress} type="email" className="form-control" id="hotenUser" value={address} onChange={(e)=>setAdress(e.target.value)}/>
+                  <input type="email" className="form-control" id="hotenUser" value={address} onChange={(e)=>setAdress(e.target.value)}/>
                 </div>
 
                 <div className="input-group mb-3">
                   <span className="input-group-text">Email</span>
-                  <input  ref = {inputEmail} type="email" className="form-control" pattern=".+@globex\.com" id="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="group8@example.com"/>
+                  <input type="email" className="form-control" pattern=".+@globex\.com" id="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="group8@example.com"/>
                 </div>
 
                 <div className="btnn row">
                     <button type="submit" className="btn btn-success" onClick={handleSubmit}>Lưu chỉnh sửa</button>
-                    <button type="submit" className="btn btn-danger" >Hủy</button>
+                    <button type="submit" className="btn btn-danger" onClick={handleClickCancel}>Hủy</button>
                 </div>
             </Segment>
             </div>
