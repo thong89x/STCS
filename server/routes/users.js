@@ -21,6 +21,9 @@ router.route('/v1/:username')
 router.route('/v1/:username/posts')
 .get(postController.getPostByUserName)
 
+router.route('/v1/:username/posts/avgRatings')
+.get(postController.getAvgRatingsByUserName)
+
 router.route('/v1/:username/registrys')
 .get(verifyJWT, registryController.getRegistryFormByUserName)
 

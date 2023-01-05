@@ -48,7 +48,7 @@ const login = asyncHandler(async (req, res) => {
     })
 
     // Send accessToken containing username and roles 
-    res.json({ accessToken })
+    return res.json({ accessToken })
 })
 const SignUp = asyncHandler(async (req, res) => {
 
@@ -95,9 +95,9 @@ const SignUp = asyncHandler(async (req, res) => {
     const user = await User.create(userObject)
 
     if (user) { //created 
-        res.status(201).json({ message: `New user ${username} created` })
+        return res.status(201).json({ message: `New user ${username} created` })
     } else {
-        res.status(400).json({ message: 'Invalid user data received' })
+        return res.status(400).json({ message: 'Invalid user data received' })
     }
 })
 // @desc Refresh
@@ -130,7 +130,7 @@ const refresh = (req, res) => {
                 { expiresIn: '15m' }
             )
 
-            res.json({ accessToken })
+            return res.json({ accessToken })
         })
     )
 }
@@ -142,7 +142,7 @@ const logout = (req, res) => {
     const cookies = req.cookies
     if (!cookies?.jwt) return res.sendStatus(204) //No content
     res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true })
-    res.json({ message: 'Cookie cleared' })
+    return res.json({ message: 'Cookie cleared' })
 }
 
 module.exports = {
