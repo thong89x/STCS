@@ -26,7 +26,7 @@ export default function NewPost() {
         nameProduct: name,
         describePost: desc,
         address: address,
-        pricePruduct: price,
+        priceProduct: price,
         amountRegistry: quantity,
         typeProduct: type
     }

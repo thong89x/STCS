@@ -29,7 +29,7 @@ export default function Home() {
     },[])
   return (  
     <div className='homeContainer'>
-
+      <div  className='subhomeContainer'>
     <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
     <div className="carousel-inner">
     <div className="carousel-item active">
@@ -74,6 +74,7 @@ export default function Home() {
           </button>
       </div>
       <PostList postList={postList}/>
+      </div>
     </div>
   )
 }

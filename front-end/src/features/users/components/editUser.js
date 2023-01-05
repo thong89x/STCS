@@ -1,9 +1,10 @@
 import React, { useState,useEffect,setCredentials,useRef } from 'react'
 import { Image,Segment} from 'semantic-ui-react';
 import { useDispatch,useSelector} from 'react-redux';
-import { useNavigate,useParams} from 'react-router-dom';
+import { Navigate, useNavigate,useParams} from 'react-router-dom';
 import axios from 'axios';
 import "../stylesUser/User.css"
+import useAuth from 'hooks/useAuth';
 export default function EditUser() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -15,6 +16,7 @@ export default function EditUser() {
   const {token} = useSelector(state=> state.auth)
 
   const {username} = useParams()
+  const ower = useAuth().username
   useEffect(()=>{
     const config = {
       headers: {
@@ -84,7 +86,7 @@ export default function EditUser() {
 
   return (
     <>
-    
+    {ower==username?
     <div  className = 'backGroundPage' style = {{backgroundColor: "#DDE4F5"}}>
       <div className='row d-flex flex-row justify-content-center'>
       <br/>
@@ -133,7 +135,7 @@ export default function EditUser() {
         </Segment>
       </div>
       
-    </div>
+    </div>:<Navigate to="/home" replace />}
     </>
   )
 }

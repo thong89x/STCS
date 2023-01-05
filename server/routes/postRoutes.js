@@ -14,6 +14,7 @@ router.route('/:id')
 .get(postController.getPostByID)
 .patch(verifyJWT,postController.updatePost)
 .delete(verifyJWT,postController.deletePost)
+//localhost:5000/posts/:id/comment
 router.route('/:id/comment')
 .get(commentController.getCommentByPostID)
 router.route('/:id/registrys')

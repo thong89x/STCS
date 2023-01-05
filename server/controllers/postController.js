@@ -79,7 +79,7 @@ const getAvgRatingsByUserName = asyncHandler(async (req, res) => {
 })
 
 const createPost = asyncHandler(async (req, res) => {
-    const {  typeProduct, nameProduct,address,imageURL,amountRegistry,describePost,pricePruduct } = req.body
+    const {  typeProduct, nameProduct,address,imageURL,amountRegistry,describePost,priceProduct } = req.body
     const username = req.user
     const User = await Users.find({ username:username}).exec()
     if(User.length == 0){
@@ -91,7 +91,7 @@ const createPost = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'Postname and password fields are required' })
     }
    
-    var PostObject = { userID:User[0]._id, nameProduct, typeProduct, address,imageURL,amountRegistry,describePost,pricePruduct}
+    var PostObject = { userID:User[0]._id, nameProduct, typeProduct, address,imageURL,amountRegistry,describePost,priceProduct}
 
     // Create and store new Post 
     const Posts = await Post.create(PostObject)

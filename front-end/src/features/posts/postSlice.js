@@ -18,7 +18,24 @@ export const searchPost = createAsyncThunk(
         console.error(error);
       }
   });
-  
+  export const findPostByUserName = createAsyncThunk(
+    "postListòUser", 
+    async (name) => {
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "application/json"
+          },
+        };
+        const response = await axios.get(
+          `http://localhost:5000/users/v1/${name}/posts`
+        ,config);
+        console.log(response.data)
+        return response.data;
+      } catch (error) {
+        console.error(error);
+      }
+  });  
 
 
 const postSlice = createSlice({
@@ -75,6 +92,12 @@ const postSlice = createSlice({
           .addCase(searchPost.rejected, (state, action) => {
             state.hasError = true
             state.isLoading = false;
+          })
+          .addCase(findPostByUserName.fulfilled, (state, action) => {
+            state.list = action.payload;
+            state.listFilter = action.payload;
+            state.isLoading = false;
+            state.hasError = false
           })
       }
 });

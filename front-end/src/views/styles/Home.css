@@ -4,8 +4,13 @@
     padding: 20px 100px;
     background-color: #2DCDDF;
     background-image: linear-gradient(#2DCDDF, rgb(227, 93, 248) );
+    display: flex;
+    justify-content: center;
     width: 100%;
     height: auto;
+}
+.homeContainer .subhomeContainer{
+    width: 70%;
 }
 
 .carousel-item > img{

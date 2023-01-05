@@ -8,7 +8,6 @@ import axios from 'axios'
 import Component1 from 'features/comment/component'
 export default function ViewPost() {
     const {id} = useParams()
-    const [valid,setValid] = useState(false)
     const [post,setPost] = useState()
     const [username,setUsername] = useState("")
     const [name,setName] = useState("")
@@ -27,7 +26,6 @@ export default function ViewPost() {
       };
       axios.get('http://localhost:5000/posts/'+id).then((res)=>{
         setPost(res.data)
-        setValid(true)
         return res.data.userID
       }).then((userID)=>{
         const config = {
@@ -68,7 +66,7 @@ export default function ViewPost() {
     };
     return (
     <>
-    {valid?
+    {post?
     <Segment>
       <div className = "card">
         <div className = "product-imgs">
@@ -108,7 +106,7 @@ export default function ViewPost() {
         </div>
         <div className = "product-content">
           <br/>
-          <h2 className = "product-title">Áo khoác Sportwear</h2>
+          <h2 className = "product-title">{post.nameProduct}</h2>
           <div className = "product-rating">
             <span id ="yellowText">5 </span>
             <i className = "fas fa-star"></i>
