@@ -24,6 +24,9 @@ import { getall } from 'features/posts/postSlice';
 import AdEditUser from 'features/admin/components/AdEditUser';
 import AdminRouter from "./features/admin/adminRouter" 
 import RequireAuth from 'features/auth/RequireAuth';
+import RegistryOwner from 'features/registryOrder/RegistryOwner';
+import GetRegistryofPost from 'features/registryOrder/GetRegistryofPost';
+
 const Posts = React.lazy(()=> import('./features/posts/Posts') )
 
 function App() {
@@ -47,6 +50,10 @@ function App() {
           
           
           {/* Users */}
+          <Route path="/user/:username/Order" element={<RegistryOwner/>}/>
+      
+          <Route path="/post/:id/Order" element={<GetRegistryofPost/>}/>
+
           <Route path='/vieworder/:id' element={<ViewOrder/>} />
           {/* <Route path='/announcements' element={<navbarAdmin/>} /> */}
           {/* <Route path='/report' element={<AdEditUser/>} /> */}
@@ -57,7 +64,8 @@ function App() {
 
           <Route path="/showall" element={<ShowAll/>}/>
           <Route path="/mostsearched" element={<MostSearched/>}/>
-          
+
+         
           <Route path='*' element={<NotFound/>}/>
         </Routes>
       </Suspense>
