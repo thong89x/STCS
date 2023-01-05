@@ -22,6 +22,7 @@ import ViewOrder from 'features/registryOrder/ViewOrder';
 import { useDispatch } from 'react-redux';
 import { getall } from 'features/posts/postSlice';
 import AdEditUser from 'features/admin/components/AdEditUser';
+import AdminRouter from "./features/admin/adminRouter" 
 const Posts = React.lazy(()=> import('./features/posts/Posts') )
 
 function App() {
@@ -32,9 +33,8 @@ function App() {
         <Header/>
         <Routes>
           {/* Admin */}
-          <Route path='/admin' element={<ManageUser/>} >
-            <Route path="account/edit/:id" element={<AdEditUser/>} />
-          </Route>
+          <Route path='/admin/*' element={<AdminRouter/>} />
+
           
           <Route path='/useracc' element={<ManageUser/>} />
           <Route path='/report' element={<Report/>} />

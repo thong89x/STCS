@@ -86,7 +86,7 @@ const User = (props) => {
       <td>{props.user.createdAt? props.user.createdAt.substring(0,10):''}</td>
       
       <td>
-        <Link to={"/admin/edit/"+props.user._id}>edit</Link> | <a href="/#">delete</a>
+        <Link to={"/admin/account/edit/"+props.user._id}>edit</Link> | <a href="/#">delete</a>
       </td>
     </tr>
   )
