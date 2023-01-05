@@ -193,8 +193,10 @@ const deletePost = asyncHandler(async (req, res) => {
 const searchProduct = asyncHandler(async (req, res) => {
     const {name} = req.query || " "
     await Post.createIndexes({nameProduct:"text"})
-    const Posts = await Post.find({nameProduct:{$regex:new RegExp(name), $options: "i"}})
-    console.log(Posts)
+    const Posts = await Post.find({nameProduct:{$regex:new RegExp(name), $options: "i"}}).sort({"createdAt":-1});
+    if (!Posts?.length) {
+        return res.status(400).json({ message: 'No Posts found' })
+    }
     return res.json(Posts)
 
 })

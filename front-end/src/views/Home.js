@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import TodoList from '../components/TodoList';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { addPost, getall, getAllPost, removePost} from '../features/posts/postSlice'
+import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
+import { addPost, removePost, searchPost, selectList, selectLoadingState} from '../features/posts/postSlice'
 import jwtDecode from 'jwt-decode'
 import axios from 'axios';
 import styled from 'styled-components';
@@ -13,7 +13,8 @@ import PostList from 'features/posts/components/PostList';
 export default function Home() {
     const {token} = useSelector(state=> state.auth);
     const {username, role} = useAuth()
-    const postList = useSelector(state=> state.postList.list) 
+    let [searchParams, setSearchParams] = useSearchParams();
+    const postList = useSelector(selectList) 
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const componentDidMount = (props) => {  
@@ -24,9 +25,7 @@ export default function Home() {
     }
 
     useEffect(()=>{
-      if(!postList.length){
-        dispatch(getAllPost())
-      }
+      dispatch(searchPost(" "))
     },[])
   return (  
     <div className='homeContainer'>

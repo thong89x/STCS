@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
-
-export const getAllPost = createAsyncThunk(
+import {current } from '@reduxjs/toolkit'
+export const searchPost = createAsyncThunk(
     "postList", 
-    async () => {
+    async (name) => {
       try {
         const config = {
           headers: {
@@ -11,7 +11,7 @@ export const getAllPost = createAsyncThunk(
           },
         };
         const response = await axios.get(
-          "http://localhost:5000/posts"
+          `http://localhost:5000/posts/search?name=${name}`
         ,config);
         return response.data;
       } catch (error) {
@@ -25,6 +25,7 @@ const postSlice = createSlice({
     name: 'posts',
     initialState:  {
         list: [],
+        listFilter: [],
         isLoading: false,
         hasError: false
     },
@@ -46,28 +47,41 @@ const postSlice = createSlice({
             if(postIndex>=0){
                 state[postIndex] = newPost;
             }
+        },
+        filterPost(state, action){
+          if(action.payload == "")
+          {
+            const filtelist = state.list;
+            return {...state,listFilter:filtelist}
+          }
+          const filtelist = state.list.filter((post) =>
+            post.typeProduct == action.payload
+          );
+          return {...state,listFilter:filtelist}
         }
     },
     extraReducers: (builder) => {
         builder
-          .addCase(getAllPost.pending, (state, action) => {
+          .addCase(searchPost.pending, (state, action) => {
           state.isLoading = true;
           state.hasError = false;
         })
-          .addCase(getAllPost.fulfilled, (state, action) => {
+          .addCase(searchPost.fulfilled, (state, action) => {
             state.list = action.payload;
+            state.listFilter = action.payload;
             state.isLoading = false;
             state.hasError = false
           })
-          .addCase(getAllPost.rejected, (state, action) => {
+          .addCase(searchPost.rejected, (state, action) => {
             state.hasError = true
             state.isLoading = false;
           })
       }
 });
+export const selectList = state => state.postList.list;
 export const selectLoadingState = state => state.postList.isLoading;
 export const selectErrorState = state => state.postList.hasError;
 
 const { actions, reducer } = postSlice;
-export const { addPost, removePost,updatePost, getall} = actions;
+export const { addPost, removePost,updatePost,filterPost} = actions;
 export default reducer;

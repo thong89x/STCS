@@ -44,6 +44,7 @@ export default function EditUser() {
     axios.patch('http://localhost:5000/users/v1/'+username,newInfo,config)
     .then((response)=>{
         console.log(response.data)
+        navigate(-1);
     }).catch((err)=>{
       if (err?.response?.status == 403 ||err?.response?.status == 400  ){
         console.log('sending request token')
@@ -56,6 +57,7 @@ export default function EditUser() {
           axios.patch('http://localhost:5000/users/v1/'+username,newInfo,config)
           .then((response)=>{
               console.log(response.data)
+              navigate(-1);
           })
         })
         .catch((err)=>{

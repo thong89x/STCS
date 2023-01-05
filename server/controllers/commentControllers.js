@@ -39,7 +39,7 @@ const getCommentByPostID = asyncHandler(async (req, res) => {
     if(!Post){
         return res.status(400).json({ message: 'Not found postID' })
     }
-    const Comments = await Comment.find({ postID:Post._id}).exec()
+    const Comments = await Comment.find({ postID:Post._id}).sort({"createdAt":-1});
 
     // If no Comments 
     if (Comments.length == 0) {
