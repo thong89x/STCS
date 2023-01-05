@@ -24,8 +24,16 @@ export default function ViewPost() {
         "Content-Type": "application/json"
         },
       };
-      axios.get('http://localhost:5000/posts/'+id).then((res)=>{
-        setPost(res.data)
+      axios.get('http://localhost:5000/posts/'+id,config).then((res)=>{
+        const postData = res.data
+
+        setPost(postData)
+        setName(postData.nameProduct)
+        setDesc(postData.describePost)
+        setPrice(postData.priceProduct)
+        setQuantity(postData.amountRegistry)
+
+        setValid(true)
         return res.data.userID
       }).then((userID)=>{
         const config = {
@@ -33,7 +41,7 @@ export default function ViewPost() {
           "Content-Type": "application/json"
           },
         };
-        axios.get('http://localhost:5000/users/v2/'+'63a33c906834e32f100123cf',config).then((res)=>{
+        axios.get('http://localhost:5000/users/v2/'+userID,config).then((res)=>{
           console.log(res.data)
           setUsername(res.data.username)
         })
@@ -106,7 +114,7 @@ export default function ViewPost() {
         </div>
         <div className = "product-content">
           <br/>
-          <h2 className = "product-title">{post.nameProduct}</h2>
+          <h2 className = "product-title">{name}</h2>
           <div className = "product-rating">
             <span id ="yellowText">5 </span>
             <i className = "fas fa-star"></i>
@@ -115,19 +123,19 @@ export default function ViewPost() {
             <i className = "fas fa-star"></i>
             <i className = "fas fa-star"></i>
             
-            <span id ="redText"> 2 </span>
-            <span> đã giao </span>
+            <span id ="redText"> {quantity} </span>
+            <span> lượt đăng ký còn lại </span>
           </div>
 
           <div className = "product-detail">
             <Segment>
             <h4 id ="centerText"> Mô tả sản phẩm</h4>
-                <p> </p>
+                <p>{desc}</p>
             </Segment>
           </div>
           <br/>
           <i className="big tag icon"></i>
-          <span id ="priceNum">50.000đ</span>
+          <span id ="priceNum"> {price} </span>
           
           <Segment>
             <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' verticalAlign='top' size='tiny' circular></Image>
