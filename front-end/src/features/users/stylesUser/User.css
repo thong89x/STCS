@@ -12,11 +12,7 @@
     transform: translate(-50%, -50%);
 }
 .infoBoxEditUser {
-    position: flex;
-    width: 550px;
-    height: 435px;
-    left: 500px;
-    top: -10px;
+    width: max-content;
 }
 #centerText{
     text-align: center;
@@ -39,7 +35,7 @@
     right: 68.61%;
     bottom: 1960px;
 
-    font-family: 'Inter';
+    font-family: 'Helvetica';   
     font-style: normal;
     font-weight: 500;
     font-size: 32px;
