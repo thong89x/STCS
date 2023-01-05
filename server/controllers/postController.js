@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const asyncHandler = require('express-async-handler');
 const Users = require('../models/User');
 const Comments = require('../models/Comment');
+const { $where } = require('../models/Post');
 
 // @desc Get all Posts
 // @route GET /Posts
@@ -48,7 +49,6 @@ const getPostByUserName = asyncHandler(async (req, res) => {
 })
 
 const getAvgRatingsByUserName = asyncHandler(async (req, res) => {
-    let sum = 0;
     let j = 0;
     let agvUSer = 0;
     // Get all Posts from MongoDB
@@ -87,14 +87,13 @@ const createPost = asyncHandler(async (req, res) => {
     if(User.length == 0){
         return res.status(400).json({ message: 'Not found username' })
     }
-    
-    var timeRegistry = Date.now();
+
     // Confirm data
     if (!typeProduct || !nameProduct) {
         return res.status(400).json({ message: 'Postname and password fields are required' })
     }
    
-    var PostObject = { userID:User[0]._id, nameProduct, typeProduct, timeRegistry }
+    var PostObject = { userID:User[0]._id, nameProduct, typeProduct, address,imageURL,amountRegistry,describePost,pricePruduct}
 
     // Create and store new Post 
     const Posts = await Post.create(PostObject)
@@ -135,7 +134,6 @@ const updatePost = asyncHandler(async (req, res) => {
         posts.addionInfo = addionInfo
         posts.pricePruduct = pricePruduct
         posts.amountRegistry = amountRegistry
-        posts.timeRegistry = posts.timeRegistry
         posts.imageURL = imageURL
 
     
@@ -194,6 +192,14 @@ const deletePost = asyncHandler(async (req, res) => {
     return res.json(reply)
 })
 
+const searchProduct = asyncHandler(async (req, res) => {
+    const {name} = req.query || " "
+    await Post.createIndexes({nameProduct:"text"})
+    const Posts = await Post.find({nameProduct:{$regex:new RegExp(name), $options: "i"}})
+    console.log(Posts)
+    return res.json(Posts)
+
+})
 module.exports = {
     getAllPosts,
     getPostByID,
@@ -201,5 +207,6 @@ module.exports = {
     updatePost,
     deletePost,
     getPostByUserName,
-    getAvgRatingsByUserName
+    getAvgRatingsByUserName,
+    searchProduct
 }
