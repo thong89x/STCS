@@ -2,7 +2,7 @@ const Post = require('../models/Post');
 const bcrypt = require('bcrypt')
 const asyncHandler = require('express-async-handler');
 const Users = require('../models/User');
-
+const Comments = require('../models/Comment');
 
 // @desc Get all Posts
 // @route GET /Posts
@@ -16,7 +16,7 @@ const getAllPosts = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'No Posts found' })
     }
 
-    res.json(Posts)
+    return res.json(Posts)
 })
 const getPostByID = asyncHandler(async (req, res) => {
 
@@ -28,11 +28,10 @@ const getPostByID = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'No Posts found' })
     }
 
-    res.json(Posts)
+    return res.json(Posts)
 })
 
 const getPostByUserName = asyncHandler(async (req, res) => {
-
     // Get all Posts from MongoDB
     const User = await Users.find({ username:req.params.username}).exec()
     if(User.length == 0){
@@ -45,8 +44,40 @@ const getPostByUserName = asyncHandler(async (req, res) => {
     if (!Posts) {
         return res.status(400).json({ message: 'No Posts found' })
     }
+    return res.json(Posts)
+})
 
-    res.json(Posts)
+const getAvgRatingsByUserName = asyncHandler(async (req, res) => {
+    let sum = 0;
+    let j = 0;
+    let agvUSer = 0;
+    // Get all Posts from MongoDB
+    const User = await Users.find({ username:req.params.username}).exec()
+    if(User.length == 0){
+        return res.status(400).json({ message: 'Not found username' })
+    }
+
+    const Posts = await Post.find({ userID:User[0]._id}).exec()
+
+    // If no Posts 
+    if (!Posts) {
+        return res.status(400).json({ message: 'No Posts found' })
+    }
+    else{
+        for (let x = 0; x < Posts.length; x++){
+            const Star = await Comments.find({ postID:Posts[x]._id}).exec();
+            let agv = 0;
+            for (let y = 0; y <Star.length; y++){
+                agvUSer += Star[y].starRatings;
+                j++;
+            }
+            console.log(agv);
+            agvUSer+= agv;
+       }
+       console.log(agvUSer/j);
+
+    }
+    return res.json(agvUSer/j)
 })
 
 const createPost = asyncHandler(async (req, res) => {
@@ -69,9 +100,9 @@ const createPost = asyncHandler(async (req, res) => {
     const Posts = await Post.create(PostObject)
 
     if (Posts) { //created 
-        res.status(201).json({ message: `New Post ${nameProduct} created` })
+        return res.status(201).json({ message: `New Post ${nameProduct} created` })
     } else {
-        res.status(400).json({ message: 'Invalid Post data received' })
+        return res.status(400).json({ message: 'Invalid Post data received' })
     }
 })
 // @desc Update a Post
@@ -160,7 +191,7 @@ const deletePost = asyncHandler(async (req, res) => {
 
     const reply = `Postname ${result.nameProduct} with ID ${result._id} deleted`
 
-    res.json(reply)
+    return res.json(reply)
 })
 
 module.exports = {
@@ -169,5 +200,6 @@ module.exports = {
     createPost,
     updatePost,
     deletePost,
-    getPostByUserName
+    getPostByUserName,
+    getAvgRatingsByUserName
 }

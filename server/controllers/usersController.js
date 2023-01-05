@@ -50,7 +50,7 @@ const getUser = asyncHandler(async (req, res) => {
     
     }
     // Get all users from MongoDB
-    res.json(users)
+    return res.json(users)
     
 })
 const createUser = asyncHandler(async (req, res) => {
@@ -77,9 +77,9 @@ const createUser = asyncHandler(async (req, res) => {
     const user = await User.create(userObject)
 
     if (user) { //created 
-        res.status(201).json({ message: `New user ${username} created` })
+        return res.status(201).json({ message: `New user ${username} created` })
     } else {
-        res.status(400).json({ message: 'Invalid user data received' })
+        return res.status(400).json({ message: 'Invalid user data received' })
     }
 })
 // @desc Update a user
@@ -189,7 +189,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
     const reply = `Username ${result.username} with ID ${result._id} deleted`
 
-    res.json(reply)
+    return res.json(reply)
 })
 
 module.exports = {
