@@ -81,6 +81,5 @@ module.exports = {
     getAllComments,
     getCommentById,
     createComment,
-    getCommentByPostID,
-    getAvgRatingsByPostID
+    getCommentByPostID
 }

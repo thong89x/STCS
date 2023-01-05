@@ -10,12 +10,10 @@ const Comments = require('../models/Comment');
 const getAllPosts = asyncHandler(async (req, res) => {
     // Get all Posts from MongoDB
     const Posts = await Post.find().lean()
-
     // If no Posts 
     if (!Posts?.length) {
         return res.status(400).json({ message: 'No Posts found' })
     }
-
     return res.json(Posts)
 })
 const getPostByID = asyncHandler(async (req, res) => {
