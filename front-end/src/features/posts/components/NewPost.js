@@ -78,7 +78,7 @@ export default function NewPost() {
       navigate('/home');
     };
   return (<>
-        <div className = "outlineFrame">
+        <div className = "outlineFrame_">
             <div as = 'h1' className = "text_themsanpham">
                     THÊM 1 SẢN PHẨM MỚI
             </div>
