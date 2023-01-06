@@ -47,7 +47,7 @@ export default function UserHome() {
                     <li>Email: {profile.email}</li>
                     <li>Age: {profile.age}</li>
                     <li>Gender: {profile.sex}</li>
-                    <li>Adress: {profile.address}</li>
+                    <li>Address: {profile.address}</li>
                 </ol>
             </Segment>
             {ower==username?<button id ="centerButton"> 

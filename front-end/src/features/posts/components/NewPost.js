@@ -15,6 +15,7 @@ export default function NewPost() {
     const [address, setAdress] = useState("")
     const [price, setPrice] = useState("")
     const [quantity, setQuantity] = useState("")
+    const [linkAnh , setLinkAnh] = useState("")
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const {token} = useSelector(state=> state.auth)
@@ -28,7 +29,8 @@ export default function NewPost() {
         address: address,
         priceProduct: price,
         amountRegistry: quantity,
-        typeProduct: type
+        typeProduct: type,
+        imageURL: linkAnh
     }
     const config = {
         headers: {
@@ -116,7 +118,7 @@ export default function NewPost() {
                 <div className="form-group row">
                     <label htmlFor="productName" className="col-sm-2 col-form-label">Số lượng</label>
                     <div className="col-sm-10">
-                        <input type="number" className="form-control" id="soluong" value={quantity} onChange={(e)=>setQuantity(e.target.value)}  placeholder="Nhập số tiền (VNĐ)"/>
+                        <input type="number" className="form-control" id="soluong" value={quantity} onChange={(e)=>setQuantity(e.target.value)}  placeholder="Nhập số lượng sản phẩm"/>
                     </div>
                 </div>
                 <br/>
@@ -132,12 +134,14 @@ export default function NewPost() {
                         Quản lý hình ảnh
                 </div>
                 <div className="form-group row">
-                    <label htmlFor="productImage" className="col-sm-2 col-form-label">Hình ảnh sản phẩm</label>
-                    <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size = 'small'/>
-                    <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size = 'small'/>
-                    <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size = 'small'/>
-                    <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size = 'small'/>
-                    <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size = 'small'/>
+                    <label htmlFor="productImage" className="col-sm-2 col-form-label">Link ảnh sản phẩm</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="linkanh1" value={linkAnh} onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 1"/>
+                        <input type="text" className="form-control" id="linkanh2" value={linkAnh} onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 2"/>
+                        <input type="text" className="form-control" id="linkanh3" value={linkAnh} onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 3"/>
+                        <input type="text" className="form-control" id="linkanh4" value={linkAnh} onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 4"/>
+                        <input type="text" className="form-control" id="linkanh5" value={linkAnh} onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 5"/>
+                    </div>
                 </div>
             </Segment>
             <Segment>

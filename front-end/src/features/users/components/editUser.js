@@ -56,7 +56,7 @@ export default function EditUser() {
       },
     };
     axios.defaults.withCredentials = true
-    axios.patch('http://localhost:5000/users/v1/'+username,newInfo,config)
+    axios.patch('http://localhost:5000/users/v1/' + username,newInfo,config)
     .then((response)=>{
         console.log(response.data)
         navigate(-1);
@@ -69,7 +69,7 @@ export default function EditUser() {
           return accessToken
         }).then((res)=>{
           config.headers.Authorization = `Bearer ${res.accessToken}`
-          axios.patch('http://localhost:5000/users/v1/'+username,newInfo,config)
+          axios.patch('http://localhost:5000/users/v1/' + username,newInfo,config)
           .then((response)=>{
               console.log(response.data)
               navigate(-1);
@@ -89,13 +89,15 @@ export default function EditUser() {
     {ower==username?
     <div  className = 'backGroundPage' style = {{backgroundColor: "#DDE4F5"}}>
       <div className='row d-flex flex-row justify-content-center'>
+        <br/>
+        <Image middle={'true'} src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular/>
+        <br/>
+        <span className = "text_header"> {username}   </span>
+      </div>
       <br/>
-      <Image middle={'true'} src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular/>
-      <br/>
-      <span className = "text_header"> {username}   </span>
-
-      <Segment style = {{backgroundColor: "#A0B4F3"}} className = "infoBoxEditUser row">
-            <div as = 'h1' className = "text_header mb-3">
+      <div className='justify-content-center'>
+      <Segment style = {{backgroundColor: "#A0B4F3"}} className = "infoBoxEditUser">
+            <div as = 'h2' className = "text_header mb-3">
                     CHỈNH SỬA THÔNG TIN CÁ NHÂN
             </div>
             <div>
@@ -133,8 +135,7 @@ export default function EditUser() {
             </div>
             
         </Segment>
-      </div>
-      
+        </div>
     </div>:<Navigate to="/home" replace />}
     </>
   )

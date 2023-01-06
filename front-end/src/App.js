@@ -19,6 +19,7 @@ import useAuth from 'hooks/useAuth';
 // import AdEditUser from 'features/admin/components/AdEditUser';
 import UsersList from 'features/users/components/userList';
 import ViewOrder from 'features/registryOrder/ViewOrder';
+import About from 'features/auth/About';
 import { useDispatch } from 'react-redux';
 import { getall, getAllPost } from 'features/posts/postSlice';
 import AdEditUser from 'features/admin/components/AdEditUser';
@@ -53,11 +54,11 @@ function App() {
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/search' element={<Search/>} /> 
           <Route path='/home' element={<Home/>} />
-          
+          <Route path='/info' element={<About/>} />
           
           {/* Users */}
       
-          <Route path="/post/:id/Order" element={<GetRegistryofPost/>}/>
+          <Route path="/order/:id" element={<Order/>}/>
 
           <Route path='/vieworder/:id' element={<ViewOrder/>} />
           {/* <Route path='/announcements' element={<navbarAdmin/>} /> */}

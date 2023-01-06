@@ -26,7 +26,7 @@ export default function ViewPost() {
       };
       axios.get('http://localhost:5000/posts/'+id,config).then((res)=>{
         const postData = res.data
-
+        
         setPost(postData)
         setName(postData.nameProduct)
         setDesc(postData.describePost)
