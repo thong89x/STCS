@@ -2,13 +2,13 @@
     background-color: "#DDE4F5";
     height: 110%;
 }
-.infoBox {
-    width: 550px;
-    height: 125px;
+.infoBoxx {
     position: flex;
-    left: 50%;
-    -ms-transform: translate(-50%, 0%);
-    transform: translate(-50%, 0%);
+    background-color: white;
+    margin-left: 40%;
+    margin-right: 40%;
+    padding: 15px;
+    border-radius: 8px;
 }
 .infoBoxEditUser {
     width: max-content;
@@ -17,16 +17,7 @@
 #centerText{
     text-align: center;
 }
-#centerButton{
-    margin: 0;
-    margin-bottom: 50px;
-    position: absolute;
-    height: 20px;
-    top: 550px;
-    left: 50%;
-    -ms-transform: translate(-50%, 0%);
-    transform: translate(-50%, 0%);
-}
+
 .cameraIcon{
     left: 145px;
 }
@@ -70,14 +61,16 @@
 }
 .posts {
     background-color: whitesmoke;
-    border: 1px solid black;
-    width: 100%;
+    /* border: 1px solid black; */
     height: 50vh;
+    border-radius: 10px;
+    padding: 10px;
 }
 .posts>img{
-    width: 100%;
+    width:100%;
     height: 40vh;
-    object-fit: cover;
+    object-fit:fill;
+    padding: 5%;
 }
 .ColPost{
     padding: 0px 30%;
@@ -89,5 +82,7 @@
     padding: 0px 1rem;
 }
 .userHomePage {
-    background-image: linear-gradient(#2DCDDF, rgb(227, 93, 248) );
+    /* background-image: linear-gradient(#2DCDDF, rgb(227, 93, 248) ); */
+    background-color: #d1e0f7;
+    min-height: 100vh;
 }

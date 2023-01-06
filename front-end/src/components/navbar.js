@@ -52,7 +52,7 @@ function Navbar(props){
         <RiBillLine className='iconBill'/> 
         My Orders
       </NavLink>
-      <NavLink to ={componentDidMount("/info")} className='information'>
+      <NavLink to ={"/info"} className='information'>
         <IoIosInformationCircleOutline className='iconInf'/>
         About
       </NavLink>

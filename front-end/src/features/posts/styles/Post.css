@@ -1,14 +1,14 @@
-.outlineFrame {
-    box-sizing: border-box;
-    position: absolute;
-    height: 1350px;
-    left: 0;
-    right: 10.21%;
-
+.outlineFrame_ {
+    position: flex;
+    width: auto;
+    margin-inline: 5%;
+    padding-inline: 1%;
+    padding-bottom: 2%;
     background: -webkit-linear-gradient(to bottom,#A0B4F3, #9EFCF6);
     background: linear-gradient(to bottom,#A0B4F3, #9EFCF6);
     border-radius: 25px;
 }
+
 
 .infoBox {
     position: absolute;
@@ -24,7 +24,7 @@
     left: 13.47%;
     right: 68.61%;
     bottom: 1960px;
-
+    padding-top: 10px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
@@ -38,11 +38,8 @@
 }
 
 .text_thongtincoban {
-    position: center;
-    width: 550px;
-    height: 58px;
-    top: 101px;
-    
+    position: flex;
+
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
