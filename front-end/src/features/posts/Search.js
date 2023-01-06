@@ -28,9 +28,9 @@ export default function Search() {
   return (
     <div className='searchContainer'>
         <h2 className=''>Browse {postlist?.length} results for "{name}"</h2>
+        <button type="button" class="btn btn-warning" onClick={handleFilter}>Filter</button>
+        <button type="button" class="btn btn-success" onClick={handleRefresh}>Refresh</button>
         {postlist?<PostList postList={postlist}/>:<></>}
-        <button onClick={handleFilter}>filter</button>
-        <button onClick={handleRefresh}>filter</button>
     </div>
   )
 }
