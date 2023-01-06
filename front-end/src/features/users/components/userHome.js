@@ -39,7 +39,7 @@ export default function UserHome() {
         <>
         {user ?
             <div className='userHomePage'>
-                <div className='cente'>
+                <div className='center'>
                     <Image middle={middle.toString()} src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular centered/>
                     <h2 id = "centerText"> {user?.username } </h2>
                     <div className='infoBoxx row' >
@@ -49,10 +49,13 @@ export default function UserHome() {
                             <li>Age: {profile.age}</li>
                             <li>Gender: {profile.sex}</li>
                             <li>Address: {profile.address}</li>
+                            <div className='infoBoxEditUser'>
+                            {ower==username?<button className='btn btn-warning'> 
+                                <NavLink to={`/users/edit/${username}`} > Edit thông tin cá nhân </NavLink>
+                            </button>:<></>}
+                            </div>
                         </ol>
-                        {ower==username?<button className='btn btn-warning'> 
-                            <NavLink to={`/users/edit/${username}`} > Edit thông tin cá nhân </NavLink>
-                        </button>:<></>}
+                        
                     </div>
                 </div>
             

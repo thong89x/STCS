@@ -2,25 +2,19 @@
     background-color: "#DDE4F5";
     height: 110%;
 }
-.infoBox {
-    width: 550px;
-    height: 125px;
-    position: flex; 
-    left: 50%;
-    padding-top: 50px;
-    -ms-transform: translate(-50%, 0%);
-    transform: translate(-50%, 0%);
+.infoBoxx {
+    min-width: 30%;
+    height: 150px;
+    background-color: white;
+    margin-inline: 27.5%;
+    border-radius: 10px;
+    padding-left: 1%;
+    padding-top: 10px;
 }
 .infoBoxEditUser {
-    width: max-content;
-    left: 50%
-}
-#centerText{
+    width: 25%;
     text-align: center;
-}
-
-.cameraIcon{
-    left: 145px;
+    margin-inline: 6.5%;
 }
 
 .text_header {
