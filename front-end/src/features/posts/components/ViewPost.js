@@ -138,8 +138,8 @@ export default function ViewPost() {
           <span id ="priceNum"> {price} </span>
           
           <Segment>
-            <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' verticalAlign='top' size='tiny' circular></Image>
-            <span >Đăng bài này lúc: </span>
+            <Image onClick={()=>{navigate(`/users/${username}`)}} src='https://react.semantic-ui.com/images/wireframe/square-image.png' verticalAlign='top' size='tiny' circular></Image>
+            <span >Đăng bài này lúc: {post.createdAt} </span>
             <br/>
             <span >{username}</span>
           </Segment>
