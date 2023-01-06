@@ -57,8 +57,6 @@ function App() {
           <Route path='/info' element={<About/>} />
           
           {/* Users */}
-      
-          <Route path="/order/:id" element={<Order/>}/>
 
           <Route path='/vieworder/:id' element={<ViewOrder/>} />
           {/* <Route path='/announcements' element={<navbarAdmin/>} /> */}

@@ -122,8 +122,8 @@ const updateUser = asyncHandler(async (req, res) => {
         return res.status(401).json({ message: 'Unauthorized' })
     }
     console.log(users);
-    
-    users.role= role
+    if(role)
+        users.role= role
     if ( typeof isActive == 'boolean') {
         users.isActive = isActive
     }

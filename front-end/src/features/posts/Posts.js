@@ -15,9 +15,10 @@ export default function Posts() {
         <Route element={<PostLayout/>}>
             <Route index element={<PostList/>}/>
             <Route path='add' element={<NewPost/>}/>
-            <Route path=':id' element={<ViewPost/>}/>
-            <Route path="order/:id" element={<GetRegistryofPost/>}/>
+            <Route path="approach/:id" element={<GetRegistryofPost/>}/>
+            <Route path="order/:id" element={<Order/>}/>
             <Route path='edit/:id' element={<EditPost/>}/>
+            <Route path=':id' element={<ViewPost/>}/>
         </Route>
     </Routes>
   )

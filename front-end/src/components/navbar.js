@@ -13,6 +13,7 @@ import UseAuth from 'hooks/useAuth';
 import NavbarAdmin from 'features/admin/navbarAdmin';
 import { useDispatch } from 'react-redux';
 import {logOut} from '../features/auth/authSlice';
+import axios from 'axios';
 
 function Navbar(props){
   const { username, role } = UseAuth()
@@ -28,7 +29,8 @@ function Navbar(props){
   }
   const handleLogout = () => {
     dispatch(logOut())
-    // gui request localhost/auth/logout
+    axios.get('http://localhost:5000/auth/logout')
+    // gui request localhost/auth/logout/
   }
   const handleSearch = () => {
     Navigate(`/search?name=${searchRef.current.value}`)
