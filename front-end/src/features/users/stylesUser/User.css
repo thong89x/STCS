@@ -2,13 +2,14 @@
     background-color: "#DDE4F5";
     height: 110%;
 }
-.infoBoxx {
-    position: flex;
-    background-color: white;
-    margin-left: 40%;
-    margin-right: 40%;
-    padding: 15px;
-    border-radius: 8px;
+.infoBox {
+    width: 550px;
+    height: 125px;
+    position: flex; 
+    left: 50%;
+    padding-top: 50px;
+    -ms-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
 }
 .infoBoxEditUser {
     width: max-content;

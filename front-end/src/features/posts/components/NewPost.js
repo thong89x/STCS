@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import {useNavigate,useParams} from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { setCredentials } from 'features/auth/authSlice'
@@ -21,8 +21,14 @@ export default function NewPost() {
     const {token} = useSelector(state=> state.auth)
     const {id} = useParams()
     const {username} = useParams()
+    const link1 = useRef()
+    const link2 = useRef()
+    const link3 = useRef()
+    const link4 = useRef()
+    const link5 = useRef()
     const handleSubmit = event =>{
-    event.preventDefault()  
+    event.preventDefault()
+    const imageURL = [link1.current.value,link2.current.value,link3.current.value,link4.current.value,link5.current.value];  
     const newPost = {
         nameProduct: name,
         describePost: desc,
@@ -30,7 +36,7 @@ export default function NewPost() {
         priceProduct: price,
         amountRegistry: quantity,
         typeProduct: type,
-        imageURL: linkAnh
+        imageURL: imageURL
     }
     const config = {
         headers: {
@@ -71,7 +77,8 @@ export default function NewPost() {
     };
   return (
     <>
-        <div className = "outlineFrame_">
+    <form onSubmit={handleSubmit}>
+        <div className = "outlineFrame">
             <div as = 'h1' className = "text_themsanpham">
                     THÊM 1 SẢN PHẨM MỚI
             </div>
@@ -133,11 +140,11 @@ export default function NewPost() {
                 <div className="form-group row">
                     <label htmlFor="productImage" className="col-sm-2 col-form-label">Link ảnh sản phẩm</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="linkanh1" value={linkAnh} onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 1"/>
-                        <input type="text" className="form-control" id="linkanh2" value={linkAnh} onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 2"/>
-                        <input type="text" className="form-control" id="linkanh3" value={linkAnh} onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 3"/>
-                        <input type="text" className="form-control" id="linkanh4" value={linkAnh} onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 4"/>
-                        <input type="text" className="form-control" id="linkanh5" value={linkAnh} onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 5"/>
+                        <input ref={link1} type="text" className="form-control" id="linkanh1" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 1"/>
+                        <input ref={link2} type="text" className="form-control" id="linkanh2" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 2"/>
+                        <input ref={link3} type="text" className="form-control" id="linkanh3" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 3"/>
+                        <input ref={link4} type="text" className="form-control" id="linkanh4" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 4"/>
+                        <input ref={link5} type="text" className="form-control" id="linkanh5" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 5"/>
                     </div>
                 </div>
             </Segment>

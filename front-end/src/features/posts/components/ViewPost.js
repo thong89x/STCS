@@ -9,6 +9,7 @@ import Comment from 'features/comment/component'
 export default function ViewPost() {
     const {id} = useParams()
     const [post,setPost] = useState()
+    const [type,setType] = useState("")
     const [username,setUsername] = useState("")
     const [name,setName] = useState("")
     const [desc,setDesc] = useState("")
@@ -128,7 +129,7 @@ export default function ViewPost() {
 
           <div className = "product-detail">
             <Segment>
-            <h4 id ="centerText"> Mô tả sản phẩm</h4>
+            <h4 id ="centerText"> Mô tả sản phẩm</h4> 
                 <p>{desc}</p>
             </Segment>
           </div>
@@ -144,7 +145,10 @@ export default function ViewPost() {
           </Segment>
           <div className = "purchase-info">
             <button type = "button" className = "btn">
-              <NavLink to={`/posts/order/${post._id}`} >Order <i className = "fas fa-shopping-cart"></i></NavLink>
+              <NavLink to={`/order/${post._id}`} >Order <i className = "fas fa-shopping-cart"></i></NavLink>
+            </button>
+            <button type = "button" className = "btn">
+              <NavLink to={`/posts/approach/${post._id}`} >Approach<i className = "address book outline icon"></i></NavLink>
             </button>
           </div>
         </div>

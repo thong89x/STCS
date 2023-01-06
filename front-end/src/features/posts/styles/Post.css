@@ -1,9 +1,10 @@
-.outlineFrame_ {
+.outlineFrame {
+    box-sizing: border-box;
     position: flex;
-    width: auto;
+    height: fit-content;
     margin-inline: 5%;
     padding-inline: 1%;
-    padding-bottom: 2%;
+    margin-left: 200px;
     background: -webkit-linear-gradient(to bottom,#A0B4F3, #9EFCF6);
     background: linear-gradient(to bottom,#A0B4F3, #9EFCF6);
     border-radius: 25px;
