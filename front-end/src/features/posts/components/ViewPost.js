@@ -145,7 +145,7 @@ export default function ViewPost() {
           </Segment>
           <div className = "purchase-info">
             <button type = "button" className = "btn">
-              <NavLink to={`/order/${post._id}`} >Order <i className = "fas fa-shopping-cart"></i></NavLink>
+              <NavLink to={`/posts/order/${post._id}`} >Order <i className = "fas fa-shopping-cart"></i></NavLink>
             </button>
             <button type = "button" className = "btn">
               <NavLink to={`/posts/approach/${post._id}`} >Approach<i className = "address book outline icon"></i></NavLink>

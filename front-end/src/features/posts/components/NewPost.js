@@ -38,6 +38,7 @@ export default function NewPost() {
         typeProduct: type,
         imageURL: imageURL
     }
+    console.log(newPost)
     const config = {
         headers: {
         "Content-Type": "application/json",
@@ -48,7 +49,7 @@ export default function NewPost() {
         axios.post('http://localhost:5000/posts/', newPost,config)
         .then((response)=>{
             console.log(response.data)
-            
+            navigate(-1)
         }).catch((err)=>{
         if (err?.response?.status == 403 ||err?.response?.status == 400  ){
             console.log('sending request token')
@@ -63,6 +64,7 @@ export default function NewPost() {
             axios.post('http://localhost:5000/posts/', newPost,config)
             .then((response)=>{
                 console.log(response.data)
+                navigate(-1)
             })
             })
             .catch((err)=>{
@@ -178,7 +180,7 @@ export default function NewPost() {
             <div className="ui buttons">
                 <button className="ui button" onClick = {navigateHome}>Hủy</button>
                 <div className="or"></div>
-                <button type='submit' className="ui positive button" onSubmit={handleSubmit}>Thêm sản phẩm </button>
+                <button type='submit' className="ui positive button" onClick={handleSubmit}>Thêm sản phẩm </button>
             </div>
         </div>
 
