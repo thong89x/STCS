@@ -147,6 +147,9 @@ export default function ViewPost() {
             <button type = "button" className = "btn">
               <NavLink to={`/order/${post._id}`} >Order <i className = "fas fa-shopping-cart"></i></NavLink>
             </button>
+            <button type = "button" className = "btn">
+              <NavLink to={`/posts/approach/${post._id}`} >Approach<i className = "address book outline icon"></i></NavLink>
+            </button>
           </div>
         </div>
       </div>
