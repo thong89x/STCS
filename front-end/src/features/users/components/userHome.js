@@ -39,20 +39,23 @@ export default function UserHome() {
         <>
         {user ?
             <div className='userHomePage'>
-            <Image middle={middle.toString()} src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular centered/>
-            <h2 id = "centerText"> {user?.username } </h2>
-            <Segment className ="infoBox">
-                <ol>
-                    <li>Fullname: {profile.fullname}</li>
-                    <li>Email: {profile.email}</li>
-                    <li>Age: {profile.age}</li>
-                    <li>Gender: {profile.sex}</li>
-                    <li>Address: {profile.address}</li>
-                </ol>
-            </Segment>
-            {ower==username?<button id ="centerButton"> 
-                <NavLink to={`/users/edit/${username}`} > Edit thông tin cá nhân </NavLink>
-            </button>:<></>}
+                <div className='cente'>
+                    <Image middle={middle.toString()} src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular centered/>
+                    <h2 id = "centerText"> {user?.username } </h2>
+                    <div className='infoBoxx row' >
+                        <ol className='col'>
+                            <li>Fullname: {profile.fullname}</li>
+                            <li>Email: {profile.email}</li>
+                            <li>Age: {profile.age}</li>
+                            <li>Gender: {profile.sex}</li>
+                            <li>Address: {profile.address}</li>
+                        </ol>
+                        {ower==username?<button className='btn btn-warning'> 
+                            <NavLink to={`/users/edit/${username}`} > Edit thông tin cá nhân </NavLink>
+                        </button>:<></>}
+                    </div>
+                </div>
+            
             <div className='row mt-5'>
                 <div className='col ColPost'>
                     {postlist?postlist.map((post) => (
