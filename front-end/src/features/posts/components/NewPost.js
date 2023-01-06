@@ -21,6 +21,7 @@ export default function NewPost() {
     const {token} = useSelector(state=> state.auth)
     const {id} = useParams()
     const {username} = useParams()
+    
     const handleSubmit = event =>{
     event.preventDefault()  
     const newPost = {
