@@ -5,6 +5,7 @@ import UserHome from './components/userHome'
 import {Routes,Route, Navigate, Link, useSearchParams, useParams } from 'react-router-dom'
 import UsersList from './components/userList'
 import axios from 'axios'
+import Notifications from './components/Notifications'
 export default function UserRouter() {
   
   return (
@@ -12,6 +13,7 @@ export default function UserRouter() {
       <Route element={<UserLayout/>}>
         <Route path="/:username" element={<UserHome/>} />
         <Route path="/edit/:username" element={<EditUser/>} />
+        <Route path='/notifications/:username' element={<Notifications/>} />
       </Route>
     </Routes>
   )

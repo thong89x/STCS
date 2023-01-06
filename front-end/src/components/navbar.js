@@ -56,7 +56,7 @@ function Navbar(props){
         <IoIosInformationCircleOutline className='iconInf'/>
         About
       </NavLink>
-      <NavLink to ={componentDidMount("/notificatioin")} className='notification'>
+      <NavLink to ={componentDidMount(`users/notifications/${username}`)} className='notification'>
         <IoNotifications className='iconNotify'/>
         Notifications
       </NavLink>
@@ -77,9 +77,6 @@ function Navbar(props){
       :<NavLink to ="/login" className="login">
         Login
       </NavLink> }
-      <NavLink to ="/approach">
-        approach
-      </NavLink>
     </div>}
     </Navigation>
   )

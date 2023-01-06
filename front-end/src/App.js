@@ -61,7 +61,6 @@ function App() {
           <Route path='/report' element={<AdEditUser/>} />
           <Route path="/users/*" element={<UserRouter/>}/>
           <Route path='/posts/*' element={<Posts/>} />
-
           <Route path="/showall" element={<ShowAll/>}/>
           <Route path="/mostsearched" element={<MostSearched/>}/>
 
