@@ -15,7 +15,6 @@ export default function UserHome() {
             },
           };
         axios.get(`http://localhost:5000/users/v1/${username}`,config).then((res)=>{
-            
             setUser(res.data)
             setProfile(res.data.profile)
             console.log(user)
@@ -38,11 +37,11 @@ export default function UserHome() {
                     <li>Email: {profile.email}</li>
                     <li>Age: {profile.age}</li>
                     <li>Gender: {profile.sex}</li>
-                    <li>Adress: {profile.address}</li>
+                    <li>Address: {profile.address}</li>
                 </ol>
             </Segment>
             <button id ="centerButton"> 
-                <NavLink to={`/users/edit/${username}`} > Edit thông tin cá nhân </NavLink>
+                <NavLink to={`/users/edit/${username}`}> Edit thông tin cá nhân </NavLink>
             </button>
             </>: ""}
         </>

@@ -1,0 +1,73 @@
+
+.backGroundPage{
+    background-color: "#DDE4F5";
+    height: 110%;
+}
+.infoBox {
+    width: 35%;
+    height: 35%;
+    position: flex;
+    left: 50%;
+    top: 150px;
+    justify-content: center;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.infoBoxEditUser {
+    position: flex;
+    width: 550px;
+    height: 435px;
+    left: 500px;
+    top: -10px;
+}
+#centerText{
+    text-align: center;
+}
+#centerButton{
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -250%);
+}
+.cameraIcon{
+    left: 145px;
+}
+
+.text_header {
+    position: top;
+    height: 39px;
+    left: 13.47%;
+    right: 68.61%;
+    bottom: 1960px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 39px;
+
+    /* identical to box height */
+    text-align: center;
+    color: #000000; 
+}
+
+.text_thongtincoban {
+    position: center;
+    width: 550px;
+    height: 58px;
+    top: 101px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 58px;
+    
+    text-align: left; 
+    color: #000000;    
+}
+
+.shade {
+    color: '#C4C4C4'
+}

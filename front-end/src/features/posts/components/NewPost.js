@@ -116,7 +116,7 @@ export default function NewPost() {
                 <div className="form-group row">
                     <label htmlFor="productName" className="col-sm-2 col-form-label">Số lượng</label>
                     <div className="col-sm-10">
-                        <input type="number" className="form-control" id="soluong" value={quantity} onChange={(e)=>setQuantity(e.target.value)}  placeholder="Nhập số tiền (VNĐ)"/>
+                        <input type="number" className="form-control" id="soluong" value={quantity} onChange={(e)=>setQuantity(e.target.value)}  placeholder="Nhập số lượng sản phẩm"/>
                     </div>
                 </div>
                 <br/>

@@ -41,7 +41,7 @@ export default function EditUser() {
       },
     };
     axios.defaults.withCredentials = true
-    axios.patch('http://localhost:5000/users/v1/'+username,newInfo,config)
+    axios.patch('http://localhost:5000/users/v1/' + username,newInfo,config)
     .then((response)=>{
         console.log(response.data)
     }).catch((err)=>{
@@ -53,7 +53,7 @@ export default function EditUser() {
           return accessToken
         }).then((res)=>{
           config.headers.Authorization = `Bearer ${res.accessToken}`
-          axios.patch('http://localhost:5000/users/v1/'+username,newInfo,config)
+          axios.patch('http://localhost:5000/users/v1/' + username,newInfo,config)
           .then((response)=>{
               console.log(response.data)
           })
