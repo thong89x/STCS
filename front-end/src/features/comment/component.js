@@ -20,7 +20,7 @@ export default function Comments(props) {
         "Content-Type": "application/json"
       },
     };
-  axios.get(`http://localhost:5000/postss/${id}/comment`,config).then((res)=>{
+  axios.get(`http://localhost:5000/posts/${id}/comment`,config).then((res)=>{
       console.log(res.data)
       setListComment(res.data)
 
@@ -33,7 +33,7 @@ export default function Comments(props) {
 
 
   return (
-    <div>
+    <div id={id}>
         {
         listComment.map((comment) => { 
           return (
