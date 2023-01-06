@@ -21,7 +21,7 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept,Authorization");
   next();
 })
-const uri = process.env.ATLAS_URI;
+const uri=process.env.ATLAS_URI;
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(uri, { useNewUrlParser: true});

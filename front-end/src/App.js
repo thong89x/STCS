@@ -23,6 +23,11 @@ import About from 'features/auth/About';
 import { useDispatch } from 'react-redux';
 import { getall } from 'features/posts/postSlice';
 import AdEditUser from 'features/admin/components/AdEditUser';
+import AdminRouter from "./features/admin/adminRouter" 
+import RequireAuth from 'features/auth/RequireAuth';
+import RegistryOwner from 'features/registryOrder/RegistryOwner';
+import GetRegistryofPost from 'features/registryOrder/GetRegistryofPost';
+
 const Posts = React.lazy(()=> import('./features/posts/Posts') )
 
 function App() {
@@ -33,11 +38,9 @@ function App() {
         <Header/>
         <Routes>
           {/* Admin */}
-          <Route path='/admin' element={<ManageUser/>} >
-            <Route path="account/edit/:id" element={<AdEditUser/>} />
+          <Route element={<RequireAuth allowedRoles={["admin", "sub-admin"]} />}>
+            <Route path='/admin/*' element={<AdminRouter/>} />
           </Route>
-          
-          <Route path='/useracc' element={<ManageUser/>} />
           <Route path='/report' element={<Report/>} />
           {/* Guest */}
           <Route path='/' element={<Home/>} />
@@ -48,16 +51,22 @@ function App() {
           <Route path='/info' element={<About/>} />
           
           {/* Users */}
+          <Route path="/user/:username/Order" element={<RegistryOwner/>}/>
+      
+          <Route path="/order/:id" element={<Order/>}/>
+
           <Route path='/vieworder/:id' element={<ViewOrder/>} />
-          <Route path='/announcements' element={<navbarAdmin/>} />
+          {/* <Route path='/announcements' element={<navbarAdmin/>} /> */}
           {/* <Route path='/report' element={<AdEditUser/>} /> */}
           
           <Route path='/report' element={<AdEditUser/>} />
           <Route path="/users/*" element={<UserRouter/>}/>
-          
+          <Route path='/posts/*' element={<Posts/>} />
+
           <Route path="/showall" element={<ShowAll/>}/>
           <Route path="/mostsearched" element={<MostSearched/>}/>
-          <Route path='/posts/*' element={<Posts/>} />
+
+         
           <Route path='*' element={<NotFound/>}/>
         </Routes>
       </Suspense>

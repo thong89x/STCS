@@ -31,7 +31,7 @@ function Navbar(props){
     // gui request localhost/auth/logout
   }
   const handleSearch = () => {
-    Navigate(`/search?typeorder=${searchRef.current.value}`)
+    Navigate(`/search?name=${searchRef.current.value}`)
   }
 
   return(

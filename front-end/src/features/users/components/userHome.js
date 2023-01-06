@@ -1,13 +1,22 @@
 import axios from 'axios'
 import React, { useEffect ,useState} from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import {Image,Segment} from 'semantic-ui-react';
 import "../stylesUser/User.css"
 import { NavLink } from 'react-router-dom';
+import useAuth from 'hooks/useAuth';
+import { findPostByUserName } from 'features/posts/postSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import PostList from 'features/posts/components/PostList';
+import { AiOutlineDelete,AiFillEdit } from "react-icons/ai";
 export default function UserHome() {
     const [user,setUser]=useState()
     const [profile,setProfile]=useState()
+    const postlist = useSelector(state=> state.postList.listFilter)
     const {username} = useParams()
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const ower = useAuth().username
     useEffect(()=>{
         const config = {
             headers: {
@@ -23,12 +32,13 @@ export default function UserHome() {
         }).catch((err)=>{
             console.log(err)
         })
+        dispatch(findPostByUserName(username))
     },[])
     const middle = true
     return (
         <>
         {user ?
-            <>
+            <div className='userHomePage'>
             <Image middle={middle.toString()} src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular centered/>
             <h2 id = "centerText"> {user?.username } </h2>
             <Segment className ="infoBox">
@@ -40,10 +50,41 @@ export default function UserHome() {
                     <li>Address: {profile.address}</li>
                 </ol>
             </Segment>
-            <button id ="centerButton"> 
-                <NavLink to={`/users/edit/${username}`}> Edit thông tin cá nhân </NavLink>
-            </button>
-            </>: ""}
+            {ower==username?<button id ="centerButton"> 
+                <NavLink to={`/users/edit/${username}`} > Edit thông tin cá nhân </NavLink>
+            </button>:<></>}
+            <div className='row mt-5'>
+                <div className='col ColPost'>
+                    {postlist?postlist.map((post) => (
+                    
+                    <div key={post._id} className='row posts mb-5 mt-4' onClick={()=>{navigate('/posts/'+post._id)}}>
+                        <div className='row'>
+                            <div className='col-2'>
+                            <Image  src='https://www.computerhope.com/jargon/s/software-engineering.jpg' size='tiny' circular centered/>
+                            </div>
+                            <div className='col-9'>
+                                <div className='row mb-2 mt-1'>{username}</div>
+                                <div className='row'>{post.createdAt}</div>
+                            </div>
+                            <div className='col-1 action'>
+                                <AiOutlineDelete/>
+                                <AiFillEdit/>
+                            </div>
+                        </div>
+                        <div className='row text-center describe'>
+                            {post.describePost}
+                        </div>
+                        {post.imageURL?
+                        <img src={post.imageURL[0]?post.imageURL[0]:"https://th.bing.com/th/id/OIP.hjEu2V3As5q1pr7ZJ3CtnQHaJT?pid=ImgDet&rs=1"} className="d-block" alt="Not found"/>
+                        :<>
+                            <img src={"https://th.bing.com/th/id/OIP.hjEu2V3As5q1pr7ZJ3CtnQHaJT?pid=ImgDet&rs=1"} className="d-block" alt="Not found"/>
+                        </>
+                        }          
+                    </div>
+                    )):<div></div>}
+                </div>
+            </div>
+            </div>: ""}
         </>
     )
 }

@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt')
-const asyncHandler = require('express-async-handler')
+const asyncHandler = require('express-async-handler');
+const Users = require('../models/User');
 
 
 // @desc Get all users
@@ -49,7 +50,7 @@ const getUser = asyncHandler(async (req, res) => {
     
     }
     // Get all users from MongoDB
-    res.json(users)
+    return res.json(users)
     
 })
 const createUser = asyncHandler(async (req, res) => {
@@ -76,9 +77,9 @@ const createUser = asyncHandler(async (req, res) => {
     const user = await User.create(userObject)
 
     if (user) { //created 
-        res.status(201).json({ message: `New user ${username} created` })
+        return res.status(201).json({ message: `New user ${username} created` })
     } else {
-        res.status(400).json({ message: 'Invalid user data received' })
+        return res.status(400).json({ message: 'Invalid user data received' })
     }
 })
 // @desc Update a user
@@ -86,25 +87,27 @@ const createUser = asyncHandler(async (req, res) => {
 // @access Private
 const updateUser = asyncHandler(async (req, res) => {
     const {username,id}= req.params
+    console.log(username,id)
     var users = null
 
     const { password, isActive ,role,profile } = req.body
-
+    console.log(isActive, role)
     // Confirm data 
    
     const RolesFromToken = req.role
     const userFromToken = req.user
+    console.log(RolesFromToken,userFromToken)
     if(id){
-        users = await User.findById(id).lean()
+        users = await User.findByIdAndUpdate(id)
     }
     if(username){
-        users = await User.findOne({ username }).exec()
+        users = await User.findOne({ username })
     }
     if (!users) {
         return res.status(400).json({ message: 'User not found' })
     }
     var valid = false;
-    if(RolesFromToken == "admin" && RolesFromToken == "subAdmin")
+    if(RolesFromToken == "admin" || RolesFromToken == "sub-admin")
     {
         valid= true;
     }
@@ -118,24 +121,30 @@ const updateUser = asyncHandler(async (req, res) => {
     if(!valid) {
         return res.status(401).json({ message: 'Unauthorized' })
     }
+    console.log(users);
+    
     users.role= role
     if ( typeof isActive == 'boolean') {
         users.isActive = isActive
     }
-    users.profile.fullname = profile.fullname
-    users.profile.age = profile.age
-    users.profile.address = profile.age
-    users.profile.sex = profile.sex 
-    users.profile.email = profile.email
+    if(profile)
+    {
+        users.profile.fullname = profile.fullname
+        users.profile.age = profile.age
+        users.profile.address = profile.address
+        users.profile.sex = profile.sex 
+        users.profile.email = profile.email
+    }
+   
     
     if (password) {
         // Hash password 
         users.password = await bcrypt.hash(password, 10) // salt rounds 
     }
-
+    console.log(users);
     const updatedUser = await users.save()
 
-    res.json({ message: `${updatedUser.username} updated` })
+    return res.json({ message: `${updatedUser.username} updated` })
 })
 
 // @desc Delete a user
@@ -180,7 +189,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
     const reply = `Username ${result.username} with ID ${result._id} deleted`
 
-    res.json(reply)
+    return res.json(reply)
 })
 
 module.exports = {

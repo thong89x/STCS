@@ -24,7 +24,7 @@ const getAllRegistryForms = asyncHandler(async (req, res) => {
 const getRegistryFormsByPostID = asyncHandler(async (req, res) => {
 
     // Get all RegistryForms from MongoDB
-    const RegistryForms = await RegistryForm.find({postID:req.params.id})
+    const RegistryForms = await RegistryForm.find({postID:req.params.id}).sort({"createdAt":-1});
 
     // If no RegistryForms 
     if (!RegistryForms?.length) {
@@ -47,7 +47,7 @@ const getRegistryFormByUserName = asyncHandler(async (req, res) => {
     if (usernamefromToken != User.username){
         return res.status(400).json({ message: 'This Registry Form is not belong to you' })
     }
-    const RegistryForms = await RegistryForm.find({ userID:User._id}).exec()
+    const RegistryForms = await RegistryForm.find({ userID:User._id}).sort({"createdAt":-1});
 
     // If no RegistryForms 
     if (!RegistryForms?.length) {
@@ -95,6 +95,9 @@ const createRegistryForm = asyncHandler(async (req, res) => {
 
     if (!Post){
         return res.status(400).json({ message: 'Not found postID' })
+    }
+    if (Post.amountRegistry <= 0){
+        return res.status(400).json({ message: 'Sold out' })
     }
     // Confirm data
     if (!listAnswer?.length) {

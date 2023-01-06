@@ -1,42 +1,165 @@
- import React, { useState } from 'react'
- import { useDispatch, useSelector } from 'react-redux';
- import { useNavigate, useParams } from 'react-router-dom';
- import { updatePost} from 'features/posts/postSlice'
- export default function EditPost() {
-    const {id} = useParams();
-    const editPost = useSelector(state=>state.postList).find(x=> x.id===+id)
-    const [name,setName] = useState(editPost.name)
-    const [desc,setDesc] = useState(editPost.desc)
+import React, { useState } from 'react'
+import {useNavigate,useParams} from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { setCredentials } from 'features/auth/authSlice'
+import { useDispatch } from 'react-redux'
+import axios from 'axios'
+import "../styles/Post.css"
+import { Image,Segment } from 'semantic-ui-react';
+export default function EditPost() {
+    const [name,setName] = useState("")
+    const [desc,setDesc] = useState("")
+    const [type,setType] = useState("")
+    const [question, setQuestion] = useState("")
+    const [address, setAdress] = useState("")
+    const [price, setPrice] = useState("")
+    const [quantity, setQuantity] = useState("")
     const navigate = useNavigate();
     const dispatch = useDispatch()
-    const handleSubmit = (event) => {
-        const newPost = {
-            id: editPost.id,
-            name: name,
-            desc: desc,
-            imgUrl:editPost.imgUrl
-        }
-        const action = updatePost(newPost);
-        dispatch(action);
-        navigate('/posts')
+    const {token} = useSelector(state=> state.auth)
+    const {id} = useParams()
+    const {username} = useParams()
+    const handleSubmit = event =>{
+    event.preventDefault()  
+    const newPost = {
+        nameProduct: name,
+        describePost: desc,
+        address: address,
+        priceProduct: price,
+        amountRegistry: quantity,
+        typeProduct: type
     }
-   return (
-     <form onSubmit={handleSubmit}>
-        Edit Post {id}
-        <div className="form-group row">
-            <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Name</label>
-            <div className="col-sm-10">
-            <input type="text" className="form-control" id="staticEmail" value={name} onChange={(e)=>setName(e.target.value)}/>
+    const config = {
+        headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token? token: 'a'}`,
+        },
+        };
+        axios.defaults.withCredentials = true
+        axios.post('http://localhost:5000/posts/', newPost,config)
+        .then((response)=>{
+            console.log(response.data)
+            
+        }).catch((err)=>{
+        if (err?.response?.status == 403 ||err?.response?.status == 400  ){
+            console.log('sending request token')
+            axios.get('http://localhost:5000/auth/refresh',config).then((res)=>{
+            const accessToken = res.data
+     
+            dispatch(setCredentials(accessToken))
+            return accessToken
+            }).then((res)=>{
+             
+            config.headers.Authorization = `Bearer ${res.accessToken}`
+            axios.post('http://localhost:5000/posts/', newPost,config)
+            .then((response)=>{
+                console.log(response.data)
+            })
+            })
+            .catch((err)=>{
+            navigate('/login')
+            })
+        }
+    })
+    }
+    const navigateHome = () => 
+    {
+      navigate('/home');
+    };
+  return (
+    <>
+    <form onSubmit={handleSubmit}>
+        <Segment style = {{backgroundColor: "#A0B4F3"}} className = "outlineFrame">
+            <div as = 'h1' className = "text_themsanpham">
+                    THÊM 1 SẢN PHẨM MỚI
             </div>
-        </div>
-        <div className="form-group row">
-            <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Mô tả</label>
-            <div className="col-sm-10">
-            <input type="text" className="form-control" id="inputPassword" value={desc} onChange={(e)=>setDesc(e.target.value)}/>
+            <Segment>
+                <div as = 'h3' className = "text_thongtincoban">
+                        Thông tin cơ bản
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Tên sản phẩm</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="tensp" value={name} onChange={(e)=>setName(e.target.value)}  placeholder="Nhập tên sản phẩm"/>
+                    </div>
+                </div>
+                <br/>
+                {/* <div className="form-group row">
+                    <label htmlFor="productDescribe" className="col-sm-2 col-form-label">Mô tả sản phẩm</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="motasp" value={desc} onChange={(e)=>setDesc(e.target.value)} placeholder="Nhập mô tả sản phẩm"/>
+                    </div>
+                </div> */}
+                <div className="ui form">
+                    <div className="field">
+                        <label>Mô tả sản phẩm</label>
+                        <textarea placeholder='Vui lòng nhập mô tả sản phẩm' className="form-control" id="motasp" value={desc} onChange={(e)=>setDesc(e.target.value)}>
+                        </textarea>
+                    </div>
+                </div>
+                <br/>
+                <div className="form-group row">
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Địa chỉ người thêm sản phẩm</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="diachinguoiban" value={address} onChange={(e)=>setAdress(e.target.value)}  placeholder="Thêm địa chỉ người bán"/>
+                    </div>
+                </div>
+                <br/>
+                <div className="form-group row">
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Giá mặt hàng (Tối đa: 150.000VNĐ)</label>
+                    <div className="col-sm-10">
+                        <input type="number" className="form-control" id="giatien" maxlength="6" value={price} onChange={(e)=>setPrice(e.target.value)}  placeholder="Nhập số tiền (VNĐ)"/>
+                    </div>
+                </div>
+                <br/>
+                <div className="form-group row">
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Số lượng</label>
+                    <div className="col-sm-10">
+                        <input type="number" className="form-control" id="soluong" value={quantity} onChange={(e)=>setQuantity(e.target.value)}  placeholder="Nhập số lượng sản phẩm"/>
+                    </div>
+                </div>
+                <br/>
+                <div className="form-group row">
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Loại hàng hóa</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="loaihanghoa" value={type} onChange={(e)=>setType(e.target.value)}  placeholder="Nhập loại hàng hóa"/>
+                    </div>
+                </div>
+            </Segment>
+            <Segment>
+                <div as = 'h3' className = "text_thongtincoban">
+                        Quản lý hình ảnh
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="productImage" className="col-sm-2 col-form-label">Hình ảnh sản phẩm</label>
+                    <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size = 'small'/>
+                    <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size = 'small'/>
+                    <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size = 'small'/>
+                    <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size = 'small'/>
+                    <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size = 'small'/>
+                </div>
+            </Segment>
+            <Segment>
+                <div as = 'h3' className = "text_thongtincoban">
+                    Câu hỏi xác thực cho người mua/nhận 
+                </div>
+                <div className="form-group row">
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Nhập câu hỏi cho người nhận/mua</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="question" value={question} onChange={(e)=>setQuestion(e.target.value)}  placeholder="Vui lòng điền câu hỏi"/>
+                    </div>
+                </div>
+                <hr/>
+                <a className="ui red tag label">Thêm câu hỏi</a>
+            </Segment>
+            <div className="ui buttons">
+                <button className="ui button" onClick = {navigateHome}>Hủy</button>
+                <div className="or"></div>
+                <button className="ui positive button">Thêm sản phẩm </button>
             </div>
-        </div>
-        <button type="submit" className="btn btn-primary mb-2" >Confirm Edit</button>
+        </Segment>
+
     </form>
-   )
- }
- 
+    </>
+  )
+}

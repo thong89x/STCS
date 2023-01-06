@@ -1,9 +1,10 @@
 import React, { useState,useEffect,setCredentials,useRef } from 'react'
 import { Image,Segment} from 'semantic-ui-react';
 import { useDispatch,useSelector} from 'react-redux';
-import { useNavigate,useParams} from 'react-router-dom';
+import { Navigate, useNavigate,useParams} from 'react-router-dom';
 import axios from 'axios';
 import "../stylesUser/User.css"
+import useAuth from 'hooks/useAuth';
 export default function EditUser() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -13,14 +14,28 @@ export default function EditUser() {
   const [sex,setSex] = useState("")
   const [email,setEmail] = useState("")
   const {token} = useSelector(state=> state.auth)
-  const  inputName = useRef()
-  const  inputAge = useRef()
-  const  inputAdress = useRef()
-  const  inputSex = useRef()
-  const  inputEmail = useRef()
+
   const {username} = useParams()
+  const ower = useAuth().username
   useEffect(()=>{
-    
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      },
+    };
+  axios.get(`http://localhost:5000/users/v1/${username}`,config).then((res)=>{
+      console.log(res.data)
+      const user = res.data;
+      setFullname(user.profile.fullname)
+      setAge(user.profile.age)
+      setAdress(user.profile.address)
+      setSex(user.profile.sex)
+      setEmail(user.profile.email)
+      
+      return res.data;
+  }).catch((err)=>{
+      console.log(err)
+  })
   },[])
   const handleSubmit = event =>{
     event.preventDefault()  
@@ -44,6 +59,7 @@ export default function EditUser() {
     axios.patch('http://localhost:5000/users/v1/' + username,newInfo,config)
     .then((response)=>{
         console.log(response.data)
+        navigate(-1);
     }).catch((err)=>{
       if (err?.response?.status == 403 ||err?.response?.status == 400  ){
         console.log('sending request token')
@@ -56,6 +72,7 @@ export default function EditUser() {
           axios.patch('http://localhost:5000/users/v1/' + username,newInfo,config)
           .then((response)=>{
               console.log(response.data)
+              navigate(-1);
           })
         })
         .catch((err)=>{
@@ -64,59 +81,62 @@ export default function EditUser() {
       }
     })
   }
+
+  const handleClickCancel = () => navigate(-1)
+
   return (
     <>
-    <div style = {{backgroundColor: "#DDE4F5"}} className = 'backGroundPage'>
-    <br/>
-    <Image middle={'true'} src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular/>
-    
-    <span className = "text_header"> {username}   </span>
+    {ower==username?
+    <div  className = 'backGroundPage' style = {{backgroundColor: "#DDE4F5"}}>
+      <div className='row d-flex flex-row justify-content-center'>
+        <br/>
+        <Image middle={'true'} src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular/>
+        <br/>
+        <span className = "text_header"> {username}   </span>
+      </div>
+      <br/>
+      <div className='justify-content-center'>
       <Segment style = {{backgroundColor: "#A0B4F3"}} className = "infoBoxEditUser">
-            <div as = 'h1' className = "text_header">
+            <div as = 'h2' className = "text_header mb-3">
                     CHỈNH SỬA THÔNG TIN CÁ NHÂN
             </div>
-            <Segment >
-                <div className="form-group row">
-                    <label htmlFor="productName" className="col-sm-2 col-form-label">Họ tên</label>
-                    <div className="col-sm-10">
-                        <input ref = {inputName} type="text" className="form-control" id="hotenUser" value={fullname} onChange={(e)=>setFullname(e.target.value)}/>
-                    </div>
+            <div>
+            <Segment>
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Họ và tên</span>
+                  <input type="text" className="form-control" id="hotenUser" value={fullname} onChange={(e)=>setFullname(e.target.value)}/>
                 </div>
-                <br/>
-                <div className="form-group row">
-                    <label htmlFor="productName" className="col-sm-2 col-form-label">Số tuổi</label>
-                    <div className="col-sm-10">
-                        <input  ref = {inputAge} type="number" min = '6' max = '100' className="form-control" id="age" name="age" required value={age} onChange={(e)=>setAge(e.target.value)}/>
-                    </div>
+
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Tuổi</span>
+                  <input type="number" min = '6' max = '100' className="form-control" id="age" name="age" required value={age} onChange={(e)=>setAge(e.target.value)}/>
                 </div>
-                <br/>
-                <div className="form-group row">
-                    <label htmlFor="productName" className="col-sm-2 col-form-label">Giới tính</label>
-                    <div className="col-sm-10">
-                        <input  ref = {inputSex} type="text" className="form-control" id="gioiTinhUser" value={sex} onChange={(e)=>setSex(e.target.value)}/>
-                    </div>
+
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Giới tính</span>
+                  <input type="text" className="form-control" id="gioiTinhUser" value={sex} onChange={(e)=>setSex(e.target.value)}/>
                 </div>
-                <br/>
-                <div className="form-group row">
-                    <label htmlFor="productName" className="col-sm-2 col-form-label">Địa chỉ</label>
-                    <div className="col-sm-10">
-                        <input  ref = {inputAdress} type="email" className="form-control" id="hotenUser" value={address} onChange={(e)=>setAdress(e.target.value)}/>
-                    </div>
+
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Địa chỉ</span>
+                  <input type="email" className="form-control" id="hotenUser" value={address} onChange={(e)=>setAdress(e.target.value)}/>
                 </div>
-                <br/>
-                <div className="form-group row">
-                    <label htmlFor="productName" className="col-sm-2 col-form-label">Email</label>
-                    <div className="col-sm-10">
-                        <input  ref = {inputEmail} type="email" className="form-control" pattern=".+@globex\.com" id="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="group8@example.com"/>
-                    </div>
+
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Email</span>
+                  <input type="email" className="form-control" pattern=".+@globex\.com" id="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="group8@example.com"/>
                 </div>
-                <br/>
-                <div className="text_header">
-                    <button className="ui positive button" onClick={handleSubmit}> Lưu chỉnh sửa </button>
+
+                <div className="btnn row">
+                    <button type="submit" className="btn btn-success" onClick={handleSubmit}>Lưu chỉnh sửa</button>
+                    <button type="submit" className="btn btn-danger" onClick={handleClickCancel}>Hủy</button>
                 </div>
             </Segment>
+            </div>
+            
         </Segment>
-    </div>
+        </div>
+    </div>:<Navigate to="/home" replace />}
     </>
   )
 }

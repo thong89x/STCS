@@ -15,7 +15,6 @@ export default function About() {
             <li> Trần Minh Trường   - MSSV: 20127656</li>
         </ol>
         </Segment>
-        
         }
         </>
     )

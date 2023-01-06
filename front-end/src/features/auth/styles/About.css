@@ -13,6 +13,7 @@
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
 .infoBoxEditUser {
     position: flex;
     width: 550px;

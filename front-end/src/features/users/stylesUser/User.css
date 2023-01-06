@@ -1,4 +1,3 @@
-
 .backGroundPage{
     background-color: "#DDE4F5";
     height: 110%;
@@ -8,25 +7,25 @@
     height: 125px;
     position: flex;
     left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
 }
 .infoBoxEditUser {
-    position: flex;
-    width: 550px;
-    height: 435px;
-    left: 500px;
-    top: -10px;
+    width: max-content;
+    left: 50%
 }
 #centerText{
     text-align: center;
 }
 #centerButton{
     margin: 0;
+    margin-bottom: 50px;
     position: absolute;
+    height: 20px;
+    top: 550px;
     left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -250%);
+    -ms-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
 }
 .cameraIcon{
     left: 145px;
@@ -39,7 +38,7 @@
     right: 68.61%;
     bottom: 1960px;
 
-    font-family: 'Inter';
+    font-family: 'Helvetica';   
     font-style: normal;
     font-weight: 500;
     font-size: 32px;
@@ -68,4 +67,27 @@
 
 .shade {
     color: '#C4C4C4'
+}
+.posts {
+    background-color: whitesmoke;
+    border: 1px solid black;
+    width: 100%;
+    height: 50vh;
+}
+.posts>img{
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+}
+.ColPost{
+    padding: 0px 30%;
+}
+.action {
+    font-size: 2rem;
+}
+.describe {
+    padding: 0px 1rem;
+}
+.userHomePage {
+    background-image: linear-gradient(#2DCDDF, rgb(227, 93, 248) );
 }

@@ -7,6 +7,7 @@ import Post from './components/Post'
 import PostLayout from './components/PostLayout'
 import PostList from './components/PostList'
 import Order from 'features/registryOrder/Order'
+import GetRegistryofPost from 'features/registryOrder/GetRegistryofPost'
 
 export default function Posts() {
   return (
@@ -15,8 +16,9 @@ export default function Posts() {
             <Route index element={<PostList/>}/>
             <Route path='add' element={<NewPost/>}/>
             <Route path=':id' element={<ViewPost/>}/>
-            <Route path="order/:id" element={<Order/>}/>
+            <Route path="order/:id" element={<GetRegistryofPost/>}/>
             <Route path='edit/:id' element={<EditPost/>}/>
+            
         </Route>
     </Routes>
   )
