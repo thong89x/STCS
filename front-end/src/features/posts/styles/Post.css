@@ -1,10 +1,10 @@
 .outlineFrame {
     box-sizing: border-box;
-    position: absolute;
-    height: 1350px;
-    left: 0;
-    right: 10.21%;
-
+    position: flex;
+    height: fit-content;
+    margin-inline: 5%;
+    padding-inline: 1%;
+    margin-left: 200px;
     background: -webkit-linear-gradient(to bottom,#A0B4F3, #9EFCF6);
     background: linear-gradient(to bottom,#A0B4F3, #9EFCF6);
     border-radius: 25px;
@@ -24,7 +24,7 @@
     left: 13.47%;
     right: 68.61%;
     bottom: 1960px;
-
+    padding-top: 10px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;

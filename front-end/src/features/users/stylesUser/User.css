@@ -5,8 +5,9 @@
 .infoBox {
     width: 550px;
     height: 125px;
-    position: flex;
+    position: flex; 
     left: 50%;
+    padding-top: 50px;
     -ms-transform: translate(-50%, 0%);
     transform: translate(-50%, 0%);
 }
