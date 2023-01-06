@@ -78,7 +78,7 @@ export default function NewPost() {
       navigate('/home');
     };
   return (<>
-        <div className = "outlineFrame">
+        <div className = "outlineFrame_">
             <div as = 'h1' className = "text_themsanpham">
                     THÊM 1 SẢN PHẨM MỚI
             </div>
@@ -115,7 +115,7 @@ export default function NewPost() {
                 <div className="form-group row">
                     <label htmlFor="productName" className="col-sm-2 col-form-label">Giá mặt hàng (Tối đa: 150.000VNĐ)</label>
                     <div className="col-sm-10">
-                        <input required type="number" className="form-control" id="giatien" maxlength="6" value={price} onChange={(e)=>setPrice(e.target.value)}  placeholder="Nhập số tiền (VNĐ)"/>
+                        <input required type="number" min='0' max='150000' className="form-control" id="giatien" maxlength="6" value={price} onChange={(e)=>setPrice(e.target.value)}  placeholder="Nhập số tiền (VNĐ)"/>
                     </div>
                 </div>
                 <br/>
