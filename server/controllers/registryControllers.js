@@ -91,7 +91,7 @@ const createRegistryForm = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'Not found username' })
     }
 
-    const Post = await Posts.findById(postID).exec()
+    const Post = await Posts.findByIdAndUpdate(postID).exec()
 
     if (!Post){
         return res.status(400).json({ message: 'Not found postID' })
@@ -103,16 +103,19 @@ const createRegistryForm = asyncHandler(async (req, res) => {
     if (!listAnswer?.length) {
         return res.status(400).json({ message: 'Status of Registry Form and Answer are required' })
     }
-   
+    
     var RegistryFormObject = { userID:User[0]._id, statusRegForm, listAnswer, postID }
 
     // Create and store new Post 
     const RegistryForms = await RegistryForm.create(RegistryFormObject)
 
+
     if (RegistryForms) { //created 
-        res.status(201).json({ message: `New RegistryForm ${RegistryForms._id} created` })
+        Post.amountRegistry = Post.amountRegistry - 1;
+        Post.save()
+        return res.status(201).json({ message: `New RegistryForm ${RegistryForms._id} created` })
     } else {
-        res.status(400).json({ message: 'Invalid RegistryForm data received' })
+        return res.status(400).json({ message: 'Invalid RegistryForm data received' })
     }
 })
 // @desc Update a Post
