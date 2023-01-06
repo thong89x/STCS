@@ -21,16 +21,22 @@ import UsersList from 'features/users/components/userList';
 import ViewOrder from 'features/registryOrder/ViewOrder';
 import About from 'features/auth/About';
 import { useDispatch } from 'react-redux';
-import { getall } from 'features/posts/postSlice';
+import { getall, getAllPost } from 'features/posts/postSlice';
 import AdEditUser from 'features/admin/components/AdEditUser';
 import AdminRouter from "./features/admin/adminRouter" 
 import RequireAuth from 'features/auth/RequireAuth';
 import RegistryOwner from 'features/registryOrder/RegistryOwner';
 import GetRegistryofPost from 'features/registryOrder/GetRegistryofPost';
+import { getAllUser } from 'features/users/userSlice';
 
 const Posts = React.lazy(()=> import('./features/posts/Posts') )
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(getAllPost(""))
+    dispatch(getAllUser())
+  },[])
   const { username, role } = useAuth()
   return (
     <div className="containerWeb">
@@ -51,7 +57,6 @@ function App() {
           <Route path='/info' element={<About/>} />
           
           {/* Users */}
-          <Route path="/user/:username/Order" element={<RegistryOwner/>}/>
       
           <Route path="/order/:id" element={<Order/>}/>
 
@@ -62,7 +67,6 @@ function App() {
           <Route path='/report' element={<AdEditUser/>} />
           <Route path="/users/*" element={<UserRouter/>}/>
           <Route path='/posts/*' element={<Posts/>} />
-
           <Route path="/showall" element={<ShowAll/>}/>
           <Route path="/mostsearched" element={<MostSearched/>}/>
 

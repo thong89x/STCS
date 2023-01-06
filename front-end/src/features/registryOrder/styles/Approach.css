@@ -11,8 +11,9 @@
     width: 250px;
     block-size: 250px;
     background-color: #F2DEBA;
-    margin-top: 50px;
-    margin-left: 100px;
+    margin-top: 75px;
+    margin-left: 32%;
+    margin-bottom: 75px;
     text-align: center;
     border-radius: 15px;
     font-size: 20px;
@@ -28,4 +29,8 @@
 
 .Duyet{
     column-count: 2;
+}
+
+.column{
+    column-count: 1;
 }

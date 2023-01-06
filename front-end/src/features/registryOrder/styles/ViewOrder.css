@@ -58,3 +58,19 @@
     border:2px solid #33738f;
     
 }
+.Pending{
+    
+}
+
+.Refused{
+    background-color: red;
+}
+.Accepted{
+    background-color: greenyellow;
+}
+.Cancelled{
+    background-color: orange;
+}
+.Done{
+
+}

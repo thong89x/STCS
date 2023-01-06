@@ -53,7 +53,7 @@ const createComment = asyncHandler(async (req, res) => {
     console.log("has req")
     const {  postID, starRatings, cmtContent } = req.body
     //const username = req.user
-   // const username = "ThongVo"
+   const username = "DungBui"
     const User = await Users.find({ username:username}).exec()
     if(User.length == 0){
         return res.status(400).json({ message: 'Not found username' })
