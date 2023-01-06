@@ -42,7 +42,8 @@ export default function Order() {
     axios.defaults.withCredentials = true
     axios.post('http://localhost:5000/registrys',newRegistry,config)
     .then((response)=>{
-        setUsersList(()=> response.data)
+        alert("Create Success")
+        navigate(-1)
     }).catch((err)=>{
       if (err?.response?.status == 403 ||err?.response?.status == 400  ){
         console.log('sending request token')
@@ -55,7 +56,8 @@ export default function Order() {
           config.headers.Authorization = `Bearer ${res.accessToken}`
           axios.get('http://localhost:5000/users/v2',config)
           .then((response)=>{
-              setUsersList(()=> response.data)
+            alert("Create Success")
+            navigate(-1)
           })
         })
         .catch((err)=>{

@@ -5,6 +5,7 @@ export const getAllUser = createAsyncThunk(
     "alluser", 
     async () => {
       try {
+        console.log("hi")
         const config = {
           headers: {
             "Content-Type": "application/json"
@@ -47,6 +48,7 @@ const userSlice = createSlice({
           let listUserofObject = []
           const list= action.payload;
           list.forEach((order)=>{ 
+            console.log(state.alllist)
             return listUserofObject.push(state.alllist.find(user=>user._id==order.userID))
           })
           return {...state,listUserofObject:listUserofObject}
