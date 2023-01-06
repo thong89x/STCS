@@ -33,7 +33,7 @@ export default function UserHome() {
             console.log(err)
         })
         dispatch(findPostByUserName(username))
-    },[])
+    },[username])
     const middle = true
     return (
         <>

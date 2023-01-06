@@ -82,5 +82,7 @@
     padding: 0px 1rem;
 }
 .userHomePage {
-    background-image: linear-gradient(#2DCDDF, rgb(227, 93, 248) );
+    /* background-image: linear-gradient(#2DCDDF, rgb(227, 93, 248) ); */
+    background-color: #d1e0f7;
+    min-height: 100vh;
 }
