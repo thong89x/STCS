@@ -10,9 +10,9 @@ const Users = require('../models/User');
 const getAllUsers = asyncHandler(async (req, res) => {
   
     // Get all users from MongoDB
-    if (req.role != "admin" && req.role != "subAdmin"){
-        return res.status(400).json({ message: 'Cant access' })
-    }
+    // if (req.role != "admin" && req.role != "subAdmin"){
+    //     return res.status(400).json({ message: 'Cant access' })
+    // }
     const users = await User.find().select('-password').lean()
 
     // If no users 

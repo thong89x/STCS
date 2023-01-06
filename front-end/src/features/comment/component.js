@@ -15,7 +15,7 @@ export default function Comments() {
         "Content-Type": "application/json"
       },
     };
-  axios.get(`http://localhost:5000/post/:id/comment`,config).then((res)=>{
+  axios.get(`http://localhost:5000/posts/:id/comment`,config).then((res)=>{
       console.log(res.data)
       const comment = res.data;
       

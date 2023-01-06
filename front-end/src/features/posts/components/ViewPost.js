@@ -33,7 +33,6 @@ export default function ViewPost() {
         setPrice(postData.priceProduct)
         setQuantity(postData.amountRegistry)
 
-        setValid(true)
         return res.data.userID
       }).then((userID)=>{
         const config = {

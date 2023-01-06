@@ -22,9 +22,9 @@ function Navbar(props){
 
   const componentDidMount = (props) => {  
     if(role === "viewer"){
-      return "/login"
+      return "/home"
     }
-    return props
+    return props+"/"+username
   }
   const handleLogout = () => {
     dispatch(logOut())
@@ -48,7 +48,7 @@ function Navbar(props){
         </div>
         <input ref={searchRef} type="text" placeholder='Search...'/>
       </div>
-      <NavLink to ={componentDidMount("/order")} className='myOrder'>
+      <NavLink to ={componentDidMount("users/order")} className='myOrder'>
         <RiBillLine className='iconBill'/> 
         My Orders
       </NavLink>

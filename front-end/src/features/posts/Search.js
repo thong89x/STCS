@@ -4,27 +4,30 @@ import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import '../posts/styles/Search.css'
 import PostList from './components/PostList';
-import { filterPost, searchPost } from './postSlice';
+import { filterPost, getAllPost, searchName } from './postSlice';
+import { findUserbyObject } from 'features/users/userSlice';
 export default function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
   const name = searchParams.get("name")
-  const ls = useSelector(state=> state.postList.list)
   const postlist = useSelector(state=> state.postList.listFilter)
-  console.log(searchParams.get("typeorder"))
+  console.log(postlist)
   const dispatch = useDispatch();
+  const userlist = useSelector(state=>state.userList.listUserofObject) 
+  console.log(userlist)
   useEffect(()=>{
-    dispatch(searchPost(name?name:" "))
-  },[])
+    dispatch(searchName(name))
+    dispatch(findUserbyObject(postlist))
+  },[name])
   const handleFilter = ()=>{
     dispatch(filterPost("Book"))
   }
   const handleRefresh= ()=>{
     dispatch(filterPost(""))
   }
-
+  
   return (
     <div className='searchContainer'>
-        <h2 className=''>Browse {postlist.length} results for "{searchParams.get("typeorder")}"</h2>
+        <h2 className=''>Browse {postlist?.length} results for "{name}"</h2>
         {postlist?<PostList postList={postlist}/>:<></>}
         <button onClick={handleFilter}>filter</button>
         <button onClick={handleRefresh}>filter</button>

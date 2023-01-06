@@ -5,11 +5,13 @@ import UserHome from './components/userHome'
 import {Routes,Route, Navigate, Link, useSearchParams, useParams } from 'react-router-dom'
 import UsersList from './components/userList'
 import axios from 'axios'
+import RegistryOwner from 'features/registryOrder/RegistryOwner'
 export default function UserRouter() {
   
   return (
     <Routes>
       <Route element={<UserLayout/>}>
+        <Route path="/order/:username" element={<RegistryOwner/>}/>
         <Route path="/:username" element={<UserHome/>} />
         <Route path="/edit/:username" element={<EditUser/>} />
       </Route>

@@ -20,7 +20,7 @@ const getAllPosts = asyncHandler(async (req, res) => {
 const getPostByID = asyncHandler(async (req, res) => {
 
     // Get all Posts from MongoDB
-    const Posts = await Post.findById(req.params.id).select('-password').lean()
+    const Posts = await Post.findById(req.params.id).select('-password')
 
     // If no Posts 
     if (!Posts) {

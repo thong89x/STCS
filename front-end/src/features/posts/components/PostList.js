@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 export default function PostList(props) {
     const navigate = useNavigate()
    const postList = props.postList
-   console.log(postList)
   return (
     <div className='row d-flex flex-wrap justify-content-between'>
         {postList?postList.map((post) => (

@@ -7,7 +7,7 @@ const verifyJWT = require('../middleware/verifyJWT')
 //router.use(verifyJWT)
 
 router.route('/v2')
-.get(verifyJWT, usersController.getAllUsers)
+.get(usersController.getAllUsers)
 .post(usersController.createUser)
 router.route('/v2/:id')
 .get(usersController.getUser)
