@@ -37,11 +37,11 @@ export default function Comments(props) {
   return (
     <div>
         {
-        listComment.map((comment) => { 
+        listComment.map((comment,index) => { 
           return (
           <div className='row'>
             <div>
-              <div className='nameuser col'>{comment.userID}</div>
+              <div className='nameuser col'>{userlist[index].username}</div>
               <span className='ratee col' id ="orangeText">{comment.starRatings}/5</span>
               <Rater coloer total={5} rating={comment.starRatings} interactive={false}/>
             </div>
