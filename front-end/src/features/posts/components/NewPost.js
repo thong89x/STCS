@@ -75,9 +75,7 @@ export default function NewPost() {
     {
       navigate('/home');
     };
-  return (
-    <>
-    <form onSubmit={handleSubmit}>
+  return (<>
         <div className = "outlineFrame">
             <div as = 'h1' className = "text_themsanpham">
                     THÊM 1 SẢN PHẨM MỚI
