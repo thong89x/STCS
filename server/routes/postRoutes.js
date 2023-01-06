@@ -9,6 +9,8 @@ router.route('/:id/registrys')
 .get(verifyJWT, registryController.getRegistryFormsByPostID)
 
 // router.use(verifyJWT)
+router.route('/:id/comment')
+.get(commentController.getCommentByPostID)
 router.route('/search')
 .get(postController.searchProduct)
 router.route('/')

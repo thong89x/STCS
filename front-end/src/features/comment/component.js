@@ -3,11 +3,16 @@ import useAuth from 'hooks/useAuth'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import './component.css'
+import 'react-rater/lib/react-rater.css'
+import Rater from 'react-rater'
 
 
-export default function Comments() {
+export default function Comments(props) {
   const [nameUser,setNameUser] = useState()
-  const [content,setContent] = useState()
+  const [listComment,setListComment] = useState([])
+  const id = props.id
+
+
 
   useEffect(()=>{
     const config = {
@@ -15,30 +20,34 @@ export default function Comments() {
         "Content-Type": "application/json"
       },
     };
-  axios.get(`http://localhost:5000/posts/:id/comment`,config).then((res)=>{
+  axios.get(`http://localhost:5000/postss/${id}/comment`,config).then((res)=>{
       console.log(res.data)
-      const comment = res.data;
-      
-      setContent(comment.cmtContent)
+      setListComment(res.data)
 
-
-      
       return res.data;
+      
   }).catch((err)=>{
       console.log(err)
   })
   },[])
 
-  
 
   return (
     <div>
-        <div>
-          <div className='nameuser'>
-              tesstttt
+        {
+        listComment.map((comment) => { 
+          return (
+          <div className='row'>
+            <div>
+              <div className='nameuser col'>{comment.userID}</div>
+              <span className='ratee col' id ="orangeText">{comment.starRatings}/5</span>
+              <Rater coloer total={5} rating={comment.starRatings} interactive={false}/>
+            </div>
+            <div className='cmt'>{comment.cmtContent}</div>
           </div>
-          <div className='cmt'>{content}</div>
-        </div>
+          )
+        })
+        }
     </div>
   )
 }
