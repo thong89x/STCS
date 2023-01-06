@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useRef } from 'react'
-import { useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 //import './styles/Order.css'
 import { useDispatch,useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
@@ -15,42 +15,49 @@ import "../registryOrder/styles/Approach.css"
 export default function GetRegistryofPost() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-    const {id} = useParams()
-    const [listRegistry,setlistRegistry] = useState([])
-    const {token} = useSelector(state=> state.auth)
-    useEffect(  ()=>{
-    // axios.post(`http://local`)
-    const config = {
-      headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token? token: 'a'}`,
-      },
-    };
-    axios.defaults.withCredentials = true
-    axios.get(`http://localhost:5000/posts/${id}/registrys`, config)
-    .then((response)=>{
-        console.log(response.data)
-        setlistRegistry(()=> response.data)
-    }).catch((err)=>{
-      if (err?.response?.status == 403 ||err?.response?.status == 400  ){
-        console.log('sending request token')
-        axios.get('http://localhost:5000/auth/refresh',config).then((res)=>{
-          const accessToken = res.data
-          dispatch(setCredentials(accessToken))
-          return accessToken
-        }).then((res)=>{
-            config.headers.Authorization = `Bearer ${res.accessToken} `
-            axios.get(`http://localhost:5000/posts/${id}/registrys`, config)
-        .then((response)=>{
-        console.log(response.data)
-        setlistRegistry(()=> response.data)
-    })
-        })
-        .catch((err)=>{
-          navigate('/login')
-        })
-      }
-    })
+  const {id} = useParams()
+  const [listRegistry,setlistRegistry] = useState([])
+  const {token} = useSelector(state=> state.auth)
+
+  const handleonClickView = (id_element) => {
+      navigate("/vieworder/"+id_element)
+  }
+  const handleonClickApproach = () => {
+
+  }
+  useEffect(  ()=>{
+  // axios.post(`http://local`)
+  const config = {
+    headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token? token: 'a'}`,
+    },
+  };
+  axios.defaults.withCredentials = true
+  axios.get(`http://localhost:5000/posts/${id}/registrys`, config)
+  .then((response)=>{
+      console.log(response.data)
+      setlistRegistry(()=> response.data)
+  }).catch((err)=>{
+    if (err?.response?.status == 403 ||err?.response?.status == 400  ){
+      console.log('sending request token')
+      axios.get('http://localhost:5000/auth/refresh',config).then((res)=>{
+        const accessToken = res.data
+        dispatch(setCredentials(accessToken))
+        return accessToken
+      }).then((res)=>{
+          config.headers.Authorization = `Bearer ${res.accessToken} `
+          axios.get(`http://localhost:5000/posts/${id}/registrys`, config)
+      .then((response)=>{
+      console.log(response.data)
+      setlistRegistry(()=> response.data)
+  })
+      })
+      .catch((err)=>{
+        navigate('/login')
+      })
+    }
+  })
 },[])
   return (
     <div >
@@ -62,10 +69,15 @@ export default function GetRegistryofPost() {
         return <div className='col-6'>
             <div className='form'>
               {element.listAnswer[0]}
+              <div className='Duyet'>
+                <button onClick={handleonClickApproach}>Duyệt</button>
+                <button onClick={handleonClickView(element._id)}>Xem</button>
+              </div>
             </div> 
           </div>
       }
       )}
+      
       </div>
         
       {/* 

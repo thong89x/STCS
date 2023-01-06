@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    height: auto;
+    min-height: 100vh;
 }
 .homeContainer .subhomeContainer{
     width: 70%;
