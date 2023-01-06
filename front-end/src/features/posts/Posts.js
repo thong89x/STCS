@@ -18,7 +18,6 @@ export default function Posts() {
             <Route path=':id' element={<ViewPost/>}/>
             <Route path="order/:id" element={<GetRegistryofPost/>}/>
             <Route path='edit/:id' element={<EditPost/>}/>
-            
         </Route>
     </Routes>
   )

@@ -27,11 +27,7 @@ export default function GetRegistryofPost() {
       },
     };
     axios.defaults.withCredentials = true
-<<<<<<< HEAD
     axios.get(`http://localhost:5000/posts/${id}/registrys`, config)
-=======
-    axios.get('http://localhost:5000/posts/63a46d388c116e3020499662/registrys',config)
->>>>>>> 9cfcbfd137ac4e60ea640939a9461500436baff1
     .then((response)=>{
         console.log(response.data)
         setlistRegistry(()=> response.data)
@@ -44,11 +40,7 @@ export default function GetRegistryofPost() {
           return accessToken
         }).then((res)=>{
             config.headers.Authorization = `Bearer ${res.accessToken} `
-<<<<<<< HEAD
             axios.get(`http://localhost:5000/posts/${id}/registrys`, config)
-=======
-            axios.get('http://localhost:5000/posts/63a46d388c116e3020499662/registrys',config)
->>>>>>> 9cfcbfd137ac4e60ea640939a9461500436baff1
         .then((response)=>{
         console.log(response.data)
         setlistRegistry(()=> response.data)

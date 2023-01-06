@@ -1,7 +1,7 @@
 import React, { Component, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import './styles/navbar.css';
-import LogoGroup from '../assets/Logo.png'
+import LogoGroup from '../assets/images/logo.png'
 import {BsSearch} from 'react-icons/bs'
 import {RiBillLine} from 'react-icons/ri'
 import {IoIosInformationCircleOutline} from 'react-icons/io'

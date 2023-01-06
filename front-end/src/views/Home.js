@@ -26,9 +26,9 @@ export default function Home() {
       return props
     }
 
-    // useEffect(()=>{
-    //   dispatch(getAllPost(""))
-    // },[])
+    useEffect(()=>{
+      dispatch(getAllPost(""))
+    },[])
   return (  
     <div className='homeContainer'>
       <div  className='subhomeContainer'>
