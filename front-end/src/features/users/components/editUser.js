@@ -120,12 +120,12 @@ export default function EditUser() {
 
                   <div className="input-group mb-3">
                     <span className="input-group-text">Address</span>
-                    <input required type="email" className="form-control" id="hotenUser" value={address} onChange={(e)=>setAdress(e.target.value)}/>
+                    <input required type="text" className="form-control" id="hotenUser" value={address} onChange={(e)=>setAdress(e.target.value)}/>
                   </div>
 
                   <div className="input-group mb-3">
                     <span className="input-group-text">Email</span>
-                    <input required type="email" className="form-control" pattern=".+@globex\.com" id="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="group8@example.com"/>
+                    <input required type="email" className="form-control" pattern=".+@gmail\.com" id="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="group8@example.com"/>
                   </div>
 
                   <div className="btnn row">
