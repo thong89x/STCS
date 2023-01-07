@@ -61,7 +61,10 @@ export default function ViewPost() {
           
           <div className = "img-display">
             <div className = "img-showcase">
-              <Image src ={post.imageURL[0]?post.imageURL[0]: "https://react.semantic-ui.com/images/wireframe/square-image.png"} alt = "No Image"/>
+              <Image src ={post.imageURL[0]?post.imageURL[0]: "https://react.semantic-ui.com/images/wireframe/square-image.png"} onError={({currentTarget}) => {
+                currentTarget.onError = null;
+                currentTarget.src ='https://react.semantic-ui.com/images/wireframe/square-image.png'
+              }} alt = "No Image"/>
 
             </div>
           </div>
@@ -70,7 +73,10 @@ export default function ViewPost() {
             {post.imageURL.map((image,index)=>{
               return<div className = "img-item">
               <a href = "#" data-id = {index}>
-                <img src ={image?image: "https://react.semantic-ui.com/images/wireframe/square-image.png"}  alt = "shoe image"/>
+                <img src ={image?image: "https://react.semantic-ui.com/images/wireframe/square-image.png"} onError={({currentTarget}) => {
+                currentTarget.onError = null;
+                currentTarget.src ='https://react.semantic-ui.com/images/wireframe/square-image.png'
+              }} alt = "shoe image"/>
               </a>
             </div>
             })}
