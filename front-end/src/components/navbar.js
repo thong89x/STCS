@@ -66,9 +66,6 @@ function Navbar(props){
             <BsList className='iconList'/>
           </a>
           <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a className="dropdown-item" href="#">Action</a>
-            <a className="dropdown-item" href="#">Another action</a>
-            <a className="dropdown-item" href="#">Something else here</a>
             <a className="dropdown-item" href="#">Setting</a>
             <NavLink to ="/login" className="dropdown-item" onClick={handleLogout}>Log out</NavLink>
           </div>
