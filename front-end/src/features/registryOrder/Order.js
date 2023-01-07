@@ -25,7 +25,8 @@ export default function Order() {
 
   const postID = id;
   const {token} = useSelector(state=> state.auth)
-  const HandleSubmit = ()=>{
+  const HandleSubmit = (e)=>{
+    e.preventDefault();
     const listAnswer = [ques1Ref.current.value,ques2Ref.current.value,ques3Ref.current.value,ques4Ref.current.value,ques5Ref.current.value];
     const newRegistry = {
       listAnswer:listAnswer,
@@ -58,7 +59,12 @@ export default function Order() {
           .then((response)=>{
             alert("Create Success")
             navigate(-1)
+          }).catch((err)=>{
+            if(err?.response.data.message == "Sold out")
+              alert("Sold out")
+            else alert("Create fail")
           })
+
         })
         .catch((err)=>{
           alert("Create Fail")
@@ -68,26 +74,27 @@ export default function Order() {
     })
   }
   return (
-
-    <div className='order'>
-        <div className='box'>Form Registry Order</div>
-        <div className='background-input'>
-        <div className='input'>Why do you need the item?:</div>
-        <input ref={ques1Ref}className='input_text' placeholder='Enter your answer.'/>
-        <div className='input_double'>
-        <div className='input'>Do you need it right now?:</div>
-        <input ref={ques2Ref}className='input_text' placeholder='Enter your answer.'/>
-        <div className='input'>What is your degree?</div>
-        <input ref={ques3Ref}className='input_text' placeholder='Enter your answer.'/>
-        </div>
-        <div className='input'>New publisher of LOL video game?</div>
-        <input ref={ques4Ref}className='input_text' placeholder='Enter your answer.'/>
-        <div className='input'>Can you please rate 5 stars for my shop?</div>
-        <input ref={ques5Ref}className='input_text' placeholder='Enter your answer.'/>
-        <div className='space '/>
-        <button onClick={HandleSubmit} className='button'>Confirm</button>
-        </div>
-    </div>
+    <form onSubmit={(e)=>HandleSubmit(e)}>
+      <div className='order'>
+          <div className='box'>Form Registry Order</div>
+          <div className='background-input'>
+          <div className='input'>Why do you need the item?:</div>
+          <input required ref={ques1Ref}className='input_text' placeholder='Enter your answer.'/>
+          <div className='input_double'>
+          <div className='input'>Do you need it right now?:</div>
+          <input required ref={ques2Ref}className='input_text' placeholder='Enter your answer.'/>
+          <div className='input'>What is your degree?</div>
+          <input ref={ques3Ref}className='input_text' placeholder='Enter your answer.'/>
+          </div>
+          <div className='input'>New publisher of LOL video game?</div>
+          <input required ref={ques4Ref}className='input_text' placeholder='Enter your answer.'/>
+          <div className='input'>Can you please rate 5 stars for my shop?</div>
+          <input required ref={ques5Ref}className='input_text' placeholder='Enter your answer.'/>
+          <div className='space '/>
+          <button type='submit' className='button'>Confirm</button>
+          </div>
+      </div>
+    </form>
   )
 }
 

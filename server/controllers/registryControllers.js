@@ -103,6 +103,13 @@ const createRegistryForm = asyncHandler(async (req, res) => {
     if (!listAnswer?.length) {
         return res.status(400).json({ message: 'Status of Registry Form and Answer are required' })
     }
+    const list = await RegistryForm.find({postID:req.params.id,userID :User[0]._id}).sort({"createdAt":-1});
+    console.log(list)
+    // If no RegistryForms 
+    if (list.length>5) {
+        return res.status(400).json({ message: 'You over limit order' })
+    }
+
     
     var RegistryFormObject = { userID:User[0]._id, statusRegForm, listAnswer, postID }
 
