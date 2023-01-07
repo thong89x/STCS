@@ -96,45 +96,47 @@ export default function EditUser() {
       </div>
       <br/>
       <div className='justify-content-center'>
-      <Segment style = {{backgroundColor: "#A0B4F3"}} className = "infoBoxEditUser">
-            <div as = 'h2' className = "text_header mb-3">
-                    CHỈNH SỬA THÔNG TIN CÁ NHÂN
-            </div>
-            <div>
-            <Segment>
-                <div className="input-group mb-3">
-                  <span className="input-group-text">Họ và tên</span>
-                  <input type="text" className="form-control" id="hotenUser" value={fullname} onChange={(e)=>setFullname(e.target.value)}/>
-                </div>
+      <form  onSubmit={handleSubmit}>
+        <Segment style = {{backgroundColor: "#A0B4F3"}} className = "infoBoxEditUser">
+              <div as = 'h2' className = "text_header mb-3">
+                      EDIT PERSONAL INFORMATION
+              </div>
+              <div>
+              <Segment>
+                  <div className="input-group mb-3">
+                    <span className="input-group-text">Fullname</span>
+                    <input required type="text" className="form-control" id="hotenUser" value={fullname} minLength="10" maxLength="2000" onChange={(e)=>setFullname(e.target.value)}/>
+                  </div>
 
-                <div className="input-group mb-3">
-                  <span className="input-group-text">Tuổi</span>
-                  <input type="number" min = '6' max = '100' className="form-control" id="age" name="age" required value={age} onChange={(e)=>setAge(e.target.value)}/>
-                </div>
+                  <div className="input-group mb-3">
+                    <span className="input-group-text">Age</span>
+                    <input required type="number" min = '6' max = '100' className="form-control" id="age" name="age" value={age} onChange={(e)=>setAge(e.target.value)}/>
+                  </div>
 
-                <div className="input-group mb-3">
-                  <span className="input-group-text">Giới tính</span>
-                  <input type="text" className="form-control" id="gioiTinhUser" value={sex} onChange={(e)=>setSex(e.target.value)}/>
-                </div>
+                  <div className="input-group mb-3">
+                    <span className="input-group-text">Sex</span>
+                    <input required type="text" className="form-control" id="gioiTinhUser" value={sex} onChange={(e)=>setSex(e.target.value)}/>
+                  </div>
 
-                <div className="input-group mb-3">
-                  <span className="input-group-text">Địa chỉ</span>
-                  <input type="email" className="form-control" id="hotenUser" value={address} onChange={(e)=>setAdress(e.target.value)}/>
-                </div>
+                  <div className="input-group mb-3">
+                    <span className="input-group-text">Address</span>
+                    <input required type="email" className="form-control" id="hotenUser" value={address} onChange={(e)=>setAdress(e.target.value)}/>
+                  </div>
 
-                <div className="input-group mb-3">
-                  <span className="input-group-text">Email</span>
-                  <input type="email" className="form-control" pattern=".+@globex\.com" id="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="group8@example.com"/>
-                </div>
+                  <div className="input-group mb-3">
+                    <span className="input-group-text">Email</span>
+                    <input required type="email" className="form-control" pattern=".+@globex\.com" id="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="group8@example.com"/>
+                  </div>
 
-                <div className="btnn row">
-                    <button type="submit" className="btn btn-success" onClick={handleSubmit}>Lưu chỉnh sửa</button>
-                    <button type="submit" className="btn btn-danger" onClick={handleClickCancel}>Hủy</button>
-                </div>
-            </Segment>
-            </div>
-            
-        </Segment>
+                  <div className="btnn row">
+                      <button type="submit" className="btn btn-success">Save adjustment</button>
+                      <button className="btn btn-danger" onClick={handleClickCancel}>Hủy</button>
+                  </div>
+              </Segment>
+              </div>
+              
+          </Segment>
+        </form>
         </div>
     </div>:<Navigate to="/home" replace />}
     </>
