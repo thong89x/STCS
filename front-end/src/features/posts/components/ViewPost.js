@@ -6,6 +6,10 @@ import "../styles/ViewPost.css"
 import {Image,Segment, Grid } from 'semantic-ui-react';
 import axios from 'axios'
 import Comment from 'features/comment/component'
+const imgs = document.querySelectorAll('.img-select a');
+const imgBtns = [...imgs];
+let imgId = 1;
+
 export default function ViewPost() {
     const {id} = useParams()
     const [post,setPost] = useState()
@@ -65,7 +69,7 @@ export default function ViewPost() {
                 currentTarget.onError = null;
                 currentTarget.src ='https://react.semantic-ui.com/images/wireframe/square-image.png'
               }} alt = "No Image"/>
-
+              
             </div>
           </div>
           
@@ -105,7 +109,7 @@ export default function ViewPost() {
           </div>
           <br/>
           <i className="big tag icon"></i>
-          <span id ="priceNum"> {price} </span>
+          <span id ="priceNum"> {price} VNĐ</span>
           
           <Segment>
             <Image onClick={()=>{navigate(`/users/${username}`)}} src='https://react.semantic-ui.com/images/wireframe/square-image.png' verticalAlign='top' size='tiny' circular></Image>

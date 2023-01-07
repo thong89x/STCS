@@ -102,7 +102,7 @@ export default function NewPost() {
                 </div> */}
                 <div className="field">
                     <label>Description</label>
-                    <textarea placeholder='Vui lòng nhập mô tả sản phẩm' className="form-control" id="motasp" value={desc} onChange={(e)=>setDesc(e.target.value)}>
+                    <textarea placeholder="Please Enter product's Description" className="form-control" id="motasp" value={desc} onChange={(e)=>setDesc(e.target.value)}>
                     </textarea>
                 </div>
                 <br/>
