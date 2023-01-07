@@ -81,9 +81,15 @@ export default function UserHome() {
                             {post.describePost}
                         </div>
                         {post.imageURL?
-                        <img src={post.imageURL[0]?post.imageURL[0]:"https://react.semantic-ui.com/images/wireframe/square-image.png"} className="d-block" alt="Not found"/>
+                        <img src={post.imageURL[0]?post.imageURL[0]:"https://react.semantic-ui.com/images/wireframe/square-image.png"} className="d-block" onError={({currentTarget}) => {
+                            currentTarget.onError = null;
+                            currentTarget.src ='https://react.semantic-ui.com/images/wireframe/square-image.png'
+                          }} alt="Not found"/>
                         :<>
-                            <img src={"https://react.semantic-ui.com/images/wireframe/square-image.png"} className="d-block" alt="Not found"/>
+                            <img src={"https://react.semantic-ui.com/images/wireframe/square-image.png"} className="d-block" onError={({currentTarget}) => {
+                                currentTarget.onError = null;
+                                currentTarget.src ='https://react.semantic-ui.com/images/wireframe/square-image.png'
+                            }} alt="Not found"/>
                         </>
                         }          
                     </div>

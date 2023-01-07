@@ -10,7 +10,7 @@ import { Button,Image,Segment,Form, TextArea } from 'semantic-ui-react';
 export default function NewPost() {
     const [name,setName] = useState("")
     const [desc,setDesc] = useState("")
-    const [type,setType] = useState("")
+    const [type,setType] = useState("books")
     const [question, setQuestion] = useState("")
     const [address, setAdress] = useState("")
     const [price, setPrice] = useState("")
@@ -81,14 +81,14 @@ export default function NewPost() {
     <form  onSubmit={handleSubmit}>
         <div className = "outlineFrame_">
             <div as = 'h1' className = "text_themsanpham">
-                    THÊM 1 SẢN PHẨM MỚI
+                    ADD A NEW PRODUCT
             </div>
             <Segment>
                 <div as = 'h3' className = "text_thongtincoban">
-                        Thông tin cơ bản
+                        BASIC INFORMATION
                 </div>
                 <div className="form-group row">
-                    <label htmlFor="productName" className="col-sm-2 col-form-label">Tên sản phẩm</label>
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Product's Name</label>
                     <div className="col-sm-10">
                         <input required type="text" className="form-control" id="tensp" value={name} onChange={(e)=>setName(e.target.value)} minLength="3" maxLength="2000" placeholder="Nhập tên sản phẩm"/>
                     </div>
@@ -101,37 +101,40 @@ export default function NewPost() {
                     </div>
                 </div> */}
                 <div className="field">
-                    <label>Mô tả sản phẩm</label>
+                    <label>Description</label>
                     <textarea placeholder='Vui lòng nhập mô tả sản phẩm' className="form-control" id="motasp" value={desc} onChange={(e)=>setDesc(e.target.value)}>
                     </textarea>
                 </div>
                 <br/>
                 <div className="form-group row">
-                    <span htmlFor="productName" className="col-sm-2 col-form-label">Địa chỉ người thêm sản phẩm</span>
+                    <span htmlFor="productName" className="col-sm-2 col-form-label">Publisher's Address</span>
                     <div className="col-sm-10">
                         <input required type="text" className="form-control" id="diachinguoiban" value={address} onChange={(e)=>setAdress(e.target.value)} minLength="3" maxLength="2000"  placeholder="Thêm địa chỉ người bán"/>
                     </div>
                 </div>
                 <br/>
                 <div className="form-group row">
-                    <label htmlFor="productName" className="col-sm-2 col-form-label">Giá mặt hàng (Tối đa: 150.000VNĐ)</label>
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Price (Maximum: 150.000VNĐ)</label>
                     <div className="col-sm-10">
                         <input required type="number" min='0' max='150000' className="form-control" id="giatien" maxLength="6" value={price} onChange={(e)=>setPrice(e.target.value)}  placeholder="Nhập số tiền (VNĐ)"/>
                     </div>
                 </div>
                 <br/>
                 <div className="form-group row">
-                    <label htmlFor="productName" className="col-sm-2 col-form-label">Số lượng</label>
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Amount</label>
                     <div className="col-sm-10">
                         <input required type="number" min='0' max='1500' className="form-control" id="soluong" value={quantity} onChange={(e)=>setQuantity(e.target.value)}  placeholder="Nhập số lượng sản phẩm"/>
                     </div>
                 </div>
                 <br/>
                 <div className="form-group row">
-                    <label htmlFor="productName" className="col-sm-2 col-form-label">Loại hàng hóa</label>
-                    <div className="col-sm-10">
-                        <input required type="text" className="form-control" id="loaihanghoa" value={type} onChange={(e)=>setType(e.target.value)} minLength="3" maxLength="2000" placeholder="Nhập loại hàng hóa"/>
-                    </div>
+                    <label htmlFor="productName" className="col-sm-2 col-form-label">Product's Type</label>
+                    <select className="ui dropdown" onChange={(e)=>setType(e.target.value)}>
+                        {/* <input required type="text" className="form-control" id="loaihanghoa" value={type} onChange={(e)=>setType(e.target.value)} minLength="3" maxLength="2000" placeholder="Nhập loại hàng hóa"/> */}
+                        <option >books</option>
+                        <option >clothes</option>
+                        <option >school supplies</option>
+                    </select>
                 </div>
             </Segment>
             <Segment>
@@ -141,11 +144,11 @@ export default function NewPost() {
                 <div className="form-group row">
                     <label htmlFor="productImage" className="col-sm-2 col-form-label">Link ảnh sản phẩm</label>
                     <div className="col-sm-10">
-                        <input ref={link1} type="text" className="form-control" id="linkanh1" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 1"/>
-                        <input ref={link2} type="text" className="form-control" id="linkanh2" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 2"/>
-                        <input ref={link3} type="text" className="form-control" id="linkanh3" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 3"/>
-                        <input ref={link4} type="text" className="form-control" id="linkanh4" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 4"/>
-                        <input ref={link5} type="text" className="form-control" id="linkanh5" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 5"/>
+                        <input ref={link1} type="url" className="form-control" maxlength="30000" id="linkanh1" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 1"/>
+                        <input ref={link2} type="url" className="form-control" maxlength="30000" id="linkanh2" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 2"/>
+                        <input ref={link3} type="url" className="form-control" maxlength="30000" id="linkanh3" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 3"/>
+                        <input ref={link4} type="url" className="form-control" maxlength="30000" id="linkanh4" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 4"/>
+                        <input ref={link5} type="url" className="form-control" maxlength="30000" id="linkanh5" onChange={(e)=>setLinkAnh(e.target.value)}  placeholder="Thêm Link ảnh sản phẩm 5"/>
                     </div>
                 </div>
             </Segment>

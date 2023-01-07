@@ -10,7 +10,7 @@ import {IoNotifications} from 'react-icons/io5'
 import {BsList} from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom';
 import UseAuth from 'hooks/useAuth';
-import NavbarAdmin from 'features/admin/NavbarAdmin';
+import NavbarAdmin from '../features/admin/navbarAdmin';
 import { useDispatch } from 'react-redux';
 import {logOut} from '../features/auth/authSlice';
 import axios from 'axios';
