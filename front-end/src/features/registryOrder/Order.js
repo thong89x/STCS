@@ -54,13 +54,14 @@ export default function Order() {
         }).then((res)=>{
            
           config.headers.Authorization = `Bearer ${res.accessToken}`
-          axios.get('http://localhost:5000/users/v2',config)
+          axios.post('http://localhost:5000/registrys',newRegistry,config)
           .then((response)=>{
             alert("Create Success")
             navigate(-1)
           })
         })
         .catch((err)=>{
+          alert("Create Fail")
           navigate('/login')
         })
       }

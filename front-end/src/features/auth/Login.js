@@ -28,18 +28,28 @@ const Login =() => {
             username :  userRef.current.value,
             password : pwRef.current.value
         }
-        const res =  await axios.post('http://localhost:5000/auth',User,config).then((res)=>{
-
-            accessToken = res.data
-            dispatch(setCredentials( accessToken ))
-            
-            // const { username, role } = decoded.UserInfo
-            
-            navigate('/home')
-        }).catch((err)=>{
-            alert("vui long nhap lai tk mat khau");
-            console.log(err)
-        })
+        var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+        if(format.test(userRef.current.value) ||format.test(pwRef.current.value)  )
+        {
+            alert("Username and Password not allow special character")
+        }
+        else{
+            const res =  await axios.post('http://localhost:5000/auth',User,config).then((res)=>{
+                accessToken = res.data
+                dispatch(setCredentials( accessToken ))
+                alert("Login successfully")
+                // const { username, role } = decoded.UserInfo
+                
+                navigate('/home')
+            }).catch((err)=>{
+                if(err?.response?.status == 400)
+                    alert("Please fill full field")
+                else if(err?.response?.status == 401)
+                    alert("Incorect Password or Username")
+                else alert("vui long nhap lai tk mat khau");
+                console.log(err)
+            })
+        }
         
     }
 
@@ -52,7 +62,7 @@ const Login =() => {
                     <Segment>
                         <form className='form-container' onSubmit={handleSubmit}>
                             <div className='row'>
-                                <h2>Đăng Nhập</h2>
+                                <h2>Log in</h2>
                             </div>
                             <div className="form-group " >
                                 <label htmlFor="InputUsername">Username:</label>
@@ -63,7 +73,7 @@ const Login =() => {
                                 <label htmlFor="InputPassword1">Password</label>
                                 <input ref={pwRef} type="password" className="form-control" id="InputPassword1" placeholder="Password"/>
                             </div>
-                            <button type="submit" className="btn btn-primary loginbtn w-100">Đăng Nhập</button>
+                            <button type="submit" className="btn btn-primary loginbtn w-100">Login</button>
                             <div className='row form-group'>
                                 <div className='line col w-20'></div>
                                 Hoặc
@@ -71,8 +81,8 @@ const Login =() => {
                                 
                             </div>
                             <footer className='row '>
-                                <div className='col-8'> Bạn chưa có tài khoản</div>
-                                <Link to="/signup" className='col ToggleLink'>Đăng Ký</Link>
+                                <div className='col-8'>You did't have account</div>
+                                <Link to="/signup" className='col ToggleLink'>Sign up</Link>
                             </footer>
                         </form>  
                     </Segment>

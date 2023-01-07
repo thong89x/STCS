@@ -11,12 +11,14 @@ import { setCredentials } from 'features/auth/authSlice';
 import jwtDecode from 'jwt-decode'
 import { useState } from 'react';
 import "../registryOrder/styles/Approach.css"
+import { findUserbyObject } from 'features/users/userSlice';
 
 export default function GetRegistryofPost() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const {id} = useParams()
   const [listRegistry,setlistRegistry] = useState([])
+  const userlist = useSelector(state=>state.userList.listUserofObject)
   const {token} = useSelector(state=> state.auth)
 
   const handleonClickView = (id_element) => {
@@ -38,6 +40,7 @@ export default function GetRegistryofPost() {
   .then((response)=>{
       console.log(response.data)
       setlistRegistry(()=> response.data)
+      dispatch(findUserbyObject(response.data))
   }).catch((err)=>{
     if (err?.response?.status == 403 ||err?.response?.status == 400  ){
       console.log('sending request token')
@@ -51,6 +54,7 @@ export default function GetRegistryofPost() {
       .then((response)=>{
       console.log(response.data)
       setlistRegistry(()=> response.data)
+      dispatch(findUserbyObject(response.data))
   })
       })
       .catch((err)=>{
@@ -65,13 +69,16 @@ export default function GetRegistryofPost() {
            Approach Form Registry 
       </div>
       <div className='row d-flex flex-wrap'>
-      {listRegistry.map((element) =>{
-        return <div className='col-6'>
+      {listRegistry.map((element,indx) =>{
+        return <div className='col-6 '>
             <div className='form'>
-              {element.listAnswer[0]}
-              <div className='Duyet'>
-                <button onClick={handleonClickApproach}>Duyệt</button>
-                <button onClick={handleonClickView(element._id)}>Xem</button>
+              {userlist[indx].username}
+              <div className='answer'>   
+                {element.listAnswer[0]}
+              </div>
+              <div className='Duyet row'>
+                <button onClick={()=>handleonClickApproach}>Duyệt</button>
+                <button onClick={()=>handleonClickView(element._id)}>Xem</button>
               </div>
             </div> 
           </div>

@@ -9,11 +9,9 @@ import Comment from 'features/comment/component'
 export default function ViewPost() {
     const {id} = useParams()
     const [post,setPost] = useState()
-    const [type,setType] = useState("")
     const [username,setUsername] = useState("")
     const [name,setName] = useState("")
     const [desc,setDesc] = useState("")
-    const [question, setQuestion] = useState("")
     const [address, setAdress] = useState("")
     const [price, setPrice] = useState("")
     const [quantity, setQuantity] = useState("")
@@ -51,24 +49,6 @@ export default function ViewPost() {
       })
 
     },[])
-    const handleSubmit = event =>{
-
-        event.preventDefault()  
-        const newID = 1000 + Math.floor(Math.random()*1000+ 9000);
-        const newPost = {
-            id: newID,
-            name: name,
-            desc: desc,
-            address: address,
-            price: setPrice,
-            quantity: setQuantity,
-            question: question
-        }
-
-        const action = addPost(newPost)
-        dispatch(action)
-        navigate('/posts')
-    }
     const navigateHome = () => {
       navigate('/home');
     };
@@ -81,35 +61,19 @@ export default function ViewPost() {
           
           <div className = "img-display">
             <div className = "img-showcase">
-              <Image src = "https://react.semantic-ui.com/images/wireframe/square-image.png" alt = "No Image"/>
-              <Image src = "https://react.semantic-ui.com/images/wireframe/square-image.png" alt = "No Image"/>
-              <Image src = "https://react.semantic-ui.com/images/wireframe/square-image.png" alt = "No Image"/>
-              <Image src = "https://react.semantic-ui.com/images/wireframe/square-image.png" alt = "No Image"/>
+              <Image src ={post.imageURL[0]?post.imageURL[0]: "https://react.semantic-ui.com/images/wireframe/square-image.png"} alt = "No Image"/>
+
             </div>
           </div>
           
           <div className = "img-select">
-            <div className = "img-item">
-              <a href = "#" data-id = "1">
-                <img src = "https://react.semantic-ui.com/images/wireframe/square-image.png" alt = "shoe image"/>
+            {post.imageURL.map((image,index)=>{
+              return<div className = "img-item">
+              <a href = "#" data-id = {index}>
+                <img src ={image?image: "https://react.semantic-ui.com/images/wireframe/square-image.png"}  alt = "shoe image"/>
               </a>
             </div>
-            <div className = "img-item">
-              <a href = "#" data-id = "2">
-                <img src = "https://react.semantic-ui.com/images/wireframe/square-image.png" alt = "shoe image"/>
-              </a>
-            </div>
-            <div className = "img-item">
-              <a href = "#" data-id = "3">
-                <img src = "https://react.semantic-ui.com/images/wireframe/square-image.png" alt = "shoe image"/>
-              </a>
-            </div>
-            <div className = "img-item">
-              <a href = "#" data-id = "4">
-                <img src = "https://react.semantic-ui.com/images/wireframe/square-image.png" alt = "shoe image"/>
-              </a>
-            </div>
-            
+            })}
           </div>
         </div>
         <div className = "product-content">

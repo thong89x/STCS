@@ -72,32 +72,6 @@ export default function RegistryOwner() {
   return (
     <div className='warehouse row'>
       <div className='col'>
-        <div className='order'>
-          <div className='box'>Form Registry Order
-          </div>
-          <div className='background-input'>
-          <div className='input'>Why do you need the item?:
-          <div>
-          <div className='input_text'>{listAnswer?listAnswer[0]:'ko co'}</div>
-          </div>
-          </div>
-          <div className='input'>Do you need it right now?:
-          </div>
-          <div className='input_text'>{listAnswer?listAnswer[1]:'ko co'}</div>
-          <div className='input'>What is your degree?
-          </div>
-          <div className='input_text'>{listAnswer?listAnswer[2]:'ko co'}</div>
-          <div className='input'>New publisher of LOL video game?
-          </div>
-          <div className='input_text'>{listAnswer?listAnswer[3]:'ko co'}</div>
-          <div className='input'>Can you please rate 5 stars for my shop?
-          </div>
-          <div className='input_text'>{listAnswer?listAnswer[4]:'ko co'}</div>
-          <div className='space '/>
-          </div>
-        </div>
-      </div>
-      <div className='col'>
       <div>
         <table className="table">
           <thead className="thead-light">
@@ -124,6 +98,32 @@ export default function RegistryOwner() {
           </tbody>
         </table>
     </div>
+      </div>
+      <div className='col-6'>
+        <div className='order'>
+          <div className='box2'>Form Registry Order
+          </div>
+          <div className='background-question'>
+          <div className='question'>Why do you need the item?:
+          <div>
+          <div className='input_text'>{listAnswer?listAnswer[0]:'ko co'}</div>
+          </div>
+          </div>
+          <div className='question'>Do you need it right now?:
+          </div>
+          <div className='input_text'>{listAnswer?listAnswer[1]:'ko co'}</div>
+          <div className='question'>What is your degree?
+          </div>
+          <div className='input_text'>{listAnswer?listAnswer[2]:'ko co'}</div>
+          <div className='question'>New publisher of LOL video game?
+          </div>
+          <div className='input_text'>{listAnswer?listAnswer[3]:'ko co'}</div>
+          <div className='question'>Can you please rate 5 stars for my shop?
+          </div>
+          <div className='input_text'>{listAnswer?listAnswer[4]:'ko co'}</div>
+          <div className='space '/>
+          </div>
+        </div>
       </div>
     </div>
   )

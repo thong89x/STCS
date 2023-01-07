@@ -3,13 +3,21 @@ import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import UseAuth from 'hooks/useAuth';
-function navbarAdmin(props){
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { logOut } from 'features/auth/authSlice';
+export default function NavbarAdmin(props){
 //   const searchRef = useRef()
 //   const Navigate = useNavigate()
 //   const handleSearch = () => {
 //     Navigate(`/search?typeorder=${searchRef.current.value}`)
 //   }
-
+const dispatch = useDispatch()
+const handleLogout = () => {
+  dispatch(logOut())
+  axios.post('http://localhost:5000/auth/logout')
+  localStorage.removeItem("userInfo")
+}
 const { username, role } = UseAuth()
   return(
     <Navigation>
@@ -31,12 +39,13 @@ const { username, role } = UseAuth()
       :<NavLink to ="/login" className="login">
         Login
       </NavLink> }
+      <NavLink to ={`/login`} onClick={()=>handleLogout()} className="login">
+        Logout
+      </NavLink>
     </div>
     </Navigation>
   )
 }
-
-export default navbarAdmin;
 const Navigation = styled.div`
 width: 100%;
 height: 80px;

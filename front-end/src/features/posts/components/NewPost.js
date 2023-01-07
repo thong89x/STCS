@@ -75,9 +75,10 @@ export default function NewPost() {
     }
     const navigateHome = () => 
     {
-      navigate('/home');
+      navigate(-1);
     };
   return (<>
+    <form  onSubmit={handleSubmit}>
         <div className = "outlineFrame_">
             <div as = 'h1' className = "text_themsanpham">
                     THÊM 1 SẢN PHẨM MỚI
@@ -89,7 +90,7 @@ export default function NewPost() {
                 <div className="form-group row">
                     <label htmlFor="productName" className="col-sm-2 col-form-label">Tên sản phẩm</label>
                     <div className="col-sm-10">
-                        <input required type="text" className="form-control" id="tensp" value={name} onChange={(e)=>setName(e.target.value)}  placeholder="Nhập tên sản phẩm"/>
+                        <input required type="text" className="form-control" id="tensp" value={name} onChange={(e)=>setName(e.target.value)} minLength="3" maxLength="2000" placeholder="Nhập tên sản phẩm"/>
                     </div>
                 </div>
                 <br/>
@@ -108,28 +109,28 @@ export default function NewPost() {
                 <div className="form-group row">
                     <span htmlFor="productName" className="col-sm-2 col-form-label">Địa chỉ người thêm sản phẩm</span>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="diachinguoiban" value={address} onChange={(e)=>setAdress(e.target.value)}  placeholder="Thêm địa chỉ người bán"/>
+                        <input required type="text" className="form-control" id="diachinguoiban" value={address} onChange={(e)=>setAdress(e.target.value)} minLength="3" maxLength="2000"  placeholder="Thêm địa chỉ người bán"/>
                     </div>
                 </div>
                 <br/>
                 <div className="form-group row">
                     <label htmlFor="productName" className="col-sm-2 col-form-label">Giá mặt hàng (Tối đa: 150.000VNĐ)</label>
                     <div className="col-sm-10">
-                        <input required type="number" min='0' max='150000' className="form-control" id="giatien" maxlength="6" value={price} onChange={(e)=>setPrice(e.target.value)}  placeholder="Nhập số tiền (VNĐ)"/>
+                        <input required type="number" min='0' max='150000' className="form-control" id="giatien" maxLength="6" value={price} onChange={(e)=>setPrice(e.target.value)}  placeholder="Nhập số tiền (VNĐ)"/>
                     </div>
                 </div>
                 <br/>
                 <div className="form-group row">
                     <label htmlFor="productName" className="col-sm-2 col-form-label">Số lượng</label>
                     <div className="col-sm-10">
-                        <input required type="number" className="form-control" id="soluong" value={quantity} onChange={(e)=>setQuantity(e.target.value)}  placeholder="Nhập số lượng sản phẩm"/>
+                        <input required type="number" min='0' max='1500' className="form-control" id="soluong" value={quantity} onChange={(e)=>setQuantity(e.target.value)}  placeholder="Nhập số lượng sản phẩm"/>
                     </div>
                 </div>
                 <br/>
                 <div className="form-group row">
                     <label htmlFor="productName" className="col-sm-2 col-form-label">Loại hàng hóa</label>
                     <div className="col-sm-10">
-                        <input required type="text" className="form-control" id="loaihanghoa" value={type} onChange={(e)=>setType(e.target.value)}  placeholder="Nhập loại hàng hóa"/>
+                        <input required type="text" className="form-control" id="loaihanghoa" value={type} onChange={(e)=>setType(e.target.value)} minLength="3" maxLength="2000" placeholder="Nhập loại hàng hóa"/>
                     </div>
                 </div>
             </Segment>
@@ -180,10 +181,10 @@ export default function NewPost() {
             <div className="ui buttons">
                 <button className="ui button" onClick = {navigateHome}>Hủy</button>
                 <div className="or"></div>
-                <button type='submit' className="ui positive button" onClick={handleSubmit}>Thêm sản phẩm </button>
+                <button type='submit' className="ui positive button">Thêm sản phẩm </button>
             </div>
         </div>
-
+    </form>   
     </>
   )
 }

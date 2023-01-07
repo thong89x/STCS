@@ -11,7 +11,6 @@ import Search from './features/posts/Search';
 import Order from 'features/registryOrder/Order';
 import MostSearched from 'views/MostSearched';
 import ShowAll from 'views/ShowAll';
-import navbarAdmin from 'features/admin/navbarAdmin';
 import Announcements from 'features/admin/announcements';
 import ManageUser from 'features/admin/manageUser';
 import Report from 'features/admin/report';

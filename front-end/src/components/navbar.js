@@ -10,7 +10,7 @@ import {IoNotifications} from 'react-icons/io5'
 import {BsList} from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom';
 import UseAuth from 'hooks/useAuth';
-import NavbarAdmin from 'features/admin/navbarAdmin';
+import NavbarAdmin from 'features/admin/NavbarAdmin';
 import { useDispatch } from 'react-redux';
 import {logOut} from '../features/auth/authSlice';
 import axios from 'axios';
@@ -29,8 +29,8 @@ function Navbar(props){
   }
   const handleLogout = () => {
     dispatch(logOut())
-    axios.get('http://localhost:5000/auth/logout')
-    // gui request localhost/auth/logout/
+    axios.post('http://localhost:5000/auth/logout')
+    localStorage.removeItem("userInfo")
   }
   const handleSearch = () => {
     Navigate(`/search?name=${searchRef.current.value}`)

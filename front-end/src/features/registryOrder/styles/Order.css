@@ -10,7 +10,29 @@
     text-align: center;
     min-width: 500px;
 }
+.box2{
+    background-color: #33738F;
+    font-size: 20px;
+    font-weight: bolder;
+    font-style: normal;
+    padding: 15px;
+    border-radius: 15px 15px 0px 0px;
+    color: white;
+    text-align: center;
+    min-width: 500px;
+}
+.box2 .question{
 
+}
+.background-question {
+    height: 560px;
+    background-color: #d9d9d9;
+    text-align: left;
+    margin-bottom: 20px; 
+    padding: 20px;
+    border-radius:  0px 0px 15px 15px;
+    min-width: 500px;
+}
 .background-input {
     height: 560px;
     background-color: #d9d9d9;

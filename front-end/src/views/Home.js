@@ -9,10 +9,12 @@ import styled from 'styled-components';
 import "./styles/Home.css"
 import useAuth from 'hooks/useAuth';
 import PostList from 'features/posts/components/PostList';
+import { getAllUser } from 'features/users/userSlice';
 
 export default function Home() {
     const {token} = useSelector(state=> state.auth);
     const {username, role} = useAuth()
+    console.log(username,role)
     let [searchParams, setSearchParams] = useSearchParams();
     const postList = useSelector(state=>state.postList.listFilter) 
     const userlist = useSelector(state=>state.userList.listUserofObject) 
@@ -28,6 +30,7 @@ export default function Home() {
 
     useEffect(()=>{
       dispatch(getAllPost(""))
+      dispatch(getAllUser())
     },[])
   return (  
     <div className='homeContainer'>

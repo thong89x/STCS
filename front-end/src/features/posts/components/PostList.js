@@ -14,9 +14,9 @@ export default function PostList(props) {
               navigate('/posts/'+post._id)
             }}>
               {post.imageURL?
-              <img src={post.imageURL[0]?post.imageURL[0]:"https://th.bing.com/th/id/OIP.hjEu2V3As5q1pr7ZJ3CtnQHaJT?pid=ImgDet&rs=1"} className="d-block" alt="Not found"/>
+              <img src={post.imageURL[0]?post.imageURL[0]:"https://react.semantic-ui.com/images/wireframe/square-image.png"} className="d-block" alt="Not found"/>
               :<>
-                <img src={"https://th.bing.com/th/id/OIP.hjEu2V3As5q1pr7ZJ3CtnQHaJT?pid=ImgDet&rs=1"} className="d-block" alt="Not found"/>
+                <img src={"https://react.semantic-ui.com/images/wireframe/square-image.png"} className="d-block" alt="Not found"/>
               </>
               }          
               <h3 className='text-center'>{post.nameProduct}</h3>

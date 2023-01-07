@@ -88,7 +88,7 @@ const createPost = asyncHandler(async (req, res) => {
 
     // Confirm data
     if (!typeProduct || !nameProduct) {
-        return res.status(400).json({ message: 'Postname and password fields are required' })
+        return res.status(400).json({ message: 'Postname and TypeName fields are required' })
     }
    
     var PostObject = { userID:User[0]._id, nameProduct, typeProduct, address,imageURL,amountRegistry,describePost,priceProduct}
